@@ -4,15 +4,22 @@ Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartpho
 
 ## Mittwoch 28.9.2022
 
-Heute beschäftigten wir uns mit der Installation von allem, was man zur Entwicklung einer Smartphone-App braucht. Die [Android Studio Präsentation (PPTX⇓)](https://github.com/BogyMitutoyoCTL/Checklisten-App-2022.1/blob/main/AndroidStudio.pptx) erklärt die einzelnen Schritte.
+Heute haben wir uns mit der Installation von allem, was man zur Entwicklung einer Smartphone-App braucht beschäftigt. Die [Android Studio Präsentation (PPTX⇓)](https://github.com/BogyMitutoyoCTL/Checklisten-App-2022.1/blob/main/AndroidStudio.pptx) erklärt die einzelnen Schritte.
 
-Die Downloads haben wir bereits erledigt und auf einem USB Stick zur Verfügung gestellt:
+Die Downloads hatten wir bereits größtenteils erledigt und auf einem USB Stick zur Verfügung gestellt:
 
 - Java SDK (JDK) namens [Amazon Corretto](https://aws.amazon.com/de/corretto/)
 - [Android Studio](https://developer.android.com/studio)
 - das Flutter-Plugin für Android Studio (Download innerhalb von Android Studio)
 - [Flutter](https://docs.flutter.dev/get-started/install/windows)
 - Emulator / virtuelle Geräte (Download innerhalb von Android Studio)
+
+Nach Fertigstellung der Installation haben wir mit der [Dart Präsentation (PPTX⇓)](https://github.com/BogyMitutoyoCTL/BOGY-App-2022-10/raw/main/Dart.pptx) begonnen. Dort sind wir bis zu Folie 13 gekommen.
+
+Hausaufgabe:
+
+- Nutze [DartPad](https://dartpad.dev/) oder Android Studio und berechne $x = 356 * 4^3$
+  
 
 ## Mittwoch 21.9.2022
 
