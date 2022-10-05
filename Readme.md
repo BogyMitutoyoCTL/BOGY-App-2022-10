@@ -2,9 +2,17 @@
 
 Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartphones 📱.
 
+## Mittwoch 5.10.2022
+
+Wir haben Fortschritte in der [Dart Präsentation (PPTX⇓)](Dart.pptx) gemacht und sind bis Folie 51 gekommen.
+
+Hausaufgabe:
+
+* Nutze [DartPad](https://dartpad.dev/) oder Android Studio und programmiere eine Funktion, die das gleiche Ergebnis liefert wie math.pow(). Zulässige Annahme: die beiden Parameter (Basis und Exponent) sind natürliche Zahlen (n ∈ ℕ₀)
+
 ## Mittwoch 28.9.2022
 
-Heute haben wir uns mit der Installation von allem, was man zur Entwicklung einer Smartphone-App braucht beschäftigt. Die [Android Studio Präsentation (PPTX⇓)](https://github.com/BogyMitutoyoCTL/Checklisten-App-2022.1/blob/main/AndroidStudio.pptx) erklärt die einzelnen Schritte.
+Heute haben wir uns mit der Installation von allem, was man zur Entwicklung einer Smartphone-App braucht beschäftigt. Die [Android Studio Präsentation (PPTX⇓)](AndroidStudio.pptx) erklärt die einzelnen Schritte.
 
 Die Downloads hatten wir bereits größtenteils erledigt und auf einem USB Stick zur Verfügung gestellt:
 
@@ -14,7 +22,7 @@ Die Downloads hatten wir bereits größtenteils erledigt und auf einem USB Stick
 - [Flutter](https://docs.flutter.dev/get-started/install/windows)
 - Emulator / virtuelle Geräte (Download innerhalb von Android Studio)
 
-Nach Fertigstellung der Installation haben wir mit der [Dart Präsentation (PPTX⇓)](https://github.com/BogyMitutoyoCTL/BOGY-App-2022-10/raw/main/Dart.pptx) begonnen. Dort sind wir bis zu Folie 13 gekommen.
+Nach Fertigstellung der Installation haben wir mit der [Dart Präsentation (PPTX⇓)](Dart.pptx) begonnen. Dort sind wir bis zu Folie 13 gekommen.
 
 Hausaufgabe:
 
