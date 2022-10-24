@@ -6,6 +6,35 @@ Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartpho
 
 Wir haben am Vormittag die Übungen für [Flutter (PPTX⇓)](Flutter.pptx) beendet und sind nun in der Lage, eigene Apps mit mehreren Seiten und Navigation zu erstellen.
 
+Danach haben wir mit Hilfe von [Figma](https://www.figma.com) eine grobe Skizze erstellt, wie unsere App aussehen soll und wie der Ablauf sein könnte:
+
+![App Übersicht](figma.png)
+
+Für unsere App wurden mehrere Namensvorschläge gemacht:
+
+* Lernmaster
+* Merk Dir Was
+* Lern dich schlau
+* Simpel schlau
+* Hirngespinst
+* Lernhub
+* Studienhelfer
+* Studyhub
+* Megabrain
+* Lernstudio
+* Studienmeister
+* Simpelklub
+* Learnhub
+* 100% schlau
+* Learning hub
+* Lernplattform
+* Lern-App
+* Studymaster
+
+Per Abstimmung haben wir uns dann auf den Namen **Learnhub** geeinigt.
+
+Wir haben [Git](https://git-scm.com/download/win) und [GitExtensions](http://gitextensions.github.io/) installiert und dieses Repository geklont.
+
 ## Mittwoch 19.10.2022
 
 Nach mehreren Nachmittagen haben wir heute die [Dart Präsentation (PPTX⇓)](Dart.pptx) abgeschlossen.
