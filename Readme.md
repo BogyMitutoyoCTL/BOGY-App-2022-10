@@ -2,6 +2,20 @@
 
 Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartphones 📱.
 
+## Montag 24.10.2022
+
+Wir haben am Vormittag die Übungen für [Flutter (PPTX⇓)](Flutter.pptx) beendet und sind nun in der Lage, eigene Apps mit mehreren Seiten und Navigation zu erstellen.
+
+## Mittwoch 19.10.2022
+
+Nach mehreren Nachmittagen haben wir heute die [Dart Präsentation (PPTX⇓)](Dart.pptx) abgeschlossen.
+
+Danach ging es los mit den Oberflächenobjekten für Android-Anwendungen, die in [Flutter (PPTX⇓)](Flutter.pptx) beschrieben werden.
+
+## Mittwoch 12.10.2022
+
+Es ging weiter mit der [Dart Präsentation (PPTX⇓)](Dart.pptx) bis Folie 80.
+
 ## Mittwoch 5.10.2022
 
 Wir haben Fortschritte in der [Dart Präsentation (PPTX⇓)](Dart.pptx) gemacht und sind bis Folie 51 gekommen.
