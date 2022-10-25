@@ -13,7 +13,11 @@ class LearnHubApp extends StatelessWidget {
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black, foregroundColor: Colors.white)),
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+            textStyle: TextStyle(fontSize: 30),
+                   padding: EdgeInsets.all(5),
+    )),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
