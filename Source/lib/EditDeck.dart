@@ -23,10 +23,34 @@ class _EditDeckState extends State<EditDeck> {
           TextField(
             controller: _titleControll,
           ),
-          Text("Karten:"),
-          /*for (int i = 0; i < 5; i++)*/ Topic(answerType: true),
+          const Text(
+            "Karten:",
+            style: TextStyle(fontSize: 30),
+          ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (BuildContext context, int index) {
+                  return Topic(
+                    answerType: false,
+                  );
+                }),
+          ),
         ],
       ),
+      /*Column(
+        children: [
+          TextField(
+            controller: _titleControll,
+          ),
+          const Text(
+            "Karten:",
+            style: TextStyle(fontSize: 30),
+          ),
+
+
+        ],
+      ),*/
     );
   }
 }
