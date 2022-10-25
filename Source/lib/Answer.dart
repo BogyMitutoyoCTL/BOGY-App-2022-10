@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
+import 'package:learnhub/Question.dart';
 
-class Question extends StatefulWidget {
-  const Question({Key? key}) : super(key: key);
+class Answer extends StatefulWidget {
+  const Answer({Key? key}) : super(key: key);
 
   @override
-  State<Question> createState() => _QuestionState();
+  State<Answer> createState() => _AnswerState();
 }
 
-class _QuestionState extends State<Question> {
+class _AnswerState extends State<Answer> {
   final TextEditingController _inputControl = TextEditingController();
 
   bool _questionType = true;
@@ -58,25 +59,13 @@ class _QuestionState extends State<Question> {
                   width: 166.0,
                   height: 100.0,
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const Answer()),
-                            (route) => false);
-                      },
-                      child: Text("A:________"))),
+                      onPressed: () {}, child: Text("A:________"))),
               Padding(padding: EdgeInsets.all(10)),
               SizedBox(
                   width: 166.0,
                   height: 100.0,
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const Answer()),
-                            (route) => false);
-                      },
-                      child: Text("B:________"))),
+                      onPressed: () {}, child: Text("B:________"))),
             ]),
           if (_questionType) Padding(padding: EdgeInsets.all(10)),
           if (_questionType)
@@ -90,30 +79,25 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => const Answer()),
-                                    (route) => false);
-                              },
-                              child: Text("C:________"))),
+                              onPressed: () {}, child: Text("C:________"))),
                       Padding(padding: EdgeInsets.all(10)),
                       SizedBox(
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => const Answer()),
-                                    (route) => false);
-                              },
-                              child: Text("D:________"))),
+                              onPressed: () {}, child: Text("D:________"))),
                     ],
                   ),
                 ],
               ),
             ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const Question()),
+                    (route) => false);
+              },
+              child: Text("Zur nächsten Frage")),
         ],
       ),
     );

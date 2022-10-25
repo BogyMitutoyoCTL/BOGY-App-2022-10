@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnhub/EditQuestion.dart';
 
 class Topic extends StatefulWidget {
   bool answerType;
@@ -8,22 +9,20 @@ class Topic extends StatefulWidget {
   }
 
   @override
-  State<Topic> createState() => _TopicState(answerType);
+  State<Topic> createState() => _TopicState();
 }
 
 class _TopicState extends State<Topic> {
-  bool _answerType;
-
-  _TopicState(this._answerType) {
-    print("constructor state:${_answerType}");
-  }
   //false = Benutzereingabe; true= Multiple Choice
 
   @override
   Widget build(BuildContext context) {
-    print(_answerType);
     return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const EditQuestion()),
+          );
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -33,9 +32,13 @@ class _TopicState extends State<Topic> {
             ),
             Column(
               children: [
-                if (!_answerType) Icon(Icons.abc),
-                if (_answerType) Icon(Icons.check_box_outline_blank),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit))
+                if (!widget.answerType) Icon(Icons.abc),
+                if (widget.answerType) Icon(Icons.check_box_outline_blank),
+                IconButton(
+                    onPressed: () {
+                      print("Hello World");
+                    },
+                    icon: Icon(Icons.edit))
               ],
             ),
           ],
