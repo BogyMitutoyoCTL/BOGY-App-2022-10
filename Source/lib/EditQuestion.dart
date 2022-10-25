@@ -10,7 +10,7 @@ class EditQuestion extends StatefulWidget {
 
 class _EditQuestionState extends State<EditQuestion> {
   //false = Frage; true = Bild
-  bool questionType = false;
+  bool _questionType = false;
   final TextEditingController _titleControll = TextEditingController();
   String _title = "";
   final ImagePicker _picker = ImagePicker();
@@ -37,13 +37,13 @@ class _EditQuestionState extends State<EditQuestion> {
         children: [
           RadioListTile(
             value: false,
-            groupValue: questionType,
+            groupValue: _questionType,
             onChanged: questionTypeChange,
             title: Text("Frage"),
           ),
           RadioListTile(
             value: true,
-            groupValue: questionType,
+            groupValue: _questionType,
             onChanged: questionTypeChange,
             title: Text("Bild"),
           ),
@@ -51,10 +51,27 @@ class _EditQuestionState extends State<EditQuestion> {
           TextField(
             controller: _titleControll,
           ),
+          Text("Bild:"),
+          IconButton(
+            onPressed: importPic,
+            icon: Icon(Icons.image),
+          ),
+          IconButton(
+            onPressed: importPic,
+            icon: Icon(Icons.camera_alt),
+          ),
         ],
       ),
     );
   }
-}
 
-void questionTypeChange(bool? type) {}
+  Future<void> importPic() async {
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  }
+
+  void questionTypeChange(bool? type) {
+    setState(() {
+      _questionType = type!;
+    });
+  }
+}
