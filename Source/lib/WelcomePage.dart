@@ -21,7 +21,8 @@ class WelcomePage extends StatelessWidget {
                 ),
               )),
           Image.asset("assets/images/Logo.png"),
-          SizedBox(height: 100,width: 200,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
@@ -29,7 +30,10 @@ class WelcomePage extends StatelessWidget {
                     (route) => false);
                 ;
               },
-              child: (Text("Spielen",style: TextStyle(fontSize: 50),)),
+              child: (Text(
+                "Spielen",
+                style: TextStyle(fontSize: 50),
+              )),
             ),
           )
         ],
