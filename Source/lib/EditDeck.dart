@@ -24,7 +24,7 @@ class _EditDeckState extends State<EditDeck> {
             controller: _titleControll,
           ),
           Text("Karten:"),
-          for (int i = 0; i < 5; i++) Topic(answerType: true),
+          /*for (int i = 0; i < 5; i++)*/ Topic(answerType: true),
         ],
       ),
     );
