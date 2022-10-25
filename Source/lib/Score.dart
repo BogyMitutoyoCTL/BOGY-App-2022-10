@@ -17,19 +17,28 @@ class _ScoreState extends State<Score> {
       body: Column(
         children: [
           Center(
-            child: Text("Glückwunsch!",
+            child: Text(
+              "Glückwunsch!",
               style: TextStyle(fontSize: 50),
             ),
           ),
           Image.asset("assets/images/Feuerwerk.png"),
-          Text("Du hast x von y",
+          Text(
+            "Du hast x von y",
             style: TextStyle(fontSize: 50),
           ),
-          Text("Punkte erreicht!",
-            style: TextStyle(fontSize: 50),),
-           ElevatedButton(onPressed: (){}, child: Text("Neues Spiel"),
-           ),
-           ],
+          Text(
+            "Punkte erreicht!",
+            style: TextStyle(fontSize: 50),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(75),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text("Neues Spiel"),
+            ),
+          ),
+        ],
       ),
     );
   }

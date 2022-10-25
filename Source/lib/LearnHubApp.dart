@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learnhub/Home.dart';
+import 'package:learnhub/Question.dart';
+import 'package:learnhub/Score.dart';
+import 'package:learnhub/Typing.dart';
+import 'package:learnhub/multiplechoice.dart';
 import 'WelcomePage.dart';
 
 class LearnHubApp extends StatelessWidget {
@@ -13,11 +17,11 @@ class LearnHubApp extends StatelessWidget {
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-            textStyle: TextStyle(fontSize: 30),
-                   padding: EdgeInsets.all(5),
-    )),
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          textStyle: TextStyle(fontSize: 30),
+          padding: EdgeInsets.all(5),
+        )),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -29,7 +33,7 @@ class LearnHubApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.amber,
       ),
-      home: const Home(),
+      home: const WelcomePage(),
     );
   }
 }
