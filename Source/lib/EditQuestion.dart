@@ -133,6 +133,7 @@ class _EditQuestionState extends State<EditQuestion> {
                 labelText: "Richtige Antwort",
               ),
             ),
+            const Padding(padding: EdgeInsets.all(8.0)),
             if (_answerType)
               TextField(
                 controller: _falseAnswerControll2,
@@ -141,6 +142,7 @@ class _EditQuestionState extends State<EditQuestion> {
                   labelText: "Falsche Antwort",
                 ),
               ),
+            const Padding(padding: EdgeInsets.all(8.0)),
             if (_answerType)
               TextField(
                 controller: _falseAnswerControll3,
@@ -149,6 +151,7 @@ class _EditQuestionState extends State<EditQuestion> {
                   labelText: "Falsche Antwort",
                 ),
               ),
+            const Padding(padding: EdgeInsets.all(8.0)),
             if (_answerType)
               TextField(
                 controller: _rightAnswerControll,
@@ -157,6 +160,7 @@ class _EditQuestionState extends State<EditQuestion> {
                   labelText: "Falsche Antwort",
                 ),
               ),
+            const Padding(padding: EdgeInsets.all(8.0)),
             FloatingActionButton(
               onPressed: save,
               child: const Icon(Icons.check),
