@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   final TextEditingController _inputControl = TextEditingController();
 
-  bool _questionType = true;
+  bool _questionType = false;
 
   String _input = "";
   @override

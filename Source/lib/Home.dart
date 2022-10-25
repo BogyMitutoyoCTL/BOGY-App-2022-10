@@ -3,8 +3,9 @@ import 'multiplechoice.dart';
 import 'Typing.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
+  const Home({Key? key}) : super(key: key)
+  //{Navigator.}
+  ;
   get onPressed => null;
 
   @override
@@ -14,7 +15,10 @@ class Home extends StatelessWidget {
           title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text("Quiz"),
+          const Text(
+            "          Quiz",
+            style: TextStyle(fontSize: 50),
+          ),
           IconButton(
               icon: const Icon(Icons.add_circle_outline), onPressed: () {})
         ],
@@ -28,17 +32,10 @@ class Home extends StatelessWidget {
             Typing(),
             Multiplechioce(),
             Multiplechioce(),
+            Multiplechioce(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.add,
-                    size: 100,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
+              children: [],
             ),
           ],
         ),
