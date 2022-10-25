@@ -32,7 +32,7 @@ class WelcomePage extends StatelessWidget {
               },
               child: (Text(
                 "Spielen",
-                style: TextStyle(fontSize: 50),
+                style: TextStyle(fontSize: 51),
               )),
             ),
           )
