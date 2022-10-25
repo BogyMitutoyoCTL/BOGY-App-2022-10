@@ -8,20 +8,15 @@ class Topic extends StatefulWidget {
   }
 
   @override
-  State<Topic> createState() => _TopicState(answerType);
+  State<Topic> createState() => _TopicState();
 }
 
 class _TopicState extends State<Topic> {
-  bool _answerType;
-
-  _TopicState(this._answerType) {
-    print("constructor state:${_answerType}");
-  }
   //false = Benutzereingabe; true= Multiple Choice
 
   @override
   Widget build(BuildContext context) {
-    print(_answerType);
+    print(widget.answerType);
     return ElevatedButton(
         onPressed: () {},
         child: Row(
@@ -33,8 +28,8 @@ class _TopicState extends State<Topic> {
             ),
             Column(
               children: [
-                if (!_answerType) Icon(Icons.abc),
-                if (_answerType) Icon(Icons.check_box_outline_blank),
+                if (!widget.answerType) Icon(Icons.abc),
+                if (widget.answerType) Icon(Icons.check_box_outline_blank),
                 IconButton(onPressed: () {}, icon: Icon(Icons.edit))
               ],
             ),
