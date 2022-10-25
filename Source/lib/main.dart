@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'MyApp.dart';
+import 'LearnHubApp.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const LearnHubApp());
 }
