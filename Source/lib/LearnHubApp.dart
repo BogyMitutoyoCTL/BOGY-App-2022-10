@@ -6,6 +6,7 @@ import 'package:learnhub/Score.dart';
 import 'package:learnhub/Typing.dart';
 import 'package:learnhub/multiplechoice.dart';
 import 'WelcomePage.dart';
+import 'Question.dart';
 
 class LearnHubApp extends StatelessWidget {
   const LearnHubApp({Key? key}) : super(key: key);

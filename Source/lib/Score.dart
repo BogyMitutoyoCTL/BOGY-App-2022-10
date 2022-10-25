@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/Home.dart';
 
 class Score extends StatefulWidget {
   const Score({Key? key}) : super(key: key);
@@ -34,7 +35,11 @@ class _ScoreState extends State<Score> {
           Padding(
             padding: const EdgeInsets.all(75),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const Home()),
+                    (route) => false);
+              },
               child: Text("Neues Spiel"),
             ),
           ),

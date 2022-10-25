@@ -23,8 +23,10 @@ class WelcomePage extends StatelessWidget {
           Image.asset("assets/images/Logo.png"),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Home()));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const Home()),
+                  (route) => false);
+              ;
             },
             child: (Text("Spielen")),
           )
