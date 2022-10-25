@@ -32,7 +32,7 @@ class _ScoreState extends State<Score> {
             style: TextStyle(fontSize: 50),
           ),
           Padding(
-            padding: const EdgeInsets.all(76),
+            padding: const EdgeInsets.all(75),
             child: ElevatedButton(
               onPressed: () {},
               child: Text("Neues Spiel"),

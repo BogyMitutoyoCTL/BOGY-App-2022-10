@@ -21,7 +21,7 @@ class WelcomePage extends StatelessWidget {
               )),
           Image.asset("assets/images/Logo.png"),
           Padding(
-            padding: const EdgeInsets.all(126.0),
+            padding: const EdgeInsets.all(125.0),
             child: ElevatedButton(
               onPressed: () {},
               child: (Text("Spielen")),
