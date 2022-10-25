@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/Home.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -20,12 +21,12 @@ class WelcomePage extends StatelessWidget {
                 ),
               )),
           Image.asset("assets/images/Logo.png"),
-          Padding(
-            padding: const EdgeInsets.all(125.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: (Text("Spielen")),
-            ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Home()));
+            },
+            child: (Text("Spielen")),
           )
         ],
       ),
