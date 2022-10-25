@@ -11,6 +11,7 @@ class EditQuestion extends StatefulWidget {
 class _EditQuestionState extends State<EditQuestion> {
   //false = Frage; true = Bild
   bool _questionType = false;
+  //false = Benutzereingabe; true = MultipleChoice
   bool _answerType = false;
   final TextEditingController _titleControll = TextEditingController();
   final TextEditingController _rightAnswerControll = TextEditingController();
