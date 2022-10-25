@@ -6,10 +6,32 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Learnhub"),
+      body: Column(
+        children: [
+          Padding(
+              padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+              child: Center(
+                child: Text(
+                  "Willkommen bei ",
+                  style: TextStyle(
+                    fontSize: 50,
+                  ),
+                ),
+              )),
+          Image.asset("assets/images/Logo.png"),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+            child: SizedBox(
+              height: 75,
+              width: 150,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: (Text("Spielen", style: TextStyle(fontSize: 30))),
+              ),
+            ),
+          )
+        ],
       ),
-      body: Container(),
     );
   }
 }
