@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/Score.dart';
 import 'WelcomePage.dart';
 
 class LearnHubApp extends StatelessWidget {
@@ -19,7 +20,7 @@ class LearnHubApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
       home: const WelcomePage(),
     );
