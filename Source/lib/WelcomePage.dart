@@ -21,14 +21,16 @@ class WelcomePage extends StatelessWidget {
                 ),
               )),
           Image.asset("assets/images/Logo.png"),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const Home()),
-                  (route) => false);
-              ;
-            },
-            child: (Text("Spielen")),
+          SizedBox(height: 100,width: 200,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const Home()),
+                    (route) => false);
+                ;
+              },
+              child: (Text("Spielen",style: TextStyle(fontSize: 50),)),
+            ),
           )
         ],
       ),
