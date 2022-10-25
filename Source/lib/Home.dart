@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'multiplechoice.dart';
-import 'Typing.dart';
+import 'package:learnhub/EditDeck.dart';
+import 'Topic.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key)
@@ -20,7 +20,13 @@ class Home extends StatelessWidget {
             style: TextStyle(fontSize: 50),
           ),
           IconButton(
-              icon: const Icon(Icons.add_circle_outline), onPressed: () {})
+              icon: const Icon(Icons.add_circle_outline),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EditDeck()),
+                );
+              })
         ],
       )),
       body: Padding(
@@ -28,11 +34,8 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Multiplechioce(),
-            Typing(),
-            Multiplechioce(),
-            Multiplechioce(),
-            Multiplechioce(),
+            Topic(answerType: false),
+            Topic(answerType: true),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [],
