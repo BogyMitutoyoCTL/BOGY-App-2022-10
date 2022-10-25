@@ -1,3 +1,5 @@
+// ignore_for_file: type_init_formals
+
 import 'package:json_annotation/json_annotation.dart';
 import 'DataStructure.dart';
 
@@ -11,7 +13,7 @@ class QuestionStringAndAnswers extends Question {
   List<String> answers; // always the first one is the right one
 
   QuestionStringAndAnswers(
-      {required String uuid, required this.question, required this.answers})
+      {required String this.question, required List<String> this.answers, String? uuid})
       : super(uuid: uuid, questionType: QuestionTypes.stringAndAnswer);
 
   @override
@@ -39,7 +41,7 @@ class QuestionStringAndFreeText extends Question {
   String answer;
 
   QuestionStringAndFreeText(
-      {required this.question, required this.answer, String? uuid})
+      {required String this.question, required String this.answer, String? uuid})
       : super(uuid: uuid, questionType: QuestionTypes.stringAndFreeText);
 
   @override
