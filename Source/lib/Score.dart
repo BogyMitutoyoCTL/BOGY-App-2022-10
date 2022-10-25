@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:learnhub/Home.dart';
+
+class Score extends StatefulWidget {
+  const Score({Key? key}) : super(key: key);
+
+  @override
+  State<Score> createState() => _ScoreState();
+}
+
+class _ScoreState extends State<Score> {
+  @override // Ich weiß nicht was das macht
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Name des Stapels"),
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Text(
+              "Glückwunsch!",
+              style: TextStyle(fontSize: 50),
+            ),
+          ),
+          Image.asset("assets/images/Feuerwerk.png"),
+          Text(
+            "Du hast x von y",
+            style: TextStyle(fontSize: 50),
+          ),
+          Text(
+            "Punkte erreicht!",
+            style: TextStyle(fontSize: 50),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(75),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const Home()),
+                    (route) => false);
+              },
+              child: Text("Neues Spiel"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
