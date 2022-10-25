@@ -11,8 +11,14 @@ class EditQuestion extends StatefulWidget {
 class _EditQuestionState extends State<EditQuestion> {
   //false = Frage; true = Bild
   bool _questionType = false;
+  bool _answerType = false;
   final TextEditingController _titleControll = TextEditingController();
+  final TextEditingController _rightAnswerControll = TextEditingController();
+  final TextEditingController _falseAnswerControll1 = TextEditingController();
+  final TextEditingController _falseAnswerControll2 = TextEditingController();
+  final TextEditingController _falseAnswerControll3 = TextEditingController();
   String _title = "";
+  List<String> _answer = ["", "", "", "", ""];
   final ImagePicker _picker = ImagePicker();
 
   @override
@@ -20,11 +26,47 @@ class _EditQuestionState extends State<EditQuestion> {
     super.initState();
 
     _titleControll.text = _title;
+    _rightAnswerControll.text = _answer[0];
+    _falseAnswerControll1.text = _answer[1];
+    _falseAnswerControll2.text = _answer[2];
+    _falseAnswerControll3.text = _answer[3];
+
     _titleControll.addListener(() {
       setState(() {
         _title = _titleControll.text;
       });
     });
+    _rightAnswerControll.addListener(() {
+      setState(() {
+        _answer[0] = _rightAnswerControll.text;
+      });
+    });
+
+    _falseAnswerControll1.addListener(() {
+      setState(() {
+        _answer[1] = _falseAnswerControll1.text;
+      });
+    });
+    _falseAnswerControll2.addListener(() {
+      setState(() {
+        _answer[2] = _falseAnswerControll2.text;
+      });
+    });
+    _falseAnswerControll3.addListener(() {
+      setState(() {
+        _answer[3] = _falseAnswerControll3.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _titleControll.dispose();
+    _rightAnswerControll.dispose();
+    _falseAnswerControll1.dispose();
+    _falseAnswerControll2.dispose();
+    _falseAnswerControll3.dispose();
+    super.dispose();
   }
 
   @override
@@ -33,39 +75,100 @@ class _EditQuestionState extends State<EditQuestion> {
       appBar: AppBar(
         title: Text("Karte bearbeiten"),
       ),
-      body: Column(
-        children: [
-          RadioListTile(
-            value: false,
-            groupValue: _questionType,
-            onChanged: questionTypeChange,
-            title: Text("Frage"),
-          ),
-          RadioListTile(
-            value: true,
-            groupValue: _questionType,
-            onChanged: questionTypeChange,
-            title: Text("Bild"),
-          ),
-          Text("Frage:"),
-          TextField(
-            controller: _titleControll,
-          ),
-          Text("Bild:"),
-          IconButton(
-            onPressed: importPic,
-            icon: Icon(Icons.image),
-          ),
-          IconButton(
-            onPressed: importPic,
-            icon: Icon(Icons.camera_alt),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            RadioListTile(
+              value: false,
+              groupValue: _questionType,
+              onChanged: questionTypeChange,
+              title: Text("Frage"),
+            ),
+            RadioListTile(
+              value: true,
+              groupValue: _questionType,
+              onChanged: questionTypeChange,
+              title: const Text("Bild"),
+            ),
+            if (!_questionType)
+              TextField(
+                controller: _titleControll,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Frage",
+                ),
+              ),
+            if (_questionType) const Text("Bild:"),
+            if (_questionType)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: importPic,
+                    icon: const Icon(Icons.image),
+                  ),
+                  IconButton(
+                    onPressed: importPic,
+                    icon: const Icon(Icons.camera_alt),
+                  ),
+                ],
+              ),
+            RadioListTile(
+              value: false,
+              groupValue: _answerType,
+              onChanged: answerTypeChange,
+              title: Text("Benutzereingabe"),
+            ),
+            RadioListTile(
+              value: true,
+              groupValue: _answerType,
+              onChanged: answerTypeChange,
+              title: const Text("Multiple Choice"),
+            ),
+            TextField(
+              controller: _falseAnswerControll1,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Richtige Antwort",
+              ),
+            ),
+            if (_answerType)
+              TextField(
+                controller: _falseAnswerControll2,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Falsche Antwort",
+                ),
+              ),
+            if (_answerType)
+              TextField(
+                controller: _falseAnswerControll3,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Falsche Antwort",
+                ),
+              ),
+            if (_answerType)
+              TextField(
+                controller: _rightAnswerControll,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Falsche Antwort",
+                ),
+              ),
+            FloatingActionButton(
+              onPressed: save,
+              child: const Icon(Icons.check),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Future<void> importPic() async {
+    //Funkt nur unter Android
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
   }
 
@@ -73,5 +176,16 @@ class _EditQuestionState extends State<EditQuestion> {
     setState(() {
       _questionType = type!;
     });
+  }
+
+  void answerTypeChange(bool? type) {
+    setState(() {
+      _answerType = type!;
+    });
+  }
+
+  void save() {
+    //Speichern
+    //Zur Home seite
   }
 }
