@@ -28,7 +28,6 @@ class WelcomePage extends StatelessWidget {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => const Home()),
                     (route) => false);
-                ;
               },
               child: (Text(
                 "Spielen",

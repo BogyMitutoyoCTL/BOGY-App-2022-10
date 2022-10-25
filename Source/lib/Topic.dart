@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnhub/EditQuestion.dart';
 
 class Topic extends StatefulWidget {
   bool answerType;
@@ -16,9 +17,12 @@ class _TopicState extends State<Topic> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.answerType);
     return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const EditQuestion()),
+          );
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -30,7 +34,11 @@ class _TopicState extends State<Topic> {
               children: [
                 if (!widget.answerType) Icon(Icons.abc),
                 if (widget.answerType) Icon(Icons.check_box_outline_blank),
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit))
+                IconButton(
+                    onPressed: () {
+                      print("Hello World");
+                    },
+                    icon: Icon(Icons.edit))
               ],
             ),
           ],
