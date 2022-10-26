@@ -44,6 +44,28 @@ class DataHelper {
     return _myQuestionStacks.length;
   }
 
+  /// Adds Demo data
+  void loadDemoData() {
+    for (int i = 0; i < 3; i++) {
+      QuestionStack questionStack = QuestionStack("QuestionStack$i");
+      for (int j = 0; j <= i; j++) {
+        QuestionStringAndFreeText questionStringAndFreeText =
+            QuestionStringAndFreeText(
+                question:
+                    "Das ist die Frage der Freitextfrage $j von Stack $i. Was ist deine Antwort?",
+                answer: "Answer");
+        questionStack.addQuestionStringAndFreeText(questionStringAndFreeText);
+        QuestionStringAndAnswers questionStringAndAnswers =
+            QuestionStringAndAnswers(
+                question:
+                    "Das ist die Frage der SingleChoiceFrage $j von Stack $i. Was ist deine Antwort?",
+                answers: ["Anton", "Berta", "Cäsar", "Dino"]);
+        questionStack.addQuestionStringAndAnswers(questionStringAndAnswers);
+      }
+      addQuestionStack(questionStack);
+    }
+  }
+
   @override
   String toString() {
     String msg = "DataHelper: Contains ${_myQuestionStacks.length} Stacks.";
