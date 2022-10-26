@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionStack.dart';
-import 'Topic.dart';
 
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
@@ -10,17 +9,14 @@ class EditDeck extends StatefulWidget {
   EditDeck(this.questionStack, {Key? key}) : super(key: key) {}
 
   @override
-  State<EditDeck> createState() => _EditDeckState(questionStack);
+  State<EditDeck> createState() => _EditDeckState();
 }
 
 class _EditDeckState extends State<EditDeck> {
-  TextEditingController _titleControll = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
 
-  late QuestionStack questionStack;
-
-  _EditDeckState(QuestionStack questionStack) {
-    this.questionStack = questionStack;
-    _titleControll.text = questionStack.name;
+  _EditDeckState() {
+    _titleController.text = widget.questionStack.name;
   }
 
   @override
@@ -38,7 +34,7 @@ class _EditDeckState extends State<EditDeck> {
                 border: OutlineInputBorder(),
                 labelText: "Titel",
               ),
-              controller: _titleControll,
+              controller: _titleController,
             ),
           ),
           const Text(
