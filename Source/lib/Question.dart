@@ -15,7 +15,7 @@ class Question extends StatefulWidget {
   bool isMultipleChoice = false;
   Question(
       {Key? key, required this.questionStack, required this.questionNumber})
-      : super(key: key);
+      : super(key: key) {}
 
   @override
   State<Question> createState() => _QuestionState();
@@ -24,11 +24,11 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   final TextEditingController _inputControl = TextEditingController();
   String _input = "";
-
   @override
   void initState() {
     super.initState();
 
+    State<Question> createState() => _QuestionState();
     _inputControl.text = _input;
     _inputControl.addListener(() {
       setState(() {
@@ -45,6 +45,11 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
+    String question = questionName();
+    List<String> answers = ["", "", "", ""];
+    if (widget.isMultipleChoice) {
+      answers = getanswers();
+    }
     return Scaffold(
         appBar: AppBar(title: Text(widget.questionStack.name)),
         body: ListView(
@@ -52,7 +57,7 @@ class _QuestionState extends State<Question> {
             Column(children: [
               /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
               Padding(padding: EdgeInsets.all(10)),
-              Text(questionName(), style: TextStyle(fontSize: 40)),
+              Text(question, style: TextStyle(fontSize: 40)),
               Padding(
                 padding: EdgeInsets.all(10),
               ),
@@ -79,7 +84,7 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text("A:________"))),
+                              onPressed: mcPressed, child: Text(answers[0]))),
                       Padding(
                         padding: EdgeInsets.all(10),
                       ),
@@ -87,7 +92,7 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text("C:________"))),
+                              onPressed: mcPressed, child: Text(answers[2]))),
                     ],
                   ),
                   Padding(
@@ -99,7 +104,7 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text("A:________"))),
+                              onPressed: mcPressed, child: Text(answers[1]))),
                       Padding(
                         padding: EdgeInsets.all(10),
                       ),
@@ -107,7 +112,7 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text("A:________"))),
+                              onPressed: mcPressed, child: Text(answers[3]))),
                     ],
                   ),
                 ]),
@@ -130,17 +135,28 @@ class _QuestionState extends State<Question> {
     QuestionBasic questionBasic =
         widget.questionStack.getQuestion(widget.questionNumber);
     if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
-      widget.isMultipleChoice = false;
+      widget.isMultipleChoice = true;
       QuestionStringAndAnswers questionStringAndAnswers =
           questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (questionBasic.questionType == QuestionTypes.stringAndFreeText) {
-      widget.isMultipleChoice = true;
+      widget.isMultipleChoice = false;
       QuestionStringAndFreeText questionStringAndFreeText =
           questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
     } else {
       return "Ordne zu";
     }
+  }
+
+  List<String> getanswers() {
+    QuestionBasic questionBasic =
+        widget.questionStack.getQuestion(widget.questionNumber);
+    QuestionStringAndAnswers questionStringAndAnswers =
+        questionBasic as QuestionStringAndAnswers;
+    List<String> answer = questionStringAndAnswers.answers;
+    answer.shuffle();
+    print(answer);
+    return answer;
   }
 }
