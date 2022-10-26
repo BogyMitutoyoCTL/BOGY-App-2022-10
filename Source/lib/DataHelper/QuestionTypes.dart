@@ -5,6 +5,13 @@ import 'DataStructure.dart';
 
 part 'QuestionTypes.g.dart';
 
+/// This are the existing QuestionTypes
+enum QuestionTypes {
+  stringAndAnswer,
+  stringAndFreeText,
+}
+
+/// This is a question that contains a String as Question and multiple answers.
 @JsonSerializable(includeIfNull: false)
 class QuestionStringAndAnswers extends Question {
   @JsonKey(required: true)
@@ -12,8 +19,12 @@ class QuestionStringAndAnswers extends Question {
   @JsonKey(required: true)
   List<String> answers; // always the first one is the right one
 
+  /// Only define the question and the answers params. Leave uuid empty!
+  /// Always the first answer is the right one.
   QuestionStringAndAnswers(
-      {required String this.question, required List<String> this.answers, String? uuid})
+      {required String this.question,
+      required List<String> this.answers,
+      String? uuid})
       : super(uuid: uuid, questionType: QuestionTypes.stringAndAnswer);
 
   @override
@@ -33,6 +44,8 @@ class QuestionStringAndAnswers extends Question {
   String toString() => toJson().toString();
 }
 
+/// This is a question that is defined by a String as Question and
+/// a free text as answer.
 @JsonSerializable(includeIfNull: false)
 class QuestionStringAndFreeText extends Question {
   @JsonKey(required: true)
@@ -40,8 +53,12 @@ class QuestionStringAndFreeText extends Question {
   @JsonKey(required: true)
   String answer;
 
+  /// Only define the question and the answers params. Leave uuid empty!
+  /// The answer is the text the user is expected to type in
   QuestionStringAndFreeText(
-      {required String this.question, required String this.answer, String? uuid})
+      {required String this.question,
+      required String this.answer,
+      String? uuid})
       : super(uuid: uuid, questionType: QuestionTypes.stringAndFreeText);
 
   @override

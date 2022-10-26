@@ -9,33 +9,38 @@ import 'package:uuid/uuid.dart';
 /// See: https://docs.flutter.dev/development/data-and-backend/json#one-time-code-generation
 part 'DataStructure.g.dart';
 
-enum QuestionTypes {
-  stringAndAnswer,
-  stringAndFreeText,
-}
-
+/// This is the parent class for all Questions. All QuestionTypes defined in QuestionTypes
+/// need to extends from this class.
 abstract class Question {
   @JsonKey(required: true)
   late String _uuid;
   @JsonKey(ignore: true)
-  QuestionTypes _questionType;
+  final QuestionTypes _questionType;
 
   Question({required String? uuid, required QuestionTypes questionType})
       : _questionType = questionType {
     _uuid = uuid ?? const Uuid().v1();
   }
 
+  /// Returns true if `answerToCheck` is the right answer. Otherwise returns false.
+  /// This function has to be overwritten by all subclasses.
   bool isAnswerCorrect(var answerToCheck);
 
+  /// Returns the UUID (Unified ID) of a question. This UUID differs from one to the next question.
+  /// When you create the Question, the UUID is created automatically if not explicitly specified.
   String get uuid => _uuid;
 
+  /// Returns the Type of the Question
   QuestionTypes get questionType => _questionType;
 
+  /// Checks if the Type of this Question is equal to `questionType`.
   bool isQuestionType(QuestionTypes questionType) {
     return _questionType == questionType;
   }
 }
 
+/// This is one QuestionStack that contains multiple Question of different Types.
+/// You can get a single Question by multiple functions.
 @JsonSerializable(explicitToJson: true, includeIfNull: true)
 class QuestionStack {
   @JsonKey(required: true)
@@ -57,6 +62,11 @@ class QuestionStack {
     checkQuestionOrder();
   }
 
+  /// Returns the Question with the index `index`.
+  /// The returned Object is not directly of Type Question but of
+  /// one of its Subclasses. These are defined in QuestionTypes.
+  /// To get the Type of the returned Question run .questionType on the
+  /// returned Question.
   Question getQuestion(int index) {
     String uuid = _orderList[index];
 
@@ -72,6 +82,8 @@ class QuestionStack {
     throw Exception("Can't find the this question");
   }
 
+  /// Adds a Question from Type QuestionStringAndAnswers to the end of the Stack.
+  /// Returns the index of the newly added question.
   int addQuestionStringAndAnswers(
       QuestionStringAndAnswers newQuestionStringAndAnswers) {
     _questionStringAndAnswers.add(newQuestionStringAndAnswers);
@@ -79,6 +91,8 @@ class QuestionStack {
     return _orderList.length - 1;
   }
 
+  /// Adds a Question from Type QuestionStringAndFreeText to the end of the Stack.
+  /// Returns the index of the newly added question.
   int addQuestionStringAndFreeText(
       QuestionStringAndFreeText newQuestionStringAndFreeText) {
     _questionStringAndFreeText.add(newQuestionStringAndFreeText);
@@ -86,6 +100,7 @@ class QuestionStack {
     return _orderList.length - 1;
   }
 
+  /// Removes a Question by its id. Throws an error if the index is not valid.
   void removeQuestion(int index) {
     String uuid = _orderList[index];
     _orderList.removeAt(index);
@@ -100,10 +115,12 @@ class QuestionStack {
     }
   }
 
+  /// Returns the total amount of Questions.
   int getAmountOfQuestions() {
     return _orderList.length;
   }
 
+  /// Syncs the uuids from the questions with the order list.
   void checkQuestionOrder() {
     _addMissingUuidsToOrderList();
     _deleteUnsetUuidsInOrderList();
@@ -141,6 +158,7 @@ class QuestionStack {
     });
   }
 
+  /// Returns a list containing the uuids from the Questions.
   List<String> get orderList => _orderList;
 
   List<QuestionStringAndAnswers> get questionStringAndAnswers =>
