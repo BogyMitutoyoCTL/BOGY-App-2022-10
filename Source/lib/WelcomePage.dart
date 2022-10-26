@@ -34,7 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
               onPressed: play,
               child: (Text(
                 "Spielen",
-                style: TextStyle(fontSize: 51),
+                style: TextStyle(fontSize: 50),
               )),
             ),
           )
