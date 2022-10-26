@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
-import 'package:learnhub/DataHelper/QuestionStack.dart';
+import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 
 import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStringAndAnswers.dart';
@@ -10,12 +10,9 @@ import 'DataHelper/QuestionStringAndFreeText.dart';
 import 'DataHelper/QuestionTypes.dart';
 
 class Question extends StatefulWidget {
-  QuestionStack questionStack;
-  int questionNumber;
+  CurrentlyPlaying playing;
   bool isMultipleChoice = false;
-  Question(
-      {Key? key, required this.questionStack, required this.questionNumber})
-      : super(key: key);
+  Question({Key? key, required this.playing}) : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
@@ -46,7 +43,7 @@ class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.questionStack.name)),
+        appBar: AppBar(title: Text(widget.playing.stack.name)),
         body: ListView(
           children: [
             Column(children: [
@@ -120,15 +117,14 @@ class _QuestionState extends State<Question> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Answer(
-                  questionStack: widget.questionStack,
-                  questionNumber: widget.questionNumber,
+                  playing: widget.playing,
                 )),
         (route) => false);
   }
 
   String questionName() {
     QuestionBasic questionBasic =
-        widget.questionStack.getQuestion(widget.questionNumber);
+        widget.playing.stack.getQuestion(widget.playing.questionIndex);
     if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
       widget.isMultipleChoice = false;
       QuestionStringAndAnswers questionStringAndAnswers =
