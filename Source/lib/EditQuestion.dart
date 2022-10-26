@@ -191,6 +191,6 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void save() {
     //Speichern
-    //Zur Home seite
+    //Zur Homo seite
   }
 }
