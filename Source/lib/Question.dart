@@ -53,10 +53,9 @@ class _QuestionState extends State<Question> {
               /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
               Padding(padding: EdgeInsets.all(10)),
               Text(questionName(), style: TextStyle(fontSize: 40)),
-              if (!widget.isMultipleChoice)
-                Padding(
-                  padding: EdgeInsets.all(8),
-                ),
+              Padding(
+                padding: EdgeInsets.all(10),
+              ),
               if (!widget.isMultipleChoice)
                 TextField(
                   controller: _inputControl,
@@ -67,7 +66,7 @@ class _QuestionState extends State<Question> {
                 ),
               if (!widget.isMultipleChoice)
                 Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(10),
                 ),
               if (!widget.isMultipleChoice)
                 FloatingActionButton(
