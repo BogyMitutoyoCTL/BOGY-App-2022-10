@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnhub/EditQuestion.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionStack.dart';
 
@@ -25,7 +26,12 @@ class _EditDeckState extends State<EditDeck> {
     return Scaffold(
       appBar: AppBar(
         actions: [IconButton(onPressed: saveStack, icon: Icon(Icons.check))],
-        title: Text("Title"),
+        title: Text("Stapel bearbeiten"),
+      ),
+      floatingActionButton:  FloatingActionButton(
+        onPressed: addQuestion,
+        backgroundColor: Colors.amber,
+        child: const Icon(Icons.add),
       ),
       body: Column(
         children: [
@@ -67,5 +73,9 @@ class _EditDeckState extends State<EditDeck> {
 
     Navigator.of(context).pop();
 
+  }
+
+  void addQuestion() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EditQuestion()));
   }
 }
