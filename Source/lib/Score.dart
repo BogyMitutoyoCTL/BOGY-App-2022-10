@@ -48,11 +48,7 @@ class _ScoreState extends State<Score> {
                 Padding(
                   padding: const EdgeInsets.all(75),
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => Home()),
-                          (route) => false);
-                    },
+                    onPressed: play,
                     child: Text("Neues Spiel"),
                   ),
                 ),
@@ -60,5 +56,10 @@ class _ScoreState extends State<Score> {
             ),
           ],
         ));
+  }
+
+  void play() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
 }
