@@ -16,14 +16,12 @@ class QuestionStringAndFreeText extends QuestionBasic {
   /// Only define the question and the answers params. Leave uuid empty!
   /// The answer is the text the user is expected to type in
   QuestionStringAndFreeText(
-      {required String this.question,
-      required String this.answer,
-      String? uuid})
+      {required this.question, required this.answer, String? uuid})
       : super(uuid: uuid, questionType: QuestionTypes.stringAndFreeText);
 
   @override
   bool isAnswerCorrect(var answerToCheck) {
-    return answer == answerToCheck;
+    return answerToCheck == answer;
   }
 
   factory QuestionStringAndFreeText.fromJson(Map<String, dynamic> json) =>

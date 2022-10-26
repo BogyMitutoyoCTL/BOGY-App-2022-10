@@ -16,9 +16,7 @@ class QuestionStringAndAnswers extends QuestionBasic {
   /// Only define the question and the answers params. Leave uuid empty!
   /// Always the first answer is the right one.
   QuestionStringAndAnswers(
-      {required String this.question,
-      required List<String> this.answers,
-      String? uuid})
+      {required this.question, required this.answers, String? uuid})
       : super(uuid: uuid, questionType: QuestionTypes.stringAndAnswer);
 
   @override
@@ -26,7 +24,7 @@ class QuestionStringAndAnswers extends QuestionBasic {
     if (answers.isEmpty) {
       return false;
     }
-    return answers[0] == answerToCheck;
+    return answerToCheck == answers[0];
   }
 
   factory QuestionStringAndAnswers.fromJson(Map<String, dynamic> json) =>
