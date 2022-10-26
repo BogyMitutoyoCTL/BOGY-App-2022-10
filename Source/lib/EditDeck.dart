@@ -14,12 +14,13 @@ class EditDeck extends StatefulWidget {
 
 class _EditDeckState extends State<EditDeck> {
   TextEditingController _titleControll = TextEditingController();
+  var Textfeld = TextField();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stapel bearbeiten"),
+        title: Text("Title"),
       ),
       body: Column(
         children: [

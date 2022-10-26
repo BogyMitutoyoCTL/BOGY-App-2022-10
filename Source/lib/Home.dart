@@ -8,11 +8,19 @@ import 'Topic.dart';
 import 'multiplechoice.dart';
 import 'Typing.dart';
 
-class Home extends StatelessWidget {
-  DataHelper quizes = DataHelper();
-  Home({Key? key}) : super(key: key) {
+class Home extends StatefulWidget {
+  Home({Key? key}) : super(key: key) {}
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  _HomeState() {
     quizes.loadDemoData();
   }
+  DataHelper quizes = DataHelper();
+
   get onPressed => null;
 
   @override
@@ -55,8 +63,7 @@ class Home extends StatelessWidget {
   }
 
   void addNewDeck() {
-    //    Navigator.push(
-    //     context,
-    //       MaterialPageRoute(builder: (context) => EditDeck()),
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => EditDeck(new QuestionStack(""))));
   }
 }

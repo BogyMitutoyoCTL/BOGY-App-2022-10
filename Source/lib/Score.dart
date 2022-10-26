@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learnhub/Home.dart';
 
 import 'DataHelper/QuestionStack.dart';
+import 'DataHelper/QuestionStack.dart';
 
 class Score extends StatefulWidget {
   QuestionStack questionStack;
@@ -36,7 +37,7 @@ class _ScoreState extends State<Score> {
                     style: TextStyle(fontSize: 50),
                   ),
                 ),
-                Image.asset("assets/images/Feuerwerk.png"),
+                Image.asset("assets/images/Pokal.png"),
                 Text(
                   "Du hast $score von $numberOfQuestions",
                   style: TextStyle(fontSize: 50),
