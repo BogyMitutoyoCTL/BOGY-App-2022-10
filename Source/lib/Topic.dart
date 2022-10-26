@@ -10,7 +10,12 @@ class Topic extends StatefulWidget {
   //false = Home; true= EditDeck
   bool answerType;
   bool comingFrom;
-  Topic({Key? key, required this.answerType, required this.comingFrom})
+  String title;
+  Topic(
+      {Key? key,
+      required this.answerType,
+      required this.comingFrom,
+      required this.title})
       : super(key: key);
 
   @override
@@ -34,7 +39,7 @@ class _TopicState extends State<Topic> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Titel",
+              widget.title,
               style: TextStyle(fontSize: 30),
             ),
             Column(
