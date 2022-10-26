@@ -6,17 +6,22 @@ import 'Topic.dart';
 
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
-  TextEditingController _titleControll = TextEditingController();
-  EditDeck(this.questionStack, {Key? key}) : super(key: key) {
-    _titleControll.text = questionStack.name;
-  }
+
+  EditDeck(this.questionStack, {Key? key}) : super(key: key) {}
 
   @override
-  State<EditDeck> createState() => _EditDeckState();
+  State<EditDeck> createState() => _EditDeckState(questionStack);
 }
 
 class _EditDeckState extends State<EditDeck> {
   TextEditingController _titleControll = TextEditingController();
+
+  late QuestionStack questionStack;
+
+  _EditDeckState(QuestionStack questionStack) {
+    this.questionStack = questionStack;
+    _titleControll.text = questionStack.name;
+  }
 
   @override
   Widget build(BuildContext context) {
