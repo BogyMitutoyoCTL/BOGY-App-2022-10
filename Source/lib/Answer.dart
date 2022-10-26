@@ -102,32 +102,34 @@ class _AnswerState extends State<Answer> {
               if ((widget.questionNumber + 1) <
                   widget.questionStack.getAmountOfQuestions())
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => Question(
-                                    questionStack: widget.questionStack,
-                                    questionNumber: widget.questionNumber + 1,
-                                  )),
-                          (route) => false);
-                    },
-                    child: Text("Zur nächsten Frage")),
+                    onPressed: nextQuestion, child: Text("Zur nächsten Frage")),
               if ((widget.questionNumber + 1) ==
                   widget.questionStack.getAmountOfQuestions())
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => Score(
-                                    questionStack: widget.questionStack,
-                                  )),
-                          (route) => false);
-                    },
-                    child: Text("Ergebnis anzeigen")),
+                    onPressed: showResult, child: Text("Ergebnis anzeigen")),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void nextQuestion() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Question(
+                  questionStack: widget.questionStack,
+                  questionNumber: widget.questionNumber + 1,
+                )),
+        (route) => false);
+  }
+
+  void showResult() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Score(
+                  questionStack: widget.questionStack,
+                )),
+        (route) => false);
   }
 }
