@@ -76,98 +76,102 @@ class _EditQuestionState extends State<EditQuestion> {
       appBar: AppBar(
         title: Text("Karte bearbeiten"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            RadioListTile(
-              value: false,
-              groupValue: _questionType,
-              onChanged: questionTypeChange,
-              title: Text("Frage"),
-            ),
-            RadioListTile(
-              value: true,
-              groupValue: _questionType,
-              onChanged: questionTypeChange,
-              title: const Text("Bild"),
-            ),
-            if (!_questionType)
-              TextField(
-                controller: _titleControll,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Frage",
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                RadioListTile(
+                  value: false,
+                  groupValue: _questionType,
+                  onChanged: questionTypeChange,
+                  title: Text("Frage"),
                 ),
-              ),
-            if (_questionType) const Text("Bild:"),
-            if (_questionType)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: importPic,
-                    icon: const Icon(Icons.image),
+                RadioListTile(
+                  value: true,
+                  groupValue: _questionType,
+                  onChanged: questionTypeChange,
+                  title: const Text("Bild"),
+                ),
+                if (!_questionType)
+                  TextField(
+                    controller: _titleControll,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Frage",
+                    ),
                   ),
-                  IconButton(
-                    onPressed: importPic,
-                    icon: const Icon(Icons.camera_alt),
+                if (_questionType) const Text("Bild:"),
+                if (_questionType)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: importPic,
+                        icon: const Icon(Icons.image),
+                      ),
+                      IconButton(
+                        onPressed: importPic,
+                        icon: const Icon(Icons.camera_alt),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            RadioListTile(
-              value: false,
-              groupValue: _answerType,
-              onChanged: answerTypeChange,
-              title: Text("Benutzereingabe"),
-            ),
-            RadioListTile(
-              value: true,
-              groupValue: _answerType,
-              onChanged: answerTypeChange,
-              title: const Text("Multiple Choice"),
-            ),
-            TextField(
-              controller: _falseAnswerControll1,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Richtige Antwort",
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(8.0)),
-            if (_answerType)
-              TextField(
-                controller: _falseAnswerControll2,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Falsche Antwort",
+                RadioListTile(
+                  value: false,
+                  groupValue: _answerType,
+                  onChanged: answerTypeChange,
+                  title: Text("Benutzereingabe"),
                 ),
-              ),
-            const Padding(padding: EdgeInsets.all(8.0)),
-            if (_answerType)
-              TextField(
-                controller: _falseAnswerControll3,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Falsche Antwort",
+                RadioListTile(
+                  value: true,
+                  groupValue: _answerType,
+                  onChanged: answerTypeChange,
+                  title: const Text("Multiple Choice"),
                 ),
-              ),
-            const Padding(padding: EdgeInsets.all(8.0)),
-            if (_answerType)
-              TextField(
-                controller: _rightAnswerControll,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Falsche Antwort",
+                TextField(
+                  controller: _falseAnswerControll1,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Richtige Antwort",
+                  ),
                 ),
-              ),
-            const Padding(padding: EdgeInsets.all(8.0)),
-            FloatingActionButton(
-              onPressed: save,
-              child: const Icon(Icons.check),
+                const Padding(padding: EdgeInsets.all(8.0)),
+                if (_answerType)
+                  TextField(
+                    controller: _falseAnswerControll2,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Falsche Antwort",
+                    ),
+                  ),
+                const Padding(padding: EdgeInsets.all(8.0)),
+                if (_answerType)
+                  TextField(
+                    controller: _falseAnswerControll3,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Falsche Antwort",
+                    ),
+                  ),
+                const Padding(padding: EdgeInsets.all(8.0)),
+                if (_answerType)
+                  TextField(
+                    controller: _rightAnswerControll,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Falsche Antwort",
+                    ),
+                  ),
+                const Padding(padding: EdgeInsets.all(8.0)),
+                FloatingActionButton(
+                  onPressed: save,
+                  child: const Icon(Icons.check),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

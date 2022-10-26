@@ -13,10 +13,10 @@ QuestionStringAndAnswers _$QuestionStringAndAnswersFromJson(
     requiredKeys: const ['question', 'answers'],
   );
   return QuestionStringAndAnswers(
-    uuid: json['uuid'] as String,
     question: json['question'] as String,
     answers:
         (json['answers'] as List<dynamic>).map((e) => e as String).toList(),
+    uuid: json['uuid'] as String?,
   );
 }
 

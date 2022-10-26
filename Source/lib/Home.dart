@@ -34,8 +34,15 @@ class Home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Topic(answerType: false),
-            Topic(answerType: true),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Topic(
+                      answerType: false,
+                    );
+                  }),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [],

@@ -13,28 +13,27 @@ QuestionStack _$QuestionStackFromJson(Map<String, dynamic> json) {
   );
   return QuestionStack(
     json['name'] as String,
-    (json['orderList'] as List<dynamic>).map((e) => e as String).toList(),
+    orderList:
+        (json['orderList'] as List<dynamic>?)?.map((e) => e as String).toList(),
     questionStringAndAnswers: (json['questionStringAndAnswers']
-                as List<dynamic>?)
-            ?.map((e) =>
-                QuestionStringAndAnswers.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-    questionStringAndFreeText: (json['questionStringAndFreeText']
-                as List<dynamic>?)
+            as List<dynamic>?)
+        ?.map(
+            (e) => QuestionStringAndAnswers.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    questionStringAndFreeText:
+        (json['questionStringAndFreeText'] as List<dynamic>?)
             ?.map((e) =>
                 QuestionStringAndFreeText.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
+            .toList(),
   );
 }
 
 Map<String, dynamic> _$QuestionStackToJson(QuestionStack instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'orderList': instance.orderList,
       'questionStringAndAnswers':
           instance.questionStringAndAnswers.map((e) => e.toJson()).toList(),
       'questionStringAndFreeText':
           instance.questionStringAndFreeText.map((e) => e.toJson()).toList(),
-      'orderList': instance.orderList,
     };
