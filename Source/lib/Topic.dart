@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/EditQuestion.dart';
+import 'package:learnhub/Score.dart';
 
 import 'EditDeck.dart';
 import 'Question.dart';
@@ -31,8 +32,9 @@ class _TopicState extends State<Topic> {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const EditQuestion()));
           } else {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const Question()));
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const Question()),
+                (route) => false);
           }
         },
         child: Row(
@@ -49,8 +51,9 @@ class _TopicState extends State<Topic> {
                 if (!widget.comingFrom)
                   IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const EditDeck()));
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => Question()),
+                            (route) => false);
                       },
                       icon: Icon(Icons.edit))
               ],
