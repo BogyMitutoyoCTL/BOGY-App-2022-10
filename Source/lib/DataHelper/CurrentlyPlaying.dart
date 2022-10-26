@@ -5,5 +5,10 @@ class CurrentlyPlaying {
   int questionIndex = 0;
   int correctAnswers = 0;
 
-  CurrentlyPlaying(this.stack);
+  CurrentlyPlaying(this.stack) {
+    stack.orderList.shuffle();
+    stack.questionStringAndAnswers.shuffle();
+    stack.questionStringAndFreeText.shuffle();
+    //TODO Workaround
+  }
 }
