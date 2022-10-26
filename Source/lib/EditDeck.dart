@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionStack.dart';
@@ -6,7 +5,7 @@ import 'DataHelper/QuestionStack.dart';
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
 
-  EditDeck(this.questionStack, {Key? key}) : super(key: key) {}
+  EditDeck(this.questionStack, {Key? key}) : super(key: key);
 
   @override
   State<EditDeck> createState() => _EditDeckState();
@@ -17,6 +16,7 @@ class _EditDeckState extends State<EditDeck> {
 
   @override
   void initState() {
+    super.initState();
     _titleController.text = widget.questionStack.name;
   }
 
@@ -24,7 +24,7 @@ class _EditDeckState extends State<EditDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Title"),
+        title: const Text("Title"),
       ),
       body: Column(
         children: [
