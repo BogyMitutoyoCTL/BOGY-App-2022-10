@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
-//w
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
 import 'package:learnhub/DataHelper/DataStructure.dart';
@@ -101,14 +100,22 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-             ElevatedButton(
+             if (4 < 20)ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => Question()),
+                        (route) => false);
+                  },
+                  child: Text("Zur nächsten Frage")),
+              if (4 == 20)ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                             builder: (context) => Score(meinQuestionStack)),
-                        (route) => false);
+                            (route) => false);
                   },
-                  child: Text("Zur nächsten Frage")),
+                  child: Text("Ergebnis anzeigen")),
 
             ],
           ),
