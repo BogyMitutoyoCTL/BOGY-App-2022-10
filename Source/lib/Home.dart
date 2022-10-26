@@ -1,11 +1,18 @@
+// ignore_for_file: unused_import, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
-import 'package:learnhub/EditDeck.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
+import 'DataHelper/DataStructure.dart';
+import 'EditDeck.dart';
 import 'Topic.dart';
+import 'multiplechoice.dart';
+import 'Typing.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key)
-  //{Navigator.}
-  ;
+  DataHelper titleRead = DataHelper();
+  Home({Key? key}) : super(key: key) {
+    titleRead.loadDemoData();
+  }
   get onPressed => null;
 
   @override
@@ -36,12 +43,14 @@ class Home extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: titleRead.amountOfQuestionStacks(),
                   itemBuilder: (BuildContext context, int index) {
+                    QuestionStack questionStack =
+                        titleRead.getQuestionStack(index);
                     return Topic(
                       answerType: false,
                       comingFrom: false,
-                      title: "Titel",
+                      title: questionStack.name,
                     );
                   }),
             ),

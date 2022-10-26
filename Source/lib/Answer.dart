@@ -1,10 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, unused_import, file_names
+
 import 'package:flutter/material.dart';
+import 'package:learnhub/Answer.dart';
+import 'package:learnhub/DataHelper/DataStructure.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
-
-import 'DataHelper/QuestionStack.dart';
-import 'DataHelper/QuestionStringAndAnswers.dart';
 
 class Answer extends StatefulWidget {
   const Answer({Key? key}) : super(key: key);
@@ -30,9 +30,6 @@ class _AnswerState extends State<Answer> {
         _input = _inputControl.text;
       });
     });
-    QuestionStringAndAnswers neueFrage = QuestionStringAndAnswers(
-        question: "Frage1", answers: ["a", "b", "c", "d"]);
-    meinQuestionStack.addQuestionStringAndAnswers(neueFrage);
   }
 
   @override
@@ -49,7 +46,7 @@ class _AnswerState extends State<Answer> {
         children: [
           Column(
             children: [
-              Placeholder(fallbackHeight: 250, color: Colors.black),
+              Image.asset("assets/images/Logo.png"),
               Padding(padding: EdgeInsets.all(10)),
               Text("Beantworte", style: TextStyle(fontSize: 40)),
               if (!_questionType)
@@ -99,23 +96,14 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-              if (4 < 20)
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => Question()),
-                          (route) => false);
-                    },
-                    child: Text("Zur nächsten Frage")),
-              if (4 == 20)
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => Score(meinQuestionStack)),
-                          (route) => false);
-                    },
-                    child: Text("Ergebnis anzeigen")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => Score(meinQuestionStack)),
+                        (route) => false);
+                  },
+                  child: Text("Zur nächsten Frage")),
             ],
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learnhub/Home.dart';
 
-import 'DataHelper/QuestionStack.dart';
+import 'DataHelper/DataStructure.dart';
 
 class Score extends StatefulWidget {
   QuestionStack questionStack;
@@ -49,7 +49,7 @@ class _ScoreState extends State<Score> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const Home()),
+                          MaterialPageRoute(builder: (context) => Home()),
                           (route) => false);
                     },
                     child: Text("Neues Spiel"),
