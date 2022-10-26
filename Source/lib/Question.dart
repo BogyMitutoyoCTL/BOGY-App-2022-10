@@ -12,6 +12,7 @@ import 'DataHelper/QuestionTypes.dart';
 class Question extends StatefulWidget {
   QuestionStack questionStack;
   int questionNumber;
+  bool isMultipleChoice = false;
   Question(
       {Key? key, required this.questionStack, required this.questionNumber})
       : super(key: key);
@@ -25,10 +26,12 @@ class _QuestionState extends State<Question> {
     QuestionBasic questionBasic =
         widget.questionStack.getQuestion(widget.questionNumber);
     if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
+      widget.isMultipleChoice = false;
       QuestionStringAndAnswers questionStringAndAnswers =
           questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (questionBasic.questionType == QuestionTypes.stringAndFreeText) {
+      widget.isMultipleChoice = true;
       QuestionStringAndFreeText questionStringAndFreeText =
           questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
@@ -38,7 +41,6 @@ class _QuestionState extends State<Question> {
   }
 
   final TextEditingController _inputControl = TextEditingController();
-  bool _questionType = false;
 
   String _input = "";
   @override
@@ -70,11 +72,11 @@ class _QuestionState extends State<Question> {
                 /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
                 Padding(padding: EdgeInsets.all(10)),
                 Text(questionName(), style: TextStyle(fontSize: 40)),
-                if (!_questionType)
+                if (!widget.isMultipleChoice)
                   Padding(
                     padding: EdgeInsets.all(8),
                   ),
-                if (!_questionType)
+                if (!widget.isMultipleChoice)
                   TextField(
                     controller: _inputControl,
                     decoration: const InputDecoration(
@@ -82,11 +84,11 @@ class _QuestionState extends State<Question> {
                       labelText: "Eingabe...",
                     ),
                   ),
-                if (!_questionType)
+                if (!widget.isMultipleChoice)
                   Padding(
                     padding: EdgeInsets.all(8),
                   ),
-                if (!_questionType)
+                if (!widget.isMultipleChoice)
                   FloatingActionButton(
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
@@ -98,7 +100,7 @@ class _QuestionState extends State<Question> {
                             (route) => false);
                       },
                       child: Icon(Icons.check)),
-                if (_questionType)
+                if (widget.isMultipleChoice)
                   Row(children: [
                     Padding(padding: EdgeInsets.all(10)),
                     SizedBox(
@@ -133,8 +135,9 @@ class _QuestionState extends State<Question> {
                             },
                             child: Text("B:________"))),
                   ]),
-                if (_questionType) Padding(padding: EdgeInsets.all(10)),
-                if (_questionType)
+                if (widget.isMultipleChoice)
+                  Padding(padding: EdgeInsets.all(10)),
+                if (widget.isMultipleChoice)
                   Padding(
                     padding: EdgeInsets.all(20),
                     child: Column(
