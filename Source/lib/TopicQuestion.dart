@@ -6,15 +6,9 @@ import 'package:learnhub/DataHelper/QuestionBasic.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/EditQuestion.dart';
-import 'package:learnhub/Score.dart';
-
-import 'DataHelper/QuestionStack.dart';
 import 'DataHelper/QuestionTypes.dart';
-import 'EditDeck.dart';
-import 'Question.dart';
 
 class TopicQuestion extends StatefulWidget {
-  //false = Benutzereingabe; true= Multiple Choice
   bool isMultipleChoice = false;
   QuestionBasic questionBasic;
 
@@ -45,11 +39,7 @@ class _TopicQuestionState extends State<TopicQuestion> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => EditQuestion()),
-              (route) => false);
-        },
+        onPressed: editQuestion,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -57,9 +47,16 @@ class _TopicQuestionState extends State<TopicQuestion> {
               questionName(),
               style: TextStyle(fontSize: 30),
             ),
-            if (!widget.isMultipleChoice) Icon(Icons.abc),
-            if (widget.isMultipleChoice) Icon(Icons.check_box_outline_blank),
+            Icon(widget.isMultipleChoice
+                ? Icons.check_box_outline_blank
+                : Icons.abc),
           ],
         ));
+  }
+
+  void editQuestion() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => EditQuestion()),
+        (route) => false);
   }
 }
