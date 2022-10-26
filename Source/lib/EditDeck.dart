@@ -24,6 +24,7 @@ class _EditDeckState extends State<EditDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [IconButton(onPressed: saveStack, icon: Icon(Icons.check))],
         title: const Text("Title"),
       ),
       body: Column(
@@ -55,5 +56,16 @@ class _EditDeckState extends State<EditDeck> {
         ],
       ),
     );
+  }
+
+
+  void saveStack() {
+    String titelStapel =_titleController.text;
+    setState(() {
+      widget.questionStack.name = titelStapel;
+    });
+
+    Navigator.of(context).pop();
+
   }
 }

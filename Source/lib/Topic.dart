@@ -46,6 +46,7 @@ class _TopicState extends State<Topic> {
 
   void editDeck() {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EditDeck(widget.questionStack)));
+        builder: (context) => EditDeck(widget.questionStack))).then((value) => setState(() {})
+    );
   }
 }
