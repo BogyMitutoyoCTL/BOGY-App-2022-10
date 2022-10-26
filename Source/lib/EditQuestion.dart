@@ -30,10 +30,10 @@ class _EditQuestionState extends State<EditQuestion> {
 
     _titleController.text = _title;
     for (int i = 0; i < 4; i++) {
-      this.answerControllers[i].text = _answer[i];
-      this.answerControllers[i].addListener(() {
+      answerControllers[i].text = _answer[i];
+      answerControllers[i].addListener(() {
         setState(() {
-          _answer[i] = this.answerControllers[i].text;
+          _answer[i] = answerControllers[i].text;
         });
       });
     }
@@ -49,7 +49,7 @@ class _EditQuestionState extends State<EditQuestion> {
   void dispose() {
     _titleController.dispose();
     for (int i = 0; i < 4; i++) {
-      this.answerControllers[i].dispose();
+      answerControllers[i].dispose();
     }
     super.dispose();
   }
