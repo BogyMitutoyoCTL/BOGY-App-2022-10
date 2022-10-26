@@ -33,6 +33,7 @@ class _EditDeckState extends State<EditDeck> {
                 itemBuilder: (BuildContext context, int index) {
                   return Topic(
                     answerType: false,
+                    comingFrom: true,
                   );
                 }),
           ),
