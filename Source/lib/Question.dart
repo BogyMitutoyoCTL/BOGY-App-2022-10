@@ -42,7 +42,7 @@ class _QuestionState extends State<Question> {
           children: [
             Column(
               children: [
-                Placeholder(fallbackHeight: 250, color: Colors.black),
+                Image.asset("assets/images/Logo.png"),
                 Padding(padding: EdgeInsets.all(10)),
                 Text("Beantworte", style: TextStyle(fontSize: 40)),
                 if (!_questionType)
