@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DataStructure.dart';
+part of 'QuestionStack.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

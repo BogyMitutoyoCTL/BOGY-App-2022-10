@@ -2,6 +2,27 @@
 
 Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartphones 📱.
 
+## Dienstag 25.10.2022
+
+Wir haben begonnen, unsere eigenen Widgets zu programmieren, wie wir sie am Vortag diskutiert haben.
+
+### Warnungen loswerden
+
+In unserem Projekt gab es Warnungen mit dem Text
+
+> Warning: Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01
+
+Um diese Warnungen loszuwerden, muss man:
+
+1. den Unterordner `android` unseres Projekts in Android Studio öffnen
+2. Im Menü "Tools/AGP Upgrade Assistent" auswählen
+3. Die Gradle Version aktualisieren (bei mir: von 4.1.3 auf 4.2.2)
+
+Dann wieder zurück zum eigentlichen Projekt.
+
+1. Appearance & Behavior / System Settings / Android SDK
+2. SDK Tools: Android SDK Build Tools auf Version 33 aktualisieren
+
 ## Montag 24.10.2022
 
 Wir haben am Vormittag die Übungen für [Flutter (PPTX⇓)](Flutter.pptx) beendet und sind nun in der Lage, eigene Apps mit mehreren Seiten und Navigation zu erstellen.

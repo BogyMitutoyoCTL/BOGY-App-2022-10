@@ -5,9 +5,9 @@
 // https://docs.flutter.dev/development/data-and-backend/json#one-time-code-generation
 // for help.
 
-import 'package:learnhub/DataHelper/QuestionTypes.dart';
-
-import 'DataStructure.dart';
+import 'QuestionStack.dart';
+import 'QuestionStringAndAnswers.dart';
+import 'QuestionStringAndFreeText.dart';
 
 /// The DataHelper take care of the different question stacks.
 /// You can add, remove and get a QuestionStack.
