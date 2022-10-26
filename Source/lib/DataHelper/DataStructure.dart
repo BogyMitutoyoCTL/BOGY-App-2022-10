@@ -11,13 +11,13 @@ part 'DataStructure.g.dart';
 
 /// This is the parent class for all Questions. All QuestionTypes defined in QuestionTypes
 /// need to extends from this class.
-abstract class Question {
+abstract class QuestionBasic {
   @JsonKey(required: true)
   late String _uuid;
   @JsonKey(ignore: true)
   final QuestionTypes _questionType;
 
-  Question({required String? uuid, required QuestionTypes questionType})
+  QuestionBasic({required String? uuid, required QuestionTypes questionType})
       : _questionType = questionType {
     _uuid = uuid ?? const Uuid().v1();
   }
@@ -67,7 +67,7 @@ class QuestionStack {
   /// one of its Subclasses. These are defined in QuestionTypes.
   /// To get the Type of the returned Question run .questionType on the
   /// returned Question.
-  Question getQuestion(int index) {
+  QuestionBasic getQuestion(int index) {
     String uuid = _orderList[index];
 
     if (_questionStringAndAnswers.any((element) => element.uuid == uuid)) {

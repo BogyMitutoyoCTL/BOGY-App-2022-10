@@ -13,7 +13,7 @@ enum QuestionTypes {
 
 /// This is a question that contains a String as Question and multiple answers.
 @JsonSerializable(includeIfNull: false)
-class QuestionStringAndAnswers extends Question {
+class QuestionStringAndAnswers extends QuestionBasic {
   @JsonKey(required: true)
   String question;
   @JsonKey(required: true)
@@ -47,7 +47,7 @@ class QuestionStringAndAnswers extends Question {
 /// This is a question that is defined by a String as Question and
 /// a free text as answer.
 @JsonSerializable(includeIfNull: false)
-class QuestionStringAndFreeText extends Question {
+class QuestionStringAndFreeText extends QuestionBasic {
   @JsonKey(required: true)
   String question;
   @JsonKey(required: true)
