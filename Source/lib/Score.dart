@@ -6,7 +6,7 @@ import 'DataHelper/QuestionStack.dart';
 class Score extends StatefulWidget {
   QuestionStack questionStack;
 
-  Score(this.questionStack, {Key? key}) : super(key: key);
+  Score({required this.questionStack, Key? key}) : super(key: key);
 
   @override
   State<Score> createState() => _ScoreState(questionStack);

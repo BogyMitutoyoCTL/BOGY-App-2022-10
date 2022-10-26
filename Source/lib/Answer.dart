@@ -100,7 +100,8 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-              if (4 < 20)
+              if ((widget.questionNumber + 1) <
+                  widget.questionStack.getAmountOfQuestions())
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
@@ -112,12 +113,15 @@ class _AnswerState extends State<Answer> {
                           (route) => false);
                     },
                     child: Text("Zur nächsten Frage")),
-              if (4 == 20)
+              if ((widget.questionNumber + 1) ==
+                  widget.questionStack.getAmountOfQuestions())
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => Score(meinQuestionStack)),
+                              builder: (context) => Score(
+                                    questionStack: widget.questionStack,
+                                  )),
                           (route) => false);
                     },
                     child: Text("Ergebnis anzeigen")),
