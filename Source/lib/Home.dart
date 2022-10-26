@@ -40,6 +40,7 @@ class Home extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Topic(
                       answerType: false,
+                      comingFrom: false,
                     );
                   }),
             ),
