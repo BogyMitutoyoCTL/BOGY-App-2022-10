@@ -51,7 +51,7 @@ class _AnswerState extends State<Answer> {
             children: [
               Image.asset("assets/images/Logo.png"),
               Padding(padding: EdgeInsets.all(10)),
-              Text("Beantworte", style: TextStyle(fontSize: 40)),
+              Text("Die Antwort war", style: TextStyle(fontSize: 40)),
               if (!_isMultipleChoice)
                 TextField(
                   controller: _inputControl,
