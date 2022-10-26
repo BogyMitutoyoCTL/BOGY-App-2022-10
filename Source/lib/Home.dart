@@ -40,8 +40,6 @@ class Home extends StatelessWidget {
                     QuestionStack questionStack =
                         quizes.getQuestionStack(index);
                     return Topic(
-                      isMultipleChoice: false,
-                      cannotEdit: false,
                       questionStack: questionStack,
                     );
                   }),

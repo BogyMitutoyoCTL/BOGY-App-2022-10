@@ -43,7 +43,7 @@ class _EditDeckState extends State<EditDeck> {
                 itemCount: widget.questionStack.getAmountOfQuestions(),
                 itemBuilder: (BuildContext context, int index) {
                   return TopicQuestion(
-                    answerType: false,
+                    isMultipleChoice: false,
                     questionBasic: widget.questionStack.getQuestion(index),
                   );
                 }),

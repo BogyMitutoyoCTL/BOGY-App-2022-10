@@ -2,9 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
+import 'package:learnhub/DataHelper/QuestionStack.dart';
+
+import 'DataHelper/QuestionBasic.dart';
 
 class Question extends StatefulWidget {
-  const Question({Key? key}) : super(key: key);
+  QuestionStack questionStack;
+  Question({Key? key, required this.questionStack}) : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
@@ -12,7 +16,7 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   final TextEditingController _inputControl = TextEditingController();
-
+  int questionNumber = 0;
   bool _questionType = false;
 
   String _input = "";
@@ -36,15 +40,17 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
+    String question = "";
+
     return Scaffold(
-        appBar: AppBar(title: Text("NameDesStapels")),
+        appBar: AppBar(title: Text(widget.questionStack.name)),
         body: ListView(
           children: [
             Column(
               children: [
-                Image.asset("assets/images/Logo.png"),
+                /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
                 Padding(padding: EdgeInsets.all(10)),
-                Text("Beantworte", style: TextStyle(fontSize: 40)),
+                Text(question, style: TextStyle(fontSize: 40)),
                 if (!_questionType)
                   Padding(
                     padding: EdgeInsets.all(8),
@@ -66,7 +72,9 @@ class _QuestionState extends State<Question> {
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const Answer()),
+                                builder: (context) => Answer(
+                                      questionStack: widget.questionStack,
+                                    )),
                             (route) => false);
                       },
                       child: Icon(Icons.check)),
@@ -80,7 +88,9 @@ class _QuestionState extends State<Question> {
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                      builder: (context) => const Answer()),
+                                      builder: (context) => Answer(
+                                            questionStack: widget.questionStack,
+                                          )),
                                   (route) => false);
                             },
                             child: Text("A:________"))),
@@ -92,7 +102,9 @@ class _QuestionState extends State<Question> {
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                      builder: (context) => const Answer()),
+                                      builder: (context) => Answer(
+                                            questionStack: widget.questionStack,
+                                          )),
                                   (route) => false);
                             },
                             child: Text("B:________"))),
@@ -112,8 +124,10 @@ class _QuestionState extends State<Question> {
                                     onPressed: () {
                                       Navigator.of(context).pushAndRemoveUntil(
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Answer()),
+                                              builder: (context) => Answer(
+                                                    questionStack:
+                                                        widget.questionStack,
+                                                  )),
                                           (route) => false);
                                     },
                                     child: Text("C:________"))),
@@ -125,8 +139,10 @@ class _QuestionState extends State<Question> {
                                     onPressed: () {
                                       Navigator.of(context).pushAndRemoveUntil(
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Answer()),
+                                              builder: (context) => Answer(
+                                                    questionStack:
+                                                        widget.questionStack,
+                                                  )),
                                           (route) => false);
                                     },
                                     child: Text("D:________"))),
