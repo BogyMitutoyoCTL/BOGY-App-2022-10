@@ -29,7 +29,7 @@ class _TopicQuestionState extends State<TopicQuestion> {
     return ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const Question()),
+              MaterialPageRoute(builder: (context) => EditQuestion()),
               (route) => false);
         },
         child: Row(
@@ -39,12 +39,8 @@ class _TopicQuestionState extends State<TopicQuestion> {
               "Frage",
               style: TextStyle(fontSize: 30),
             ),
-            Column(
-              children: [
-                if (!widget.answerType) Icon(Icons.abc),
-                if (widget.answerType) Icon(Icons.check_box_outline_blank),
-              ],
-            ),
+            if (!widget.answerType) Icon(Icons.abc),
+            if (widget.answerType) Icon(Icons.check_box_outline_blank),
           ],
         ));
   }
