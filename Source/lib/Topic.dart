@@ -2,8 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learnhub/EditQuestion.dart';
-import 'package:learnhub/Score.dart';
 
 import 'DataHelper/QuestionStack.dart';
 import 'EditDeck.dart';
@@ -45,8 +43,13 @@ class _TopicState extends State<Topic> {
   }
 
   void editDeck() {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EditDeck(widget.questionStack))).then((value) => setState(() {})
-    );
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => EditDeck(widget.questionStack)))
+        .then(refresh);
+  }
+
+  void refresh(value) {
+    setState(() {});
   }
 }

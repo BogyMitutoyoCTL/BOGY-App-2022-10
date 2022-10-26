@@ -20,8 +20,7 @@ class Answer extends StatefulWidget {
 class _AnswerState extends State<Answer> {
   final TextEditingController _inputControl = TextEditingController();
 
-  bool _questionType = true;
-  QuestionStack meinQuestionStack = QuestionStack("Flaggen");
+  bool _isMultipleChoice = true;
 
   String _input = "";
   @override
@@ -53,7 +52,7 @@ class _AnswerState extends State<Answer> {
               Image.asset("assets/images/Logo.png"),
               Padding(padding: EdgeInsets.all(10)),
               Text("Beantworte", style: TextStyle(fontSize: 40)),
-              if (!_questionType)
+              if (!_isMultipleChoice)
                 TextField(
                   controller: _inputControl,
                   decoration: const InputDecoration(
@@ -61,7 +60,7 @@ class _AnswerState extends State<Answer> {
                     labelText: "Eingabe...",
                   ),
                 ),
-              if (_questionType)
+              if (_isMultipleChoice)
                 Row(children: [
                   Padding(padding: EdgeInsets.all(10)),
                   SizedBox(
@@ -76,8 +75,8 @@ class _AnswerState extends State<Answer> {
                       child: ElevatedButton(
                           onPressed: () {}, child: Text("B:________"))),
                 ]),
-              if (_questionType) Padding(padding: EdgeInsets.all(10)),
-              if (_questionType)
+              if (_isMultipleChoice) Padding(padding: EdgeInsets.all(10)),
+              if (_isMultipleChoice)
                 Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(
