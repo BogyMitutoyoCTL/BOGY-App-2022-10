@@ -20,12 +20,15 @@ class _EditDeckState extends State<EditDeck> {
       ),
       body: Column(
         children: [
-          TextField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Titel",
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Titel",
+              ),
+              controller: _titleControll,
             ),
-            controller: _titleControll,
           ),
           const Text(
             "Karten:",
