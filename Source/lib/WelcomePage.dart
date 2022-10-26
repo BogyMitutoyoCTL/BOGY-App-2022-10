@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, empty_statements
+
 import 'package:flutter/material.dart';
 import 'package:learnhub/Home.dart';
 
@@ -26,7 +28,7 @@ class WelcomePage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const Home()),
+                    MaterialPageRoute(builder: (context) => Home()),
                     (route) => false);
               },
               child: (Text(

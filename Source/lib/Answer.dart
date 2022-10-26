@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, unused_import, file_names
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
@@ -30,8 +30,6 @@ class _AnswerState extends State<Answer> {
         _input = _inputControl.text;
       });
     });
-
-
   }
 
   @override
@@ -48,7 +46,7 @@ class _AnswerState extends State<Answer> {
         children: [
           Column(
             children: [
-              Placeholder(fallbackHeight: 250, color: Colors.black),
+              Image.asset("assets/images/Logo.png"),
               Padding(padding: EdgeInsets.all(10)),
               Text("Beantworte", style: TextStyle(fontSize: 40)),
               if (!_questionType)
@@ -98,7 +96,7 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-             ElevatedButton(
+              ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
@@ -106,7 +104,6 @@ class _AnswerState extends State<Answer> {
                         (route) => false);
                   },
                   child: Text("Zur nächsten Frage")),
-
             ],
           ),
         ],
