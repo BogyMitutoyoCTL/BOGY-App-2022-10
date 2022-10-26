@@ -14,6 +14,7 @@ class TopicQuestion extends StatefulWidget {
   //false = Benutzereingabe; true= Multiple Choice
   bool isMultipleChoice = false;
   QuestionBasic questionBasic;
+
   TopicQuestion(
       {Key? key, required this.isMultipleChoice, required this.questionBasic})
       : super(key: key);
