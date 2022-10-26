@@ -39,6 +39,7 @@ class _TopicState extends State<Topic> {
         MaterialPageRoute(
             builder: (context) => Question(
                   questionStack: widget.questionStack,
+                  questionNumber: 0,
                 )),
         (route) => false);
   }

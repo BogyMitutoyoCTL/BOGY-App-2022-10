@@ -9,7 +9,9 @@ import 'DataHelper/QuestionStack.dart';
 
 class Answer extends StatefulWidget {
   QuestionStack questionStack;
-  Answer({Key? key, required this.questionStack}) : super(key: key);
+  int questionNumber;
+  Answer({Key? key, required this.questionStack, required this.questionNumber})
+      : super(key: key);
 
   @override
   State<Answer> createState() => _AnswerState();
@@ -105,6 +107,7 @@ class _AnswerState extends State<Answer> {
                           MaterialPageRoute(
                               builder: (context) => Question(
                                     questionStack: widget.questionStack,
+                                    questionNumber: widget.questionNumber + 1,
                                   )),
                           (route) => false);
                     },

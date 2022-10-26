@@ -5,18 +5,39 @@ import 'package:learnhub/Answer.dart';
 import 'package:learnhub/DataHelper/QuestionStack.dart';
 
 import 'DataHelper/QuestionBasic.dart';
+import 'DataHelper/QuestionStringAndAnswers.dart';
+import 'DataHelper/QuestionStringAndFreeText.dart';
+import 'DataHelper/QuestionTypes.dart';
 
 class Question extends StatefulWidget {
   QuestionStack questionStack;
-  Question({Key? key, required this.questionStack}) : super(key: key);
+  int questionNumber;
+  Question(
+      {Key? key, required this.questionStack, required this.questionNumber})
+      : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
 }
 
 class _QuestionState extends State<Question> {
+  String questionName() {
+    QuestionBasic questionBasic =
+        widget.questionStack.getQuestion(widget.questionNumber);
+    if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
+      QuestionStringAndAnswers questionStringAndAnswers =
+          questionBasic as QuestionStringAndAnswers;
+      return questionStringAndAnswers.question;
+    } else if (questionBasic.questionType == QuestionTypes.stringAndFreeText) {
+      QuestionStringAndFreeText questionStringAndFreeText =
+          questionBasic as QuestionStringAndFreeText;
+      return questionStringAndFreeText.question;
+    } else {
+      return "Ordne zu";
+    }
+  }
+
   final TextEditingController _inputControl = TextEditingController();
-  int questionNumber = 0;
   bool _questionType = false;
 
   String _input = "";
@@ -40,8 +61,6 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
-    String question = "";
-
     return Scaffold(
         appBar: AppBar(title: Text(widget.questionStack.name)),
         body: ListView(
@@ -50,7 +69,7 @@ class _QuestionState extends State<Question> {
               children: [
                 /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
                 Padding(padding: EdgeInsets.all(10)),
-                Text(question, style: TextStyle(fontSize: 40)),
+                Text(questionName(), style: TextStyle(fontSize: 40)),
                 if (!_questionType)
                   Padding(
                     padding: EdgeInsets.all(8),
@@ -74,6 +93,7 @@ class _QuestionState extends State<Question> {
                             MaterialPageRoute(
                                 builder: (context) => Answer(
                                       questionStack: widget.questionStack,
+                                      questionNumber: widget.questionNumber,
                                     )),
                             (route) => false);
                       },
@@ -90,6 +110,8 @@ class _QuestionState extends State<Question> {
                                   MaterialPageRoute(
                                       builder: (context) => Answer(
                                             questionStack: widget.questionStack,
+                                            questionNumber:
+                                                widget.questionNumber,
                                           )),
                                   (route) => false);
                             },
@@ -104,6 +126,8 @@ class _QuestionState extends State<Question> {
                                   MaterialPageRoute(
                                       builder: (context) => Answer(
                                             questionStack: widget.questionStack,
+                                            questionNumber:
+                                                widget.questionNumber,
                                           )),
                                   (route) => false);
                             },
@@ -127,6 +151,8 @@ class _QuestionState extends State<Question> {
                                               builder: (context) => Answer(
                                                     questionStack:
                                                         widget.questionStack,
+                                                    questionNumber:
+                                                        widget.questionNumber,
                                                   )),
                                           (route) => false);
                                     },
@@ -142,6 +168,8 @@ class _QuestionState extends State<Question> {
                                               builder: (context) => Answer(
                                                     questionStack:
                                                         widget.questionStack,
+                                                    questionNumber:
+                                                        widget.questionNumber,
                                                   )),
                                           (route) => false);
                                     },
