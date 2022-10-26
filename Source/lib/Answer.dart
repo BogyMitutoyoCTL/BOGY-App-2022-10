@@ -2,16 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
+import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
 
 import 'DataHelper/QuestionStack.dart';
 
 class Answer extends StatefulWidget {
-  QuestionStack questionStack;
-  int questionNumber;
-  Answer({Key? key, required this.questionStack, required this.questionNumber})
-      : super(key: key);
+  CurrentlyPlaying playing;
+
+  Answer({Key? key, required this.playing}) : super(key: key);
 
   @override
   State<Answer> createState() => _AnswerState();
@@ -44,7 +44,7 @@ class _AnswerState extends State<Answer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.questionStack.name)),
+      appBar: AppBar(title: Text(widget.playing.stack.name)),
       body: ListView(
         children: [
           Column(
@@ -99,12 +99,12 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-              if ((widget.questionNumber + 1) <
-                  widget.questionStack.getAmountOfQuestions())
+              if ((widget.playing.questionIndex + 1) <
+                  widget.playing.stack.getAmountOfQuestions())
                 ElevatedButton(
                     onPressed: nextQuestion, child: Text("Zur nächsten Frage")),
-              if ((widget.questionNumber + 1) ==
-                  widget.questionStack.getAmountOfQuestions())
+              if ((widget.playing.questionIndex + 1) ==
+                  widget.playing.stack.getAmountOfQuestions())
                 ElevatedButton(
                     onPressed: showResult, child: Text("Ergebnis anzeigen")),
             ],
@@ -115,11 +115,11 @@ class _AnswerState extends State<Answer> {
   }
 
   void nextQuestion() {
+    widget.playing.questionIndex++;
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Question(
-                  questionStack: widget.questionStack,
-                  questionNumber: widget.questionNumber + 1,
+                  playing: widget.playing,
                 )),
         (route) => false);
   }
@@ -128,7 +128,7 @@ class _AnswerState extends State<Answer> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Score(
-                  questionStack: widget.questionStack,
+                  playing: widget.playing,
                 )),
         (route) => false);
   }
