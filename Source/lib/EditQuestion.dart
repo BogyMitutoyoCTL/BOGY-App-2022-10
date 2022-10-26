@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:learnhub/EditDeck.dart';
 
 class EditQuestion extends StatefulWidget {
   const EditQuestion({Key? key}) : super(key: key);
@@ -195,6 +196,6 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void save() {
     //Speichern
-    //Zur Homo seite
+    Navigator.of(context).pop(EditDeck()); //Zur Homo seite
   }
 }
