@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "          Quiz",
+            "          Home",
             style: TextStyle(fontSize: 50),
           ),
           IconButton(
@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
                     return Topic(
                       answerType: false,
                       comingFrom: false,
-                      title: questionStack.name,
+                      questionStack: questionStack,
                     );
                   }),
             ),
