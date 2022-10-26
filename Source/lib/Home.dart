@@ -29,10 +29,10 @@ class Home extends StatelessWidget {
           IconButton(
               icon: const Icon(Icons.add_circle_outline),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const EditDeck()),
-                );
+                //    Navigator.push(
+                //     context,
+                //       MaterialPageRoute(builder: (context) => EditDeck()),
+                //  );
               })
         ],
       )),

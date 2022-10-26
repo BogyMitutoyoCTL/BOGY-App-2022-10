@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import, prefer_const_constructors, must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/EditQuestion.dart';
@@ -53,7 +55,8 @@ class _TopicState extends State<Topic> {
                   IconButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EditDeck()));
+                            builder: (context) =>
+                                EditDeck(widget.questionStack)));
                       },
                       icon: Icon(Icons.edit))
               ],
