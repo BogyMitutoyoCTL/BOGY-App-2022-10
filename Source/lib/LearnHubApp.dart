@@ -36,7 +36,7 @@ class LearnHubApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.amber,
       ),
-      home: const ImageProcessing(),
+      home: const WelcomePage(),
     );
   }
 }

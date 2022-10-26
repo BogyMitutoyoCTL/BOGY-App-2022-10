@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learnhub/Home.dart';
 
-import 'DataHelper/DataStructure.dart';
+import 'DataHelper/QuestionStack.dart';
 
 class Score extends StatefulWidget {
   QuestionStack questionStack;
