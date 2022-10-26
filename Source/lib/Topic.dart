@@ -51,9 +51,8 @@ class _TopicState extends State<Topic> {
                 if (!widget.comingFrom)
                   IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) => Question()),
-                            (route) => false);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EditDeck()));
                       },
                       icon: Icon(Icons.edit))
               ],
