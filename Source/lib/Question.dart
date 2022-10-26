@@ -22,27 +22,9 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-  String questionName() {
-    QuestionBasic questionBasic =
-        widget.questionStack.getQuestion(widget.questionNumber);
-    if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
-      widget.isMultipleChoice = false;
-      QuestionStringAndAnswers questionStringAndAnswers =
-          questionBasic as QuestionStringAndAnswers;
-      return questionStringAndAnswers.question;
-    } else if (questionBasic.questionType == QuestionTypes.stringAndFreeText) {
-      widget.isMultipleChoice = true;
-      QuestionStringAndFreeText questionStringAndFreeText =
-          questionBasic as QuestionStringAndFreeText;
-      return questionStringAndFreeText.question;
-    } else {
-      return "Ordne zu";
-    }
-  }
-
   final TextEditingController _inputControl = TextEditingController();
-
   String _input = "";
+
   @override
   void initState() {
     super.initState();
@@ -67,124 +49,99 @@ class _QuestionState extends State<Question> {
         appBar: AppBar(title: Text(widget.questionStack.name)),
         body: ListView(
           children: [
-            Column(
-              children: [
-                /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
-                Padding(padding: EdgeInsets.all(10)),
-                Text(questionName(), style: TextStyle(fontSize: 40)),
-                if (!widget.isMultipleChoice)
+            Column(children: [
+              /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
+              Padding(padding: EdgeInsets.all(10)),
+              Text(questionName(), style: TextStyle(fontSize: 40)),
+              if (!widget.isMultipleChoice)
+                Padding(
+                  padding: EdgeInsets.all(8),
+                ),
+              if (!widget.isMultipleChoice)
+                TextField(
+                  controller: _inputControl,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Eingabe...",
+                  ),
+                ),
+              if (!widget.isMultipleChoice)
+                Padding(
+                  padding: EdgeInsets.all(8),
+                ),
+              if (!widget.isMultipleChoice)
+                FloatingActionButton(
+                    onPressed: mcPressed, child: Icon(Icons.check)),
+              if (widget.isMultipleChoice)
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: ElevatedButton(
+                              onPressed: mcPressed, child: Text("A:________"))),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: ElevatedButton(
+                              onPressed: mcPressed, child: Text("C:________"))),
+                    ],
+                  ),
                   Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(10),
                   ),
-                if (!widget.isMultipleChoice)
-                  TextField(
-                    controller: _inputControl,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Eingabe...",
-                    ),
+                  Column(
+                    children: [
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: ElevatedButton(
+                              onPressed: mcPressed, child: Text("A:________"))),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: ElevatedButton(
+                              onPressed: mcPressed, child: Text("A:________"))),
+                    ],
                   ),
-                if (!widget.isMultipleChoice)
-                  Padding(
-                    padding: EdgeInsets.all(8),
-                  ),
-                if (!widget.isMultipleChoice)
-                  FloatingActionButton(
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => Answer(
-                                      questionStack: widget.questionStack,
-                                      questionNumber: widget.questionNumber,
-                                    )),
-                            (route) => false);
-                      },
-                      child: Icon(Icons.check)),
-                if (widget.isMultipleChoice)
-                  Row(children: [
-                    Padding(padding: EdgeInsets.all(10)),
-                    SizedBox(
-                        width: 166.0,
-                        height: 100.0,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => Answer(
-                                            questionStack: widget.questionStack,
-                                            questionNumber:
-                                                widget.questionNumber,
-                                          )),
-                                  (route) => false);
-                            },
-                            child: Text("A:________"))),
-                    Padding(padding: EdgeInsets.all(10)),
-                    SizedBox(
-                        width: 166.0,
-                        height: 100.0,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => Answer(
-                                            questionStack: widget.questionStack,
-                                            questionNumber:
-                                                widget.questionNumber,
-                                          )),
-                                  (route) => false);
-                            },
-                            child: Text("B:________"))),
-                  ]),
-                if (widget.isMultipleChoice)
-                  Padding(padding: EdgeInsets.all(10)),
-                if (widget.isMultipleChoice)
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                                width: 166.0,
-                                height: 100.0,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) => Answer(
-                                                    questionStack:
-                                                        widget.questionStack,
-                                                    questionNumber:
-                                                        widget.questionNumber,
-                                                  )),
-                                          (route) => false);
-                                    },
-                                    child: Text("C:________"))),
-                            Padding(padding: EdgeInsets.all(10)),
-                            SizedBox(
-                                width: 166.0,
-                                height: 100.0,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) => Answer(
-                                                    questionStack:
-                                                        widget.questionStack,
-                                                    questionNumber:
-                                                        widget.questionNumber,
-                                                  )),
-                                          (route) => false);
-                                    },
-                                    child: Text("D:________"))),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
+                ]),
+            ]),
           ],
         ));
+  }
+
+  void mcPressed() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Answer(
+                  questionStack: widget.questionStack,
+                  questionNumber: widget.questionNumber,
+                )),
+        (route) => false);
+  }
+
+  String questionName() {
+    QuestionBasic questionBasic =
+        widget.questionStack.getQuestion(widget.questionNumber);
+    if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
+      widget.isMultipleChoice = false;
+      QuestionStringAndAnswers questionStringAndAnswers =
+          questionBasic as QuestionStringAndAnswers;
+      return questionStringAndAnswers.question;
+    } else if (questionBasic.questionType == QuestionTypes.stringAndFreeText) {
+      widget.isMultipleChoice = true;
+      QuestionStringAndFreeText questionStringAndFreeText =
+          questionBasic as QuestionStringAndFreeText;
+      return questionStringAndFreeText.question;
+    } else {
+      return "Ordne zu";
+    }
   }
 }
