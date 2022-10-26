@@ -6,15 +6,16 @@ import 'Topic.dart';
 
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
-  EditDeck(this.questionStack, {Key? key}) : super(key: key);
+  TextEditingController _titleControll = TextEditingController();
+  EditDeck(this.questionStack, {Key? key}) : super(key: key) {
+    _titleControll.text = questionStack.name;
+  }
 
   @override
   State<EditDeck> createState() => _EditDeckState();
 }
 
 class _EditDeckState extends State<EditDeck> {
-  TextEditingController _titleControll = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _EditDeckState extends State<EditDeck> {
                 border: OutlineInputBorder(),
                 labelText: "Titel",
               ),
-              controller: _titleControll,
+              controller: widget._titleControll,
             ),
           ),
           const Text(
