@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/Home.dart';
 
-import 'DataHelper/QuestionStack.dart';
-import 'DataHelper/QuestionStack.dart';
-
 class Score extends StatefulWidget {
-  QuestionStack questionStack;
+  CurrentlyPlaying playing;
 
-  Score({required this.questionStack, Key? key}) : super(key: key);
+  Score({required this.playing, Key? key}) : super(key: key);
 
   @override
-  State<Score> createState() => _ScoreState(questionStack);
+  State<Score> createState() => _ScoreState();
 }
 
 class _ScoreState extends State<Score> {
-  QuestionStack questionStack;
-  _ScoreState(this.questionStack);
-
   @override
   Widget build(BuildContext context) {
-    // TODO: durch echte Anzahl austauschen
-    var score = 4;
-    var numberOfQuestions = questionStack.getAmountOfQuestions();
+    var score = widget.playing.correctAnswers;
+    var numberOfQuestions = widget.playing.stack.getAmountOfQuestions();
 
     return Scaffold(
         appBar: AppBar(

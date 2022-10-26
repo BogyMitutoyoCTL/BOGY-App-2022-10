@@ -1,13 +1,12 @@
-// ignore_for_file: unused_import, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:learnhub/DataHelper/DataHelper.dart';
+import 'package:learnhub/EditDeck.dart';
+import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionStack.dart';
-import 'EditDeck.dart';
+import 'DataHelper/QuestionStack.dart';
 import 'Topic.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key) {}
+  Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -28,7 +27,7 @@ class _HomeState extends State<Home> {
           actions: [
             IconButton(
                 icon: const Icon(Icons.add_circle_outline),
-                onPressed: addNewDeck)
+                onPressed: addNewDeck,)
           ],
           title: const Text(
             "Home",
@@ -62,6 +61,13 @@ class _HomeState extends State<Home> {
 
   void addNewDeck() {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EditDeck(new QuestionStack(""))));
+        builder: (context) => EditDeck(QuestionStack(""))))
+        .then((questionStack) {
+          if(questionStack != null){
+          setState(() {
+            quizes.addQuestionStack(questionStack);
+          });
+          }
+        });
   }
 }

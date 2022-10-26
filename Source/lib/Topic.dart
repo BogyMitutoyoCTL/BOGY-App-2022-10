@@ -2,8 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learnhub/EditQuestion.dart';
-import 'package:learnhub/Score.dart';
+import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 
 import 'DataHelper/QuestionStack.dart';
 import 'EditDeck.dart';
@@ -38,15 +37,19 @@ class _TopicState extends State<Topic> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Question(
-                  questionStack: widget.questionStack,
-                  questionNumber: 0,
+                  playing: CurrentlyPlaying(widget.questionStack),
                 )),
         (route) => false);
   }
 
   void editDeck() {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EditDeck(widget.questionStack))).then((value) => setState(() {})
-    );
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => EditDeck(widget.questionStack)))
+        .then(refresh);
+  }
+
+  void refresh(value) {
+    setState(() {});
   }
 }

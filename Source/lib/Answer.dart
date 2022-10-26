@@ -2,16 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
+import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
 
 import 'DataHelper/QuestionStack.dart';
 
 class Answer extends StatefulWidget {
-  QuestionStack questionStack;
-  int questionNumber;
-  Answer({Key? key, required this.questionStack, required this.questionNumber})
-      : super(key: key);
+  CurrentlyPlaying playing;
+
+  Answer({Key? key, required this.playing}) : super(key: key);
 
   @override
   State<Answer> createState() => _AnswerState();
@@ -20,8 +20,7 @@ class Answer extends StatefulWidget {
 class _AnswerState extends State<Answer> {
   final TextEditingController _inputControl = TextEditingController();
 
-  bool _questionType = true;
-  QuestionStack meinQuestionStack = QuestionStack("Flaggen");
+  bool _isMultipleChoice = true;
 
   String _input = "";
   @override
@@ -45,15 +44,15 @@ class _AnswerState extends State<Answer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.questionStack.name)),
+      appBar: AppBar(title: Text(widget.playing.stack.name)),
       body: ListView(
         children: [
           Column(
             children: [
               Image.asset("assets/images/Logo.png"),
               Padding(padding: EdgeInsets.all(10)),
-              Text("Beantworte", style: TextStyle(fontSize: 40)),
-              if (!_questionType)
+              Text("Die Antwort war", style: TextStyle(fontSize: 40)),
+              if (!_isMultipleChoice)
                 TextField(
                   controller: _inputControl,
                   decoration: const InputDecoration(
@@ -61,7 +60,7 @@ class _AnswerState extends State<Answer> {
                     labelText: "Eingabe...",
                   ),
                 ),
-              if (_questionType)
+              if (_isMultipleChoice)
                 Row(children: [
                   Padding(padding: EdgeInsets.all(10)),
                   SizedBox(
@@ -76,8 +75,8 @@ class _AnswerState extends State<Answer> {
                       child: ElevatedButton(
                           onPressed: () {}, child: Text("B:________"))),
                 ]),
-              if (_questionType) Padding(padding: EdgeInsets.all(10)),
-              if (_questionType)
+              if (_isMultipleChoice) Padding(padding: EdgeInsets.all(10)),
+              if (_isMultipleChoice)
                 Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(
@@ -100,35 +99,37 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-              if ((widget.questionNumber + 1) <
-                  widget.questionStack.getAmountOfQuestions())
+              if ((widget.playing.questionIndex + 1) <
+                  widget.playing.stack.getAmountOfQuestions())
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => Question(
-                                    questionStack: widget.questionStack,
-                                    questionNumber: widget.questionNumber + 1,
-                                  )),
-                          (route) => false);
-                    },
-                    child: Text("Zur nächsten Frage")),
-              if ((widget.questionNumber + 1) ==
-                  widget.questionStack.getAmountOfQuestions())
+                    onPressed: nextQuestion, child: Text("Zur nächsten Frage")),
+              if ((widget.playing.questionIndex + 1) ==
+                  widget.playing.stack.getAmountOfQuestions())
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => Score(
-                                    questionStack: widget.questionStack,
-                                  )),
-                          (route) => false);
-                    },
-                    child: Text("Ergebnis anzeigen")),
+                    onPressed: showResult, child: Text("Ergebnis anzeigen")),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void nextQuestion() {
+    widget.playing.questionIndex++;
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Question(
+                  playing: widget.playing,
+                )),
+        (route) => false);
+  }
+
+  void showResult() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Score(
+                  playing: widget.playing,
+                )),
+        (route) => false);
   }
 }
