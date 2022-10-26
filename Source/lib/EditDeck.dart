@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionStack.dart';
+import 'EditQuestion.dart';
 
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
@@ -26,7 +27,7 @@ class _EditDeckState extends State<EditDeck> {
     return Scaffold(
       appBar: AppBar(
         actions: [IconButton(onPressed: saveStack, icon: Icon(Icons.check))],
-        title: Text("Stapel bearbeiten"),
+        title: Text("Bearbeiten/Erstellen"),
       ),
       floatingActionButton:  FloatingActionButton(
         onPressed: addQuestion,
