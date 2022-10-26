@@ -46,6 +46,10 @@ class _QuestionState extends State<Question> {
                 Padding(padding: EdgeInsets.all(10)),
                 Text("Beantworte", style: TextStyle(fontSize: 40)),
                 if (!_questionType)
+                  Padding(
+                    padding: EdgeInsets.all(8),
+                  ),
+                if (!_questionType)
                   TextField(
                     controller: _inputControl,
                     decoration: const InputDecoration(
@@ -54,12 +58,18 @@ class _QuestionState extends State<Question> {
                     ),
                   ),
                 if (!_questionType)
-                  IconButton(
+                  Padding(
+                    padding: EdgeInsets.all(8),
+                  ),
+                if (!_questionType)
+                  FloatingActionButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Answer()));
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const Answer()),
+                            (route) => false);
                       },
-                      icon: Icon(Icons.check)),
+                      child: Icon(Icons.check)),
                 if (_questionType)
                   Row(children: [
                     Padding(padding: EdgeInsets.all(10)),
