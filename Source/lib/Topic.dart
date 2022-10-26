@@ -31,8 +31,9 @@ class _TopicState extends State<Topic> {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const EditQuestion()));
           } else {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const Question()));
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const Question()),
+                (route) => false);
           }
         },
         child: Row(

@@ -41,6 +41,7 @@ class Home extends StatelessWidget {
                     return Topic(
                       answerType: false,
                       comingFrom: false,
+                      title: "Titel",
                     );
                   }),
             ),
