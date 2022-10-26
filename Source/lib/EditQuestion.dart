@@ -172,6 +172,6 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void save() {
     // TODO: Speichern
-    Navigator.of(context).pop(); //Zur Home seite
+    Navigator.of(context).pop(); //Zur EditDeck seite
   }
 }
