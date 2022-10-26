@@ -15,7 +15,8 @@ class EditDeck extends StatefulWidget {
 class _EditDeckState extends State<EditDeck> {
   final TextEditingController _titleController = TextEditingController();
 
-  _EditDeckState() {
+  @override
+  void initState() {
     _titleController.text = widget.questionStack.name;
   }
 
@@ -23,6 +24,7 @@ class _EditDeckState extends State<EditDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [IconButton(onPressed: saveStack, icon: Icon(Icons.check))],
         title: Text("Title"),
       ),
       body: Column(
@@ -54,5 +56,16 @@ class _EditDeckState extends State<EditDeck> {
         ],
       ),
     );
+  }
+
+
+  void saveStack() {
+    String titelStapel =_titleController.text;
+    setState(() {
+      widget.questionStack.name = titelStapel;
+    });
+
+    Navigator.of(context).pop();
+
   }
 }
