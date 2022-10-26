@@ -1,0 +1,32 @@
+{
+  "multiple_choice_question": [
+    {
+      "question": "Wie heißt die Hauptstadt von Frankreich?",
+      "wrong_answers": [
+        "London",
+        "Berlin",
+        "Wien"
+      ],
+      "correct_answer": "Paris"
+    },
+    {
+      "question": "Wer war der erste Präsident von den USA?",
+      "wrong_answers": [
+        "Abraham Lincoln",
+        "Barack Obama",
+        "Homer Simpson"
+      ],
+      "correct_answer": "George Washington"
+    }
+  ],
+  "question_answer": [
+    {
+      "question": "Wie viel ist 4+3*2?",
+      "correct_answer": "10"
+    },
+    {
+      "question": "Welche Farbe hat das Kreuz in der Schweizer Flagge?",
+      "correct_answer": "weiss"
+    }
+  ]
+}
