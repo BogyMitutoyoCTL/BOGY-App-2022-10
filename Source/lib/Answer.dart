@@ -21,7 +21,6 @@ class _AnswerState extends State<Answer> {
   final TextEditingController _inputControl = TextEditingController();
 
   bool _questionType = true;
-  QuestionStack meinQuestionStack = QuestionStack("Flaggen");
 
   String _input = "";
   @override
