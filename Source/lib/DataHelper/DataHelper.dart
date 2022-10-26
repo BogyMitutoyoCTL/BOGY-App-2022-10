@@ -9,7 +9,12 @@ import 'package:learnhub/DataHelper/QuestionTypes.dart';
 
 import 'DataStructure.dart';
 
+/// The DataHelper take care of the different question stacks.
+/// You can add, remove and get a QuestionStack.
+/// The DataHelper is also the one what saves and read the
+/// QuestionStacks from file.
 class DataHelper {
+  // ignore: prefer_final_fields
   List<QuestionStack> _myQuestionStacks;
 
   DataHelper({List<QuestionStack>? myQuestionStacks})
@@ -17,18 +22,24 @@ class DataHelper {
 
   List<QuestionStack> get myQuestionStacks => _myQuestionStacks;
 
-  void addQuestionStack(QuestionStack newQuestionStack) {
+  /// This adds a new QuestionStack. Returns the index of the newly added Stack.
+  /// It always adds the new Stack to the end.
+  int addQuestionStack(QuestionStack newQuestionStack) {
     _myQuestionStacks.add(newQuestionStack);
+    return _myQuestionStacks.length - 1;
   }
 
+  /// Returns the QuestionStack by index. Throws an error if index doesn't exists.
   QuestionStack getQuestionStack(int index) {
     return _myQuestionStacks[index];
   }
 
+  /// Removes one QuestionStack by index. Throws an error if index doesn't exists.
   void removeQuestionStack(int index) {
     _myQuestionStacks.removeAt(index);
   }
 
+  /// Returns the amount of the QuestionStacks
   int amountOfQuestionStacks() {
     return _myQuestionStacks.length;
   }
@@ -43,6 +54,7 @@ class DataHelper {
   }
 }
 
+/// This is an example of how to use this DataHelper
 void main() {
   DataHelper dataHelper = DataHelper();
 
