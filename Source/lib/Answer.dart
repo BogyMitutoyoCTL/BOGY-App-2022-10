@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
-
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
+import 'package:learnhub/DataHelper/DataStructure.dart';
+import 'package:learnhub/DataHelper/QuestionTypes.dart';
 import 'package:learnhub/Question.dart';
+import 'package:learnhub/Score.dart';
 
 class Answer extends StatefulWidget {
   const Answer({Key? key}) : super(key: key);
@@ -15,6 +17,8 @@ class _AnswerState extends State<Answer> {
   final TextEditingController _inputControl = TextEditingController();
 
   bool _questionType = true;
+  QuestionStack meinQuestionStack = QuestionStack("Flaggen");
+
 
   String _input = "";
   @override
@@ -27,6 +31,9 @@ class _AnswerState extends State<Answer> {
         _input = _inputControl.text;
       });
     });
+    QuestionStringAndAnswers neueFrage = QuestionStringAndAnswers(question: "Frage1", answers: ["a","b","c","d"]);
+    meinQuestionStack.addQuestionStringAndAnswers(neueFrage);
+
   }
 
   @override
@@ -93,14 +100,23 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-              ElevatedButton(
+             if (4 < 20)ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                            builder: (context) => const Question()),
+                            builder: (context) => Question()),
                         (route) => false);
                   },
                   child: Text("Zur nächsten Frage")),
+              if (4 == 20)ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => Score(meinQuestionStack)),
+                            (route) => false);
+                  },
+                  child: Text("Ergebnis anzeigen")),
+
             ],
           ),
         ],

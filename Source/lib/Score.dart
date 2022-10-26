@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/DataStructure.dart';
 import 'package:learnhub/Home.dart';
 
 class Score extends StatefulWidget {
-  const Score({Key? key}) : super(key: key);
+  QuestionStack questionStack;
+
+   Score(this.questionStack , {Key? key}) : super(key: key);
+
 
   @override
-  State<Score> createState() => _ScoreState();
+  State<Score> createState() => _ScoreState(questionStack);
 }
 
 class _ScoreState extends State<Score> {
+  QuestionStack questionStack;
+  _ScoreState(this.questionStack);
+
   @override // Ich weiß nicht was das macht
   Widget build(BuildContext context) {
+    var ErreichtePunkte = 4;
+    var AnzahlFragen = questionStack.getAmountOfQuestions();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Name des Stapels"),
       ),
-      body: Column(
+      body: ListView(
+      children:[Column(
         children: [
           Center(
             child: Text(
@@ -25,7 +36,7 @@ class _ScoreState extends State<Score> {
           ),
           Image.asset("assets/images/Feuerwerk.png"),
           Text(
-            "Du hast x von y",
+            "Du hast $ErreichtePunkte von $AnzahlFragen",
             style: TextStyle(fontSize: 50),
           ),
           Text(
@@ -45,6 +56,9 @@ class _ScoreState extends State<Score> {
           ),
         ],
       ),
+            ],
+      )
     );
   }
+
 }
