@@ -16,10 +16,11 @@ class _ScoreState extends State<Score> {
   QuestionStack questionStack;
   _ScoreState(this.questionStack);
 
-  @override 
+  @override
   Widget build(BuildContext context) {
-    var ErreichtePunkte = 4;
-    var AnzahlFragen = questionStack.getAmountOfQuestions();
+    // TODO: durch echte Anzahl austauschen
+    var score = 4;
+    var numberOfQuestions = questionStack.getAmountOfQuestions();
 
     return Scaffold(
         appBar: AppBar(
@@ -37,7 +38,7 @@ class _ScoreState extends State<Score> {
                 ),
                 Image.asset("assets/images/Feuerwerk.png"),
                 Text(
-                  "Du hast $ErreichtePunkte von $AnzahlFragen",
+                  "Du hast $score von $numberOfQuestions",
                   style: TextStyle(fontSize: 50),
                 ),
                 Text(

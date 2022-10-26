@@ -10,15 +10,14 @@ import 'EditDeck.dart';
 import 'Question.dart';
 
 class Topic extends StatefulWidget {
-  //false = Benutzereingabe; true= Multiple Choice
   //false = Home; true= EditDeck
-  bool answerType = false;
-  bool comingFrom;
+  bool isMultipleChoice = false;
+  bool cannotEdit;
   QuestionStack questionStack;
   Topic(
       {Key? key,
-      required this.answerType,
-      required this.comingFrom,
+      required this.isMultipleChoice,
+      required this.cannotEdit,
       required this.questionStack})
       : super(key: key);
 
@@ -30,16 +29,7 @@ class _TopicState extends State<Topic> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          if (widget.comingFrom) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const EditQuestion()));
-          } else {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const Question()),
-                (route) => false);
-          }
-        },
+        onPressed: askOrEditQuestion,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -49,19 +39,31 @@ class _TopicState extends State<Topic> {
             ),
             Column(
               children: [
-                if (!widget.answerType && widget.comingFrom) Icon(Icons.abc),
-                if (widget.answerType) Icon(Icons.check_box_outline_blank),
-                if (!widget.comingFrom)
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                EditDeck(widget.questionStack)));
-                      },
-                      icon: Icon(Icons.edit))
+                if (!widget.isMultipleChoice && widget.cannotEdit)
+                  Icon(Icons.abc),
+                if (widget.isMultipleChoice)
+                  Icon(Icons.check_box_outline_blank),
+                if (!widget.cannotEdit)
+                  IconButton(onPressed: editDeck, icon: Icon(Icons.edit))
               ],
             ),
           ],
         ));
+  }
+
+  void askOrEditQuestion() {
+    if (widget.cannotEdit) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const EditQuestion()));
+    } else {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const Question()),
+          (route) => false);
+    }
+  }
+
+  void editDeck() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => EditDeck(widget.questionStack)));
   }
 }

@@ -9,9 +9,9 @@ import 'multiplechoice.dart';
 import 'Typing.dart';
 
 class Home extends StatelessWidget {
-  DataHelper titleRead = DataHelper();
+  DataHelper quizes = DataHelper();
   Home({Key? key}) : super(key: key) {
-    titleRead.loadDemoData();
+    quizes.loadDemoData();
   }
   get onPressed => null;
 
@@ -19,23 +19,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            "          Home",
+          actions: [
+            IconButton(
+                icon: const Icon(Icons.add_circle_outline),
+                onPressed: addNewDeck)
+          ],
+          title: const Text(
+            "Home",
             style: TextStyle(fontSize: 50),
-          ),
-          IconButton(
-              icon: const Icon(Icons.add_circle_outline),
-              onPressed: () {
-                //    Navigator.push(
-                //     context,
-                //       MaterialPageRoute(builder: (context) => EditDeck()),
-                //  );
-              })
-        ],
-      )),
+          )),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -43,13 +35,13 @@ class Home extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                  itemCount: titleRead.amountOfQuestionStacks(),
+                  itemCount: quizes.amountOfQuestionStacks(),
                   itemBuilder: (BuildContext context, int index) {
                     QuestionStack questionStack =
-                        titleRead.getQuestionStack(index);
+                        quizes.getQuestionStack(index);
                     return Topic(
-                      answerType: false,
-                      comingFrom: false,
+                      isMultipleChoice: false,
+                      cannotEdit: false,
                       questionStack: questionStack,
                     );
                   }),
@@ -62,5 +54,11 @@ class Home extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void addNewDeck() {
+    //    Navigator.push(
+    //     context,
+    //       MaterialPageRoute(builder: (context) => EditDeck()),
   }
 }

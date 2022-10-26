@@ -12,10 +12,8 @@ class EditQuestion extends StatefulWidget {
 }
 
 class _EditQuestionState extends State<EditQuestion> {
-  //false = Frage; true = Bild
-  bool _questionType = false;
-  //false = Benutzereingabe; true = MultipleChoice
-  bool _answerType = false;
+  bool _isPictureQuestion = false;
+  bool _isMultipleChoice = false;
   final TextEditingController _titleControll = TextEditingController();
   final TextEditingController _rightAnswerControll = TextEditingController();
   final TextEditingController _falseAnswerControll1 = TextEditingController();
@@ -87,17 +85,17 @@ class _EditQuestionState extends State<EditQuestion> {
               children: [
                 RadioListTile(
                   value: false,
-                  groupValue: _questionType,
+                  groupValue: _isPictureQuestion,
                   onChanged: questionTypeChange,
                   title: Text("Frage"),
                 ),
                 RadioListTile(
                   value: true,
-                  groupValue: _questionType,
+                  groupValue: _isPictureQuestion,
                   onChanged: questionTypeChange,
                   title: const Text("Bild"),
                 ),
-                if (!_questionType)
+                if (!_isPictureQuestion)
                   TextField(
                     controller: _titleControll,
                     decoration: const InputDecoration(
@@ -105,8 +103,8 @@ class _EditQuestionState extends State<EditQuestion> {
                       labelText: "Frage",
                     ),
                   ),
-                if (_questionType) const Text("Bild:"),
-                if (_questionType)
+                if (_isPictureQuestion) const Text("Bild:"),
+                if (_isPictureQuestion)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -122,13 +120,13 @@ class _EditQuestionState extends State<EditQuestion> {
                   ),
                 RadioListTile(
                   value: false,
-                  groupValue: _answerType,
+                  groupValue: _isMultipleChoice,
                   onChanged: answerTypeChange,
                   title: Text("Benutzereingabe"),
                 ),
                 RadioListTile(
                   value: true,
-                  groupValue: _answerType,
+                  groupValue: _isMultipleChoice,
                   onChanged: answerTypeChange,
                   title: const Text("Multiple Choice"),
                 ),
@@ -140,7 +138,7 @@ class _EditQuestionState extends State<EditQuestion> {
                   ),
                 ),
                 const Padding(padding: EdgeInsets.all(8.0)),
-                if (_answerType)
+                if (_isMultipleChoice)
                   TextField(
                     controller: _falseAnswerControll2,
                     decoration: const InputDecoration(
@@ -149,7 +147,7 @@ class _EditQuestionState extends State<EditQuestion> {
                     ),
                   ),
                 const Padding(padding: EdgeInsets.all(8.0)),
-                if (_answerType)
+                if (_isMultipleChoice)
                   TextField(
                     controller: _falseAnswerControll3,
                     decoration: const InputDecoration(
@@ -158,7 +156,7 @@ class _EditQuestionState extends State<EditQuestion> {
                     ),
                   ),
                 const Padding(padding: EdgeInsets.all(8.0)),
-                if (_answerType)
+                if (_isMultipleChoice)
                   TextField(
                     controller: _rightAnswerControll,
                     decoration: const InputDecoration(
@@ -186,18 +184,18 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void questionTypeChange(bool? type) {
     setState(() {
-      _questionType = type!;
+      _isPictureQuestion = type!;
     });
   }
 
   void answerTypeChange(bool? type) {
     setState(() {
-      _answerType = type!;
+      _isMultipleChoice = type!;
     });
   }
 
   void save() {
-    //Speichern
+    // TODO: Speichern
     Navigator.of(context).pop(); //Zur Home seite
   }
 }

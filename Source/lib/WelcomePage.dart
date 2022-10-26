@@ -3,9 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:learnhub/Home.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +31,7 @@ class WelcomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => Home()),
-                    (route) => false);
-              },
+              onPressed: play,
               child: (Text(
                 "Spielen",
                 style: TextStyle(fontSize: 51),
@@ -40,5 +41,10 @@ class WelcomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void play() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
 }
