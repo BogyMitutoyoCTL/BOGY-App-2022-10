@@ -12,11 +12,10 @@ import 'Question.dart';
 
 class TopicQuestion extends StatefulWidget {
   //false = Benutzereingabe; true= Multiple Choice
-  //false = Home; true= EditDeck
-  bool answerType = false;
+  bool isMultipleChoice = false;
   QuestionBasic questionBasic;
   TopicQuestion(
-      {Key? key, required this.answerType, required this.questionBasic})
+      {Key? key, required this.isMultipleChoice, required this.questionBasic})
       : super(key: key);
 
   @override
@@ -39,8 +38,8 @@ class _TopicQuestionState extends State<TopicQuestion> {
               "Frage",
               style: TextStyle(fontSize: 30),
             ),
-            if (!widget.answerType) Icon(Icons.abc),
-            if (widget.answerType) Icon(Icons.check_box_outline_blank),
+            if (!widget.isMultipleChoice) Icon(Icons.abc),
+            if (widget.isMultipleChoice) Icon(Icons.check_box_outline_blank),
           ],
         ));
   }
