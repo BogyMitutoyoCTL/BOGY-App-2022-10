@@ -16,7 +16,7 @@ class _ScoreState extends State<Score> {
   QuestionStack questionStack;
   _ScoreState(this.questionStack);
 
-  @override // Ich weiß nicht was das macht
+  @override 
   Widget build(BuildContext context) {
     var ErreichtePunkte = 4;
     var AnzahlFragen = questionStack.getAmountOfQuestions();

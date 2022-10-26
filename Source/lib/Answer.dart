@@ -97,14 +97,22 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 ),
-              ElevatedButton(
+             if (4 < 20) ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => Question()),
+                            (route) => false);
+                  },
+                  child: Text("Zur nächsten Frage")),
+              if (4 == 20) ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                             builder: (context) => Score(meinQuestionStack)),
-                        (route) => false);
+                            (route) => false);
                   },
-                  child: Text("Zur nächsten Frage")),
+                  child: Text("Ergebnis anzeigen")),
             ],
           ),
         ],
