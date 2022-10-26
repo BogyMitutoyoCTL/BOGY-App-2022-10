@@ -15,7 +15,8 @@ class EditDeck extends StatefulWidget {
 class _EditDeckState extends State<EditDeck> {
   final TextEditingController _titleController = TextEditingController();
 
-  _EditDeckState() {
+  @override
+  void initState() {
     _titleController.text = widget.questionStack.name;
   }
 
