@@ -21,6 +21,10 @@ class _EditDeckState extends State<EditDeck> {
       body: Column(
         children: [
           TextField(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Titel",
+            ),
             controller: _titleControll,
           ),
           const Text(
@@ -40,19 +44,6 @@ class _EditDeckState extends State<EditDeck> {
           ),
         ],
       ),
-      /*Column(
-        children: [
-          TextField(
-            controller: _titleControll,
-          ),
-          const Text(
-            "Karten:",
-            style: TextStyle(fontSize: 30),
-          ),
-
-
-        ],
-      ),*/
     );
   }
 }
