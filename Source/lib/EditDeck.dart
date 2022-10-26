@@ -34,6 +34,7 @@ class _EditDeckState extends State<EditDeck> {
                   return Topic(
                     answerType: false,
                     comingFrom: true,
+                    title: "Titel der x-te",
                   );
                 }),
           ),
