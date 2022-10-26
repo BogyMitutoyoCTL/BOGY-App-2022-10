@@ -5,8 +5,6 @@ import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionStack.dart';
 import 'EditDeck.dart';
 import 'Topic.dart';
-import 'multiplechoice.dart';
-import 'Typing.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key) {}

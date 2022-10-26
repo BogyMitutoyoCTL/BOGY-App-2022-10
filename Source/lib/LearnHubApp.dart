@@ -4,8 +4,6 @@ import 'package:learnhub/Home.dart';
 import 'package:learnhub/ImageProcessing.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
-import 'package:learnhub/Typing.dart';
-import 'package:learnhub/multiplechoice.dart';
 import 'WelcomePage.dart';
 import 'Question.dart';
 
