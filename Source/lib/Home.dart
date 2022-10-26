@@ -23,16 +23,16 @@ class Home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "          Quiz",
+            "          Home",
             style: TextStyle(fontSize: 50),
           ),
           IconButton(
               icon: const Icon(Icons.add_circle_outline),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const EditDeck()),
-                );
+                //    Navigator.push(
+                //     context,
+                //       MaterialPageRoute(builder: (context) => EditDeck()),
+                //  );
               })
         ],
       )),
@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
                     return Topic(
                       answerType: false,
                       comingFrom: false,
-                      title: questionStack.name,
+                      questionStack: questionStack,
                     );
                   }),
             ),

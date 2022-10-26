@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnhub/TopicQuestion.dart';
+import 'DataHelper/QuestionStack.dart';
 import 'Topic.dart';
 
 class EditDeck extends StatefulWidget {
-  const EditDeck({Key? key}) : super(key: key);
+  QuestionStack questionStack;
+  EditDeck(this.questionStack, {Key? key}) : super(key: key);
 
   @override
   State<EditDeck> createState() => _EditDeckState();
@@ -36,12 +39,11 @@ class _EditDeckState extends State<EditDeck> {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: widget.questionStack.getAmountOfQuestions(),
                 itemBuilder: (BuildContext context, int index) {
-                  return Topic(
+                  return TopicQuestion(
                     answerType: false,
-                    comingFrom: true,
-                    title: "Titel der x-te",
+                    questionBasic: widget.questionStack.getQuestion(index),
                   );
                 }),
           ),
