@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
 import 'package:learnhub/DataHelper/DataStructure.dart';
+import 'package:learnhub/DataHelper/QuestionTypes.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
 
@@ -19,6 +20,7 @@ class _AnswerState extends State<Answer> {
   bool _questionType = true;
   QuestionStack meinQuestionStack = QuestionStack("Flaggen");
 
+
   String _input = "";
   @override
   void initState() {
@@ -30,7 +32,8 @@ class _AnswerState extends State<Answer> {
         _input = _inputControl.text;
       });
     });
-
+    QuestionStringAndAnswers neueFrage = QuestionStringAndAnswers(question: "Frage1", answers: ["a","b","c","d"]);
+    meinQuestionStack.addQuestionStringAndAnswers(neueFrage);
 
   }
 
