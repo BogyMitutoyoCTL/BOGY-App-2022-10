@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:learnhub/DataHelper/QuestionBasic.dart';
+import 'package:learnhub/DataHelper/QuestionImageAndFreeText.dart';
+import 'package:learnhub/DataHelper/QuestionImageAndSingleChoice.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/DataHelper/QuestionTypes.dart';
@@ -55,6 +57,13 @@ class _EditQuestionState extends State<EditQuestion> {
     } else if (widget.frage.questionType == QuestionTypes.stringAndAnswers) {
       _isMultipleChoice = true;
       _isPictureQuestion = false;
+    } else if (widget.frage.questionType == QuestionTypes.imageAndFreeText) {
+      _isMultipleChoice = false;
+      _isPictureQuestion = true;
+    } else if (widget.frage.questionType ==
+        QuestionTypes.imageAndSingleChoice) {
+      _isMultipleChoice = true;
+      _isPictureQuestion = true;
     }
   }
 
@@ -62,7 +71,6 @@ class _EditQuestionState extends State<EditQuestion> {
   void initState() {
     super.initState();
     setRadioButtons();
-    print(_image_base64);
     _titleController.text = getFragenTitel();
     setAntwort();
   }
@@ -71,18 +79,34 @@ class _EditQuestionState extends State<EditQuestion> {
     if (widget.frage.questionType == QuestionTypes.stringAndFreeText) {
       _isMultipleChoice = false;
       _isPictureQuestion = false;
-      QuestionStringAndFreeText textBenutzerFrage =
-          widget.frage as QuestionStringAndFreeText;
-      answerControllers[0].text = textBenutzerFrage.answer;
+      var questionStringAndFreeText = widget.frage as QuestionStringAndFreeText;
+      answerControllers[0].text = questionStringAndFreeText.answer;
     } else if (widget.frage.questionType == QuestionTypes.stringAndAnswers) {
       _isMultipleChoice = true;
       _isPictureQuestion = false;
-      QuestionStringAndAnswers textBenutzerFrage =
-          widget.frage as QuestionStringAndAnswers;
-      answerControllers[0].text = textBenutzerFrage.answers[0];
-      answerControllers[1].text = textBenutzerFrage.answers[1];
-      answerControllers[2].text = textBenutzerFrage.answers[2];
-      answerControllers[3].text = textBenutzerFrage.answers[3];
+      var questionStringAndAnswers = widget.frage as QuestionStringAndAnswers;
+      answerControllers[0].text = questionStringAndAnswers.answers[0];
+      answerControllers[1].text = questionStringAndAnswers.answers[1];
+      answerControllers[2].text = questionStringAndAnswers.answers[2];
+      answerControllers[3].text = questionStringAndAnswers.answers[3];
+    } else if (widget.frage.questionType ==
+        QuestionTypes.imageAndSingleChoice) {
+      _isMultipleChoice = true;
+      _isPictureQuestion = true;
+      var questionImageAndSingleChoice =
+          widget.frage as QuestionImageAndSingleChoice;
+      answerControllers[0].text = questionImageAndSingleChoice.answers[0];
+      answerControllers[1].text = questionImageAndSingleChoice.answers[1];
+      answerControllers[2].text = questionImageAndSingleChoice.answers[2];
+      answerControllers[3].text = questionImageAndSingleChoice.answers[3];
+      _image_base64 = questionImageAndSingleChoice.imageString;
+      ;
+    } else if (widget.frage.questionType == QuestionTypes.imageAndFreeText) {
+      _isMultipleChoice = false;
+      _isPictureQuestion = true;
+      var questionImageAndFreeText = widget.frage as QuestionImageAndFreeText;
+      answerControllers[0].text = questionImageAndFreeText.answer;
+      _image_base64 = questionImageAndFreeText.imageString;
     }
   }
 
@@ -229,32 +253,57 @@ class _EditQuestionState extends State<EditQuestion> {
             answerControllers[3].text.toLowerCase()) {
       // TODO: Speichern
       if (_isPictureQuestion) {
-        //TODO: Bild speichern
-      } else {
-        String fragenname = _titleController.text;
         if (_isMultipleChoice) {
-          String antwortnamerichtig = answerControllers[0].text;
-          String antwortnamefalsch1 = answerControllers[1].text;
-          String antwortnamefalsch2 = answerControllers[2].text;
-          String antwortnamefalsch3 = answerControllers[3].text;
-          QuestionStringAndAnswers frageMultiple = QuestionStringAndAnswers(
-            question: fragenname,
-            answers: [
-              antwortnamerichtig,
-              antwortnamefalsch1,
-              antwortnamefalsch2,
-              antwortnamefalsch3
-            ],
-          );
-          Navigator.of(context).pop(frageMultiple);
+          GenerateQuestionImageAndSingleChoice();
         } else {
-          String antwortnamerichtig = answerControllers[0].text;
-          QuestionStringAndFreeText frageEingabe = QuestionStringAndFreeText(
-              question: fragenname, answer: antwortnamerichtig);
-          Navigator.of(context).pop(frageEingabe);
+          GenerateQuestionImageAndFreeText();
+        }
+      } else {
+        if (_isMultipleChoice) {
+          GenerateQuestionStringAndAnswers();
+        } else {
+          GenerateQuestionStringAndFreeText();
         }
       }
     }
+  }
+
+  void GenerateQuestionStringAndFreeText() {
+    var questionStringAndFreeText = QuestionStringAndFreeText(
+        question: answerControllers[0].text, answer: answerControllers[0].text);
+    Navigator.of(context).pop(questionStringAndFreeText);
+  }
+
+  void GenerateQuestionImageAndFreeText() {
+    var questionImageAndFreeText = QuestionImageAndFreeText(
+        imageString: _image_base64!, answer: answerControllers[0].text);
+    Navigator.of(context).pop(questionImageAndFreeText);
+  }
+
+  void GenerateQuestionStringAndAnswers() {
+    var questionStringAndAnswers = QuestionStringAndAnswers(
+      question: _titleController.text,
+      answers: [
+        answerControllers[0].text,
+        answerControllers[1].text,
+        answerControllers[2].text,
+        answerControllers[3].text
+      ],
+    );
+    Navigator.of(context).pop(questionStringAndAnswers);
+  }
+
+  void GenerateQuestionImageAndSingleChoice() {
+    var questionImageAndSingleChoice = QuestionImageAndSingleChoice(
+      imageString: _image_base64!,
+      answers: [
+        answerControllers[0].text,
+        answerControllers[1].text,
+        answerControllers[2].text,
+        answerControllers[3].text
+      ],
+    );
+    Navigator.of(context).pop(questionImageAndSingleChoice);
   }
 
   deleteStack() {}
