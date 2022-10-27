@@ -33,7 +33,7 @@ class _EditDeckState extends State<EditDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bearbeiten/Erstellen"),
+        title: Text("Bearbeiten/Erstellen", style: TextStyle(fontSize: 30)),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
