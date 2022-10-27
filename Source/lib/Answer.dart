@@ -55,8 +55,9 @@ class _AnswerState extends State<Answer> {
           children: [
             Column(children: [
               /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
-              Padding(padding: EdgeInsets.all(10),
-             child :  Text(widget.question, style: TextStyle(fontSize: 40)),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(widget.question, style: TextStyle(fontSize: 40)),
               ),
               Padding(
                 padding: EdgeInsets.all(10),
@@ -195,7 +196,7 @@ class _AnswerState extends State<Answer> {
     if (questionBasic.isAnswerCorrect(widget.input)) {
       widget.playing.correctAnswers++;
     } else {
-      Vibration.vibrate(duration: 100);
+      Vibration.vibrate(duration: 500, amplitude: 4000);
     }
     List<Color> list = [
       Colors.black,
