@@ -86,18 +86,18 @@ class _HomeState extends State<Home> {
     return (await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
+            title: new Text('Sind Sie sicher?'),
+            content: new Text('Wollen Sie die App wirklich verlassen?'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 //<-- SEE HERE
-                child: new Text('No'),
+                child: new Text('Nein'),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
                 // <-- SEE HERE
-                child: new Text('Yes'),
+                child: new Text('Ja'),
               ),
             ],
           ),
