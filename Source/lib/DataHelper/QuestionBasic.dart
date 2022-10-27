@@ -6,23 +6,21 @@ import 'QuestionTypes.dart';
 /// This is the parent class for all Questions. All QuestionTypes defined in QuestionTypes
 /// need to extends from this class.
 abstract class QuestionBasic {
+  /// This is the UUID (Unified ID) of a question. This UUID differs from one to the next question.
+  /// When you create the Question, the UUID is created automatically if not explicitly specified.
   @JsonKey(required: true)
-  late String _uuid;
+  late String uuid;
   @JsonKey(ignore: true)
   final QuestionTypes _questionType;
 
   QuestionBasic({required String? uuid, required QuestionTypes questionType})
       : _questionType = questionType {
-    _uuid = uuid ?? const Uuid().v1();
+    this.uuid = uuid ?? const Uuid().v1();
   }
 
   /// Returns true if `answerToCheck` is the right answer. Otherwise returns false.
   /// This function has to be overwritten by all subclasses.
   bool isAnswerCorrect(var answerToCheck);
-
-  /// Returns the UUID (Unified ID) of a question. This UUID differs from one to the next question.
-  /// When you create the Question, the UUID is created automatically if not explicitly specified.
-  String get uuid => _uuid;
 
   /// Returns the Type of the Question
   QuestionTypes get questionType => _questionType;
