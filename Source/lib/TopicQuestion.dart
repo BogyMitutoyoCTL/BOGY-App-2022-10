@@ -25,12 +25,12 @@ class _TopicQuestionState extends State<TopicQuestion> {
   String questionName() {
     if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       QuestionStringAndAnswers questionStringAndAnswers =
-          widget.questionBasic as QuestionStringAndAnswers;
+      widget.questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (widget.questionBasic.questionType ==
         QuestionTypes.stringAndFreeText) {
       QuestionStringAndFreeText questionStringAndFreeText =
-          widget.questionBasic as QuestionStringAndFreeText;
+      widget.questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
     } else {
       return "no title";
@@ -39,31 +39,35 @@ class _TopicQuestionState extends State<TopicQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-          onPressed: editQuestion,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  questionName(),
-                  overflow: TextOverflow.visible,
-                  style: TextStyle(fontSize: 17),
+    return Container(
+      color: Colors.grey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(
+            onPressed: editQuestion,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    questionName(),
+                    overflow: TextOverflow.visible,
+                    style: TextStyle(fontSize: 17),
+                  ),
                 ),
-              ),
-              Icon(widget.isMultipleChoice
-                  ? Icons.check_box_outline_blank
-                  : Icons.abc),
-            ],
-          )),
+                Icon(widget.isMultipleChoice
+                    ? Icons.check_box_outline_blank
+                    : Icons.abc),
+              ],
+            )),
+      ),
     );
   }
 
   void editQuestion() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => EditQuestion()),
+        MaterialPageRoute(
+            builder: (context) => EditQuestion(widget.questionBasic))
     );
   }
 }

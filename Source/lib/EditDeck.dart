@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionStack.dart';
+import 'DataHelper/QuestionStringAndAnswers.dart';
 import 'EditQuestion.dart';
 
 class EditDeck extends StatefulWidget {
@@ -34,6 +35,7 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(40.0),
             child: FloatingActionButton(
+              heroTag: "add",
               onPressed: addQuestion,
               backgroundColor: Colors.amber,
               child: const Icon(Icons.add),
@@ -42,7 +44,9 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
-                onPressed: saveStack, child: Icon(Icons.check)),
+                heroTag: "save",
+                onPressed: saveStack,
+                child: Icon(Icons.check)),
           )
         ],
       ),
@@ -79,15 +83,20 @@ class _EditDeckState extends State<EditDeck> {
 
   void saveStack() {
     String titelStapel = _titleController.text;
-    setState(() {
-      widget.questionStack.name = titelStapel;
-    });
 
+    widget.questionStack.name = titelStapel;
     Navigator.of(context).pop(widget.questionStack);
   }
 
   void addQuestion() {
+    QuestionStringAndAnswers neuefrage =
+        QuestionStringAndAnswers(question: "", answers: ["", "", "", ""]);
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => EditQuestion()));
+        .push(MaterialPageRoute(builder: (context) => EditQuestion(neuefrage)))
+        .then((questionbasic) {
+      setState(() {
+        widget.questionStack.addQuestion(questionbasic);
+      });
+    });
   }
 }

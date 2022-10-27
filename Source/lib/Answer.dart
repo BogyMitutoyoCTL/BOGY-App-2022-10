@@ -6,119 +6,158 @@ import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
 
+import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionStack.dart';
 
 class Answer extends StatefulWidget {
   CurrentlyPlaying playing;
 
-  Answer({Key? key, required this.playing}) : super(key: key);
+  DataHelper datahelper;
+  bool isMultipleChoice;
+  String input;
+  List<String> answers = [];
+  String question;
+  Answer(
+      {Key? key,
+      required this.playing,
+      required this.datahelper,
+      required this.answers,
+      required this.input,
+      required this.question,
+      required this.isMultipleChoice})
+      : super(key: key);
 
   @override
   State<Answer> createState() => _AnswerState();
 }
 
 class _AnswerState extends State<Answer> {
-  final TextEditingController _inputControl = TextEditingController();
-
-  bool _isMultipleChoice = true;
-
-  String _input = "";
-  @override
-  void initState() {
-    super.initState();
-
-    _inputControl.text = _input;
-    _inputControl.addListener(() {
-      setState(() {
-        _input = _inputControl.text;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _inputControl.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.playing.stack.name)),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              Image.asset("assets/images/Logo.png"),
+        appBar: AppBar(title: Text(widget.playing.stack.name)),
+        body: ListView(
+          children: [
+            Column(children: [
+              /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
               Padding(padding: EdgeInsets.all(10)),
-              Text("Die Antwort war", style: TextStyle(fontSize: 40)),
-              if (!_isMultipleChoice)
+              Text(widget.question, style: TextStyle(fontSize: 40)),
+              Padding(
+                padding: EdgeInsets.all(10),
+              ),
+              if (!widget.isMultipleChoice)
                 TextField(
-                  controller: _inputControl,
+                  enabled: false,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Eingabe...",
+                    //labelText: widget.input,
                   ),
                 ),
-              if (_isMultipleChoice)
-                Row(children: [
-                  Padding(padding: EdgeInsets.all(10)),
-                  SizedBox(
-                      width: 166.0,
-                      height: 100.0,
-                      child: ElevatedButton(
-                          onPressed: () {}, child: Text("A:________"))),
-                  Padding(padding: EdgeInsets.all(10)),
-                  SizedBox(
-                      width: 166.0,
-                      height: 100.0,
-                      child: ElevatedButton(
-                          onPressed: () {}, child: Text("B:________"))),
-                ]),
-              if (_isMultipleChoice) Padding(padding: EdgeInsets.all(10)),
-              if (_isMultipleChoice)
+              if (!widget.isMultipleChoice)
                 Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
+                  padding: EdgeInsets.all(10),
+                ),
+              if (widget.isMultipleChoice)
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Column(
                     children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                              width: 166.0,
-                              height: 100.0,
-                              child: ElevatedButton(
-                                  onPressed: () {}, child: Text("C:________"))),
-                          Padding(padding: EdgeInsets.all(10)),
-                          SizedBox(
-                              width: 166.0,
-                              height: 100.0,
-                              child: ElevatedButton(
-                                  onPressed: () {}, child: Text("D:________"))),
-                        ],
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  border: Border.all(
+                                    color: Colors.green,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Text(widget.answers[0],
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.white)))),
+                      Padding(
+                        padding: EdgeInsets.all(10),
                       ),
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  border: Border.all(
+                                    color: Colors.red,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Text(widget.answers[2],
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.white)))),
                     ],
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  border: Border.all(
+                                    color: Colors.red,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Text(widget.answers[1],
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.white)))),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
+                      SizedBox(
+                          width: 166.0,
+                          height: 100.0,
+                          child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  border: Border.all(
+                                    color: Colors.red,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Text(widget.answers[3],
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  )))),
+                    ],
+                  ),
+                ]),
               if ((widget.playing.questionIndex + 1) <
                   widget.playing.stack.getAmountOfQuestions())
-                ElevatedButton(
-                    onPressed: nextQuestion, child: Text("Zur nächsten Frage")),
+                ElevatedButton(onPressed: nextQuestion, child: Text("Weiter")),
               if ((widget.playing.questionIndex + 1) ==
                   widget.playing.stack.getAmountOfQuestions())
                 ElevatedButton(
-                    onPressed: showResult, child: Text("Ergebnis anzeigen")),
-            ],
-          ),
-        ],
-      ),
-    );
+                    onPressed: showResult, child: Text("Zum Ergebnis")),
+            ]),
+          ],
+        ));
   }
 
   void nextQuestion() {
     widget.playing.questionIndex++;
+
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Question(
+                  datahelper: widget.datahelper,
                   playing: widget.playing,
                 )),
         (route) => false);
@@ -128,6 +167,7 @@ class _AnswerState extends State<Answer> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Score(
+                  datahelper: widget.datahelper,
                   playing: widget.playing,
                 )),
         (route) => false);

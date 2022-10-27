@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/DataHelper/DataHelper.dart';
+import 'package:learnhub/Home.dart';
 
 import 'DataHelper/QuestionStack.dart';
 import 'EditDeck.dart';
@@ -12,7 +13,13 @@ import 'Question.dart';
 class Topic extends StatefulWidget {
   QuestionStack questionStack;
   int index;
-  Topic({Key? key, required this.questionStack, required this.index})
+
+  DataHelper datahelper;
+  Topic(
+      {Key? key,
+      required this.questionStack,
+      required this.index,
+      required DataHelper this.datahelper})
       : super(key: key);
 
   @override
@@ -49,6 +56,7 @@ class _TopicState extends State<Topic> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Question(
+                  datahelper: widget.datahelper,
                   playing: CurrentlyPlaying(widget.questionStack),
                 )),
         (route) => false);
@@ -67,9 +75,11 @@ class _TopicState extends State<Topic> {
 
   void Loeschen() {
     setState(() {
-      DataHelper dataHelper = DataHelper();
-      dataHelper.removeQuestionStack(widget.index);
+      widget.datahelper.removeQuestionStack(widget.index);
     });
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Home(datahelper: widget.datahelper)),
+        (route) => false);
   }
 }
-//TODO

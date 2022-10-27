@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/Home.dart';
 
 class Score extends StatefulWidget {
   CurrentlyPlaying playing;
 
-  Score({required this.playing, Key? key}) : super(key: key);
+  DataHelper datahelper;
+
+  Score({required this.playing, Key? key, required DataHelper this.datahelper})
+      : super(key: key);
 
   @override
   State<Score> createState() => _ScoreState();
@@ -31,7 +35,7 @@ class _ScoreState extends State<Score> {
                     style: TextStyle(fontSize: 50),
                   ),
                 ),
-                Image.asset("assets/images/PokalbeiScore.png"),
+                Image.asset("assets/images/Pokal.png"),
                 Text(
                   "Du hast $score von $numberOfQuestions",
                   style: TextStyle(fontSize: 50),
@@ -55,6 +59,8 @@ class _ScoreState extends State<Score> {
 
   void play() {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+        MaterialPageRoute(
+            builder: (context) => Home(datahelper: widget.datahelper)),
+        (route) => false);
   }
 }
