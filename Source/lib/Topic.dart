@@ -22,24 +22,27 @@ class Topic extends StatefulWidget {
 class _TopicState extends State<Topic> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: askQuestion,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Expanded(
-              child: Text(
-                widget.questionStack.name,
-                style: TextStyle(fontSize: 17),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: askQuestion,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Text(
+                  widget.questionStack.name,
+                  style: TextStyle(fontSize: 17),
+                ),
               ),
-            ),
-            IconButton(onPressed: editDeck, icon: Icon(Icons.edit)),
-            IconButton(
-              onPressed: Loeschen,
-              icon: Icon(Icons.delete),
-            )
-          ],
-        ));
+              IconButton(onPressed: editDeck, icon: Icon(Icons.edit)),
+              IconButton(
+                onPressed: Loeschen,
+                icon: Icon(Icons.delete),
+              )
+            ],
+          )),
+    );
   }
 
   void askQuestion() {
