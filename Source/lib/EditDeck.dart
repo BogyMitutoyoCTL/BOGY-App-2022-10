@@ -103,10 +103,13 @@ class _EditDeckState extends State<EditDeck> {
     String titelStapel = _titleController.text;
 
     widget.questionStack.name = titelStapel;
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (context) => Home(datahelper: widget.datahelper)),
-        (route) => false);
+    if (widget.questionStack.getAmountOfQuestions() != 0 &&
+        widget.questionStack.name != "") {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => Home(datahelper: widget.datahelper)),
+          (route) => false);
+    }
   }
 
   void addQuestion() {
