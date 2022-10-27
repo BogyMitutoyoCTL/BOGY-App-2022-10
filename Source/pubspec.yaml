@@ -34,7 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-
+  vibration: ^1.7.6
   # To save as json
   # Run `flutter pub run build_runner build --delete-conflicting-outputs`
   # if you run into trouble with *.g.dart files. See

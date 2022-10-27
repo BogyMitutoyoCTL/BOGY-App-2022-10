@@ -5,6 +5,7 @@ import 'package:learnhub/Answer.dart';
 import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
+import 'package:vibration/vibration.dart';
 
 import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionBasic.dart';
@@ -171,6 +172,8 @@ class _AnswerState extends State<Answer> {
         widget.playing.stack.getQuestion(widget.playing.questionIndex);
     if (questionBasic.isAnswerCorrect(widget.input)) {
       widget.playing.correctAnswers++;
+    } else {
+      Vibration.vibrate(duration: 100);
     }
     List<Color> list = [
       Colors.black,
