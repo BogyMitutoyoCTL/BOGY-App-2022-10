@@ -13,13 +13,15 @@ import 'Question.dart';
 class Topic extends StatefulWidget {
   QuestionStack questionStack;
   int index;
+  Function removeStack;
 
   DataHelper datahelper;
   Topic(
       {Key? key,
       required this.questionStack,
       required this.index,
-      required DataHelper this.datahelper})
+      required DataHelper this.datahelper,
+      required this.removeStack})
       : super(key: key);
 
   @override
@@ -77,12 +79,29 @@ class _TopicState extends State<Topic> {
   }
 
   void Loeschen() {
-    setState(() {
-      widget.datahelper.removeQuestionStack(widget.index);
-    });
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (context) => Home(datahelper: widget.datahelper)),
-        (route) => false);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Löschen?"),
+          content: Text(
+              "Diese Aktion löscht unwiderruflich den gesamten Stapel ${widget.questionStack.name}."),
+          actions: <Widget>[
+            TextButton(
+                child: Text('Abbrechen'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            TextButton(
+              child: Text('Bestätigen'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                widget.removeStack();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

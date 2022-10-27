@@ -45,6 +45,11 @@ class _HomeState extends State<Home> {
                       datahelper: widget.datahelper,
                       questionStack: questionStack,
                       index: index,
+                      removeStack: () {
+                        setState(() {
+                          widget.datahelper.removeQuestionStack(index);
+                        });
+                      },
                     );
                   }),
             ),
