@@ -10,7 +10,7 @@ QuestionStringAndAnswers _$QuestionStringAndAnswersFromJson(
     Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['question', 'answers'],
+    requiredKeys: const ['uuid', 'question', 'answers'],
   );
   return QuestionStringAndAnswers(
     question: json['question'] as String,
