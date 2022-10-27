@@ -8,15 +8,8 @@ import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/EditQuestion.dart';
 
 import 'DataHelper/QuestionTypes.dart';
-import 'package:http/http.dart';
 import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/DataHelper/QuestionStack.dart';
-import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
-import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
-import 'package:learnhub/EditDeck.dart';
-import 'package:learnhub/EditQuestion.dart';
-
-import 'DataHelper/QuestionTypes.dart';
 
 class TopicQuestion extends StatefulWidget {
   bool isMultipleChoice = false;
