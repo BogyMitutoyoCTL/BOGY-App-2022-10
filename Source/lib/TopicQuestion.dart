@@ -28,7 +28,6 @@ class TopicQuestion extends StatefulWidget {
 
   TopicQuestion(
       {Key? key,
-      required this.isMultipleChoice,
       required this.questionBasic,
       required this.changedCard,
       required this.removeCard,
@@ -43,11 +42,13 @@ class TopicQuestion extends StatefulWidget {
 class _TopicQuestionState extends State<TopicQuestion> {
   String questionName() {
     if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
+      widget.isMultipleChoice = true;
       QuestionStringAndAnswers questionStringAndAnswers =
           widget.questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (widget.questionBasic.questionType ==
         QuestionTypes.stringAndFreeText) {
+      widget.isMultipleChoice = false;
       QuestionStringAndFreeText questionStringAndFreeText =
           widget.questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
@@ -63,17 +64,17 @@ class _TopicQuestionState extends State<TopicQuestion> {
       child: ElevatedButton(
           onPressed: editQuestion,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Flexible(
+              Expanded(
                 child: Text(
                   questionName(),
                   overflow: TextOverflow.visible,
                   style: TextStyle(fontSize: 17),
                 ),
               ),
-              Icon(widget.isMultipleChoice
-                  ? Icons.check_box_outline_blank
-                  : Icons.abc),
+              if (widget.isMultipleChoice) Icon(Icons.check_box_outlined),
+              if (!widget.isMultipleChoice) Icon(Icons.abc),
               IconButton(
                 onPressed: Loeschen,
                 icon: Icon(Icons.delete_forever),

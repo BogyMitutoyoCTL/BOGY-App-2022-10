@@ -4,5 +4,6 @@
 enum QuestionTypes {
   stringAndAnswers,
   stringAndFreeText,
+  imageAndSingleChoice,
   imageAndFreeText,
 }
