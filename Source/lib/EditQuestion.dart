@@ -92,9 +92,8 @@ class _EditQuestionState extends State<EditQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Karte bearbeiten"), actions: [
-        IconButton(onPressed: deleteStack, icon: Icon(Icons.check))
-      ]),
+      appBar: AppBar(title: Text("Karte bearbeiten"),
+      ),
       body: ListView(
         children: [
           Padding(
@@ -156,18 +155,15 @@ class _EditQuestionState extends State<EditQuestion> {
                       ),
                     )
                   ] +
-                  multipleChoiceWidgets() +
-                  [
-                    const Padding(padding: EdgeInsets.all(8.0)),
-                    FloatingActionButton(
-                      onPressed: save,
-                      child: const Icon(Icons.check),
-                    ),
-                  ],
+                  multipleChoiceWidgets()
             ),
           ),
         ],
       ),
+floatingActionButton: FloatingActionButton(
+    onPressed: save,
+    child: const Icon(Icons.check),
+),
     );
   }
 
