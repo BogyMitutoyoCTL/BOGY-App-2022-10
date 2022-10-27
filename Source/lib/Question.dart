@@ -108,7 +108,7 @@ class _QuestionState extends State<Question> {
                         height: 100.0,
                         child: ElevatedButton(
                             onPressed: () {
-                              mcPressed(answers[2], 1);
+                              mcPressed(answers[2], 2);
                             },
                             child: Text(answers[2]))),
                   ],
@@ -123,7 +123,7 @@ class _QuestionState extends State<Question> {
                         height: 100.0,
                         child: ElevatedButton(
                             onPressed: () {
-                              mcPressed(answers[1], 2);
+                              mcPressed(answers[1], 1);
                             },
                             child: Text(answers[1]))),
                     Padding(
