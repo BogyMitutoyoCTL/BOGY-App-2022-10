@@ -88,8 +88,13 @@ class QuestionStack {
     return newQuestionStringAndFreeText.uuid;
   }
 
+  void removeQuestion(QuestionBasic question) {
+    _orderList.remove(question.uuid);
+    _removeQuestionFromQuestionList(question.uuid);
+  }
+
   /// Removes a Question by its id. Throws an error if the index is not valid.
-  void removeQuestion(int index) {
+  void removeQuestionByIndex(int index) {
     String uuid = _orderList[index];
     _orderList.removeAt(index);
     _removeQuestionFromQuestionList(uuid);
