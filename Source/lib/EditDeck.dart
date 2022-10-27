@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/DataHelper.dart';
+import 'package:learnhub/Home.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStack.dart';
@@ -103,7 +104,10 @@ class _EditDeckState extends State<EditDeck> {
     String titelStapel = _titleController.text;
 
     widget.questionStack.name = titelStapel;
-    Navigator.of(context).pop(widget.questionStack);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => Home(datahelper: widget.datahelper)),
+        (route) => false);
   }
 
   void addQuestion() {
