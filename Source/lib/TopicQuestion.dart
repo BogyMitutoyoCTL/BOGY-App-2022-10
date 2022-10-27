@@ -25,12 +25,12 @@ class _TopicQuestionState extends State<TopicQuestion> {
   String questionName() {
     if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       QuestionStringAndAnswers questionStringAndAnswers =
-          widget.questionBasic as QuestionStringAndAnswers;
+      widget.questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (widget.questionBasic.questionType ==
         QuestionTypes.stringAndFreeText) {
       QuestionStringAndFreeText questionStringAndFreeText =
-          widget.questionBasic as QuestionStringAndFreeText;
+      widget.questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
     } else {
       return "no title";
@@ -63,7 +63,8 @@ class _TopicQuestionState extends State<TopicQuestion> {
 
   void editQuestion() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => EditQuestion()),
+        MaterialPageRoute(
+            builder: (context) => EditQuestion(widget.questionBasic))
     );
   }
 }
