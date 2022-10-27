@@ -78,11 +78,14 @@ class _QuestionState extends State<Question> {
               padding: EdgeInsets.all(10),
             ),
             if (!widget.isMultipleChoice)
-              TextField(
-                controller: _inputControl,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Eingabe...",
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: _inputControl,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Eingabe...",
+                  ),
                 ),
               ),
             if (!widget.isMultipleChoice)
