@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'QuestionStringAndFreeText.dart';
+part of 'QuestionImageAndFreeText.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-QuestionStringAndFreeText _$QuestionStringAndFreeTextFromJson(
+QuestionImageAndFreeText _$QuestionImageAndFreeTextFromJson(
     Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['uuid', 'question', 'answer'],
+    requiredKeys: const ['uuid', 'imageString', 'answer'],
   );
-  return QuestionStringAndFreeText(
-    question: json['question'] as String,
+  return QuestionImageAndFreeText(
+    imageString: json['imageString'] as String,
     answer: json['answer'] as String,
     uuid: json['uuid'] as String?,
   );
 }
 
-Map<String, dynamic> _$QuestionStringAndFreeTextToJson(
-        QuestionStringAndFreeText instance) =>
+Map<String, dynamic> _$QuestionImageAndFreeTextToJson(
+        QuestionImageAndFreeText instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
-      'question': instance.question,
+      'imageString': instance.imageString,
       'answer': instance.answer,
     };

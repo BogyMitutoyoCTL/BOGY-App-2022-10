@@ -71,17 +71,21 @@ class _QuestionState extends State<Question> {
         children: [
           Column(children: [
             /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
-            Padding(padding: EdgeInsets.all(10)),
-            Text(question, style: TextStyle(fontSize: 40)),
+            Padding(padding: EdgeInsets.all(10),
+             child:Text(question, style: TextStyle(fontSize: 40)),
+             ),
             Padding(
               padding: EdgeInsets.all(10),
             ),
             if (!widget.isMultipleChoice)
-              TextField(
-                controller: _inputControl,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Eingabe...",
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: _inputControl,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Eingabe...",
+                  ),
                 ),
               ),
             if (!widget.isMultipleChoice)
@@ -180,7 +184,7 @@ class _QuestionState extends State<Question> {
   }
 
   Widget? FAB() {
-    if (1 == 1) {
+    if (!widget.isMultipleChoice) {
       return Padding(
           padding: const EdgeInsets.all(8.0),
           child: FloatingActionButton(

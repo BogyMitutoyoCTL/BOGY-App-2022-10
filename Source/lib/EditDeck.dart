@@ -51,7 +51,7 @@ class _EditDeckState extends State<EditDeck> {
             child: FloatingActionButton(
                 heroTag: "save",
                 onPressed: saveStack,
-                child: Icon(Icons.check)),
+                child: Icon(Icons.save_outlined)),
           )
         ],
       ),

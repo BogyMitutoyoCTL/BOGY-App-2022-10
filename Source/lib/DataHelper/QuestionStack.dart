@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:learnhub/DataHelper/QuestionTypes.dart';
 
 import 'QuestionBasic.dart';
+import 'QuestionImageAndFreeText.dart';
 import 'QuestionStringAndAnswers.dart';
 import 'QuestionStringAndFreeText.dart';
 
@@ -19,14 +20,18 @@ class QuestionStack {
   List<QuestionStringAndAnswers> _questionStringAndAnswers;
   @JsonKey(defaultValue: [])
   List<QuestionStringAndFreeText> _questionStringAndFreeText;
+  @JsonKey(defaultValue: [])
+  List<QuestionImageAndFreeText> _questionImageAndFreeText;
 
   QuestionStack(this.name,
       {List<String>? orderList,
       List<QuestionStringAndAnswers>? questionStringAndAnswers,
-      List<QuestionStringAndFreeText>? questionStringAndFreeText})
+      List<QuestionStringAndFreeText>? questionStringAndFreeText,
+      List<QuestionImageAndFreeText>? questionImageAndFreeText})
       : _orderList = orderList ?? [],
         _questionStringAndAnswers = questionStringAndAnswers ?? [],
-        _questionStringAndFreeText = questionStringAndFreeText ?? [] {
+        _questionStringAndFreeText = questionStringAndFreeText ?? [],
+        _questionImageAndFreeText = questionImageAndFreeText ?? [] {
     checkQuestionOrder();
     _orderList.shuffle();
   }
@@ -47,6 +52,10 @@ class QuestionStack {
       return _questionStringAndFreeText
           .firstWhere((element) => element.uuid == uuid);
     }
+    if (_questionImageAndFreeText.any((element) => element.uuid == uuid)) {
+      return _questionImageAndFreeText
+          .firstWhere((element) => element.uuid == uuid);
+    }
 
     throw Exception("Can't find the this question");
   }
@@ -63,6 +72,11 @@ class QuestionStack {
       case QuestionTypes.stringAndFreeText:
         String uuid = _addQuestionStringAndFreeText(
             question as QuestionStringAndFreeText);
+        _orderList.add(uuid);
+        return _orderList.length - 1;
+      case QuestionTypes.imageAndFreeText:
+        String uuid =
+            _addQuestionImageAndFreeText(question as QuestionImageAndFreeText);
         _orderList.add(uuid);
         return _orderList.length - 1;
       default:
@@ -88,6 +102,15 @@ class QuestionStack {
     return newQuestionStringAndFreeText.uuid;
   }
 
+  /// Adds a Question from Type QuestionImageAndFreeText to the end of the Stack.
+  /// Returns the uuid of the newly added question.
+  /// Does NOT add uuid to order file!
+  String _addQuestionImageAndFreeText(
+      QuestionImageAndFreeText newQuestionImageAndFreeText) {
+    _questionImageAndFreeText.add(newQuestionImageAndFreeText);
+    return newQuestionImageAndFreeText.uuid;
+  }
+
   void removeQuestion(QuestionBasic question) {
     _orderList.remove(question.uuid);
     _removeQuestionFromQuestionList(question.uuid);
@@ -110,6 +133,10 @@ class QuestionStack {
       _questionStringAndFreeText.removeWhere((element) => element.uuid == uuid);
       return;
     }
+    if (_questionImageAndFreeText.any((element) => element.uuid == uuid)) {
+      _questionImageAndFreeText.removeWhere((element) => element.uuid == uuid);
+      return;
+    }
   }
 
   /// Replaces the Question at index `indexOfOldQuestion` with `newQuestion`.
@@ -125,6 +152,9 @@ class QuestionStack {
         break;
       case QuestionTypes.stringAndFreeText:
         _addQuestionStringAndFreeText(newQuestion as QuestionStringAndFreeText);
+        break;
+      case QuestionTypes.imageAndFreeText:
+        _addQuestionImageAndFreeText(newQuestion as QuestionImageAndFreeText);
         break;
       default:
         throw Exception("This question is not of a valid question type");
@@ -153,6 +183,11 @@ class QuestionStack {
         _orderList.add(element.uuid);
       }
     }
+    for (QuestionImageAndFreeText element in _questionImageAndFreeText) {
+      if (!_orderList.contains(element.uuid)) {
+        _orderList.add(element.uuid);
+      }
+    }
   }
 
   void _deleteUnsetUuidsInOrderList() {
@@ -170,6 +205,11 @@ class QuestionStack {
           return false;
         }
       }
+      for (QuestionImageAndFreeText element in _questionImageAndFreeText) {
+        if (uuid == element.uuid) {
+          return false;
+        }
+      }
       return true;
     });
   }
@@ -183,6 +223,9 @@ class QuestionStack {
   List<QuestionStringAndFreeText> get questionStringAndFreeText =>
       _questionStringAndFreeText;
 
+  List<QuestionImageAndFreeText> get questionImageAndFreeText =>
+      _questionImageAndFreeText;
+
   @override
   String toString() => toJson().toString();
 
@@ -190,4 +233,18 @@ class QuestionStack {
       _$QuestionStackFromJson(json);
 
   Map<String, dynamic> toJson() => _$QuestionStackToJson(this);
+}
+
+void main() {
+  QuestionStack questionStack = QuestionStack("Neuer QuestionStack");
+
+  QuestionImageAndFreeText questionImageAndFreeText =
+      QuestionImageAndFreeText(imageString: "ALNDWONDOWAN", answer: "Antwort");
+  questionStack.addQuestion(questionImageAndFreeText);
+  Map<String, dynamic> json = questionStack.toJson();
+
+  print(json.toString());
+
+  QuestionStack questionStack_2 = QuestionStack.fromJson(json);
+  print(questionStack_2);
 }
