@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
-import 'package:learnhub/DataHelper/QuestionStack.dart';
 
 import 'DataHelper/CurrentlyPlaying.dart';
 import 'DataHelper/QuestionBasic.dart';
@@ -13,7 +12,7 @@ import 'DataHelper/QuestionTypes.dart';
 class Question extends StatefulWidget {
   CurrentlyPlaying playing;
   bool isMultipleChoice = false;
-  Question({Key? key, required this.playing}) : super(key: key) {}
+  Question({Key? key, required this.playing}) : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
@@ -29,7 +28,6 @@ class _QuestionState extends State<Question> {
   void initState() {
     super.initState();
 
-    State<Question> createState() => _QuestionState();
     _inputControl.text = _input;
     _inputControl.addListener(() {
       setState(() {
@@ -153,7 +151,7 @@ class _QuestionState extends State<Question> {
   String questionName() {
     QuestionBasic questionBasic =
         widget.playing.stack.getQuestion(widget.playing.questionIndex);
-    if (questionBasic.questionType == QuestionTypes.stringAndAnswer) {
+    if (questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       widget.isMultipleChoice = true;
       QuestionStringAndAnswers questionStringAndAnswers =
           questionBasic as QuestionStringAndAnswers;

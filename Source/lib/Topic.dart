@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
 
 import 'DataHelper/QuestionStack.dart';
 import 'EditDeck.dart';
@@ -10,7 +11,9 @@ import 'Question.dart';
 
 class Topic extends StatefulWidget {
   QuestionStack questionStack;
-  Topic({Key? key, required this.questionStack}) : super(key: key);
+  int index;
+  Topic({Key? key, required this.questionStack, required this.index})
+      : super(key: key);
 
   @override
   State<Topic> createState() => _TopicState();
@@ -19,18 +22,27 @@ class Topic extends StatefulWidget {
 class _TopicState extends State<Topic> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: askQuestion,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              widget.questionStack.name,
-              style: TextStyle(fontSize: 30),
-            ),
-            IconButton(onPressed: editDeck, icon: Icon(Icons.edit))
-          ],
-        ));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: askQuestion,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Text(
+                  widget.questionStack.name,
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+              IconButton(onPressed: editDeck, icon: Icon(Icons.edit)),
+              IconButton(
+                onPressed: Loeschen,
+                icon: Icon(Icons.delete),
+              )
+            ],
+          )),
+    );
   }
 
   void askQuestion() {
@@ -52,4 +64,12 @@ class _TopicState extends State<Topic> {
   void refresh(value) {
     setState(() {});
   }
+
+  void Loeschen() {
+    setState(() {
+      DataHelper dataHelper = DataHelper();
+      dataHelper.removeQuestionStack(widget.index);
+    });
+  }
 }
+//TODO
