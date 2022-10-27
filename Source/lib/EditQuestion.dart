@@ -134,8 +134,10 @@ class _EditQuestionState extends State<EditQuestion> {
                           children: [
                             if (_image_base64 != null)
                               Image(
+                                  width: 50,
                                   image:
-                                      Image.memory(base64Decode(_image_base64!)).image),
+                                      Image.memory(base64Decode(_image_base64!))
+                                          .image),
                             IconButton(
                               onPressed: importPic,
                               icon: const Icon(Icons.image),
@@ -195,12 +197,11 @@ class _EditQuestionState extends State<EditQuestion> {
   }
 
   Future<void> importPic() async {
-    XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? pickedImage = await _picker.pickImage(source: ImageSource.camera);
     if (pickedImage != null) {
-      var imagepath = pickedImage.path;
-      File imagefile = File(imagepath); //convert Path to File
-      var imagebytes = await imagefile.readAsBytes(); //convert to bytes
-      String base64string = base64.encode(imagebytes); //convert bytes to base64 string
+      var imagebytes = await pickedImage.readAsBytes();
+      String base64string =
+          base64.encode(imagebytes); //convert bytes to base64 string
       _image_base64 = base64string;
       setState(() {});
     }
