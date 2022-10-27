@@ -23,7 +23,7 @@ class _ScoreState extends State<Score> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Name des Stapels"),
+          title: Text(widget.playing.stack.name),
         ),
         body: ListView(
           children: [
