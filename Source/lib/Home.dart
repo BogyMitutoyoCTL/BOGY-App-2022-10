@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:learnhub/EditDeck.dart';
 import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionStack.dart';
-import 'DataHelper/QuestionStack.dart';
 import 'Topic.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  DataHelper datahelper;
+
+  Home({Key? key, required DataHelper this.datahelper}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  _HomeState() {
-    quizes.loadDemoData();
-  }
-  DataHelper quizes = DataHelper();
-
   get onPressed => null;
 
   @override
@@ -41,11 +37,12 @@ class _HomeState extends State<Home> {
           children: [
             Expanded(
               child: ListView.builder(
-                  itemCount: quizes.amountOfQuestionStacks(),
+                  itemCount: widget.datahelper.amountOfQuestionStacks(),
                   itemBuilder: (BuildContext context, int index) {
                     QuestionStack questionStack =
-                        quizes.getQuestionStack(index);
+                        widget.datahelper.getQuestionStack(index);
                     return Topic(
+                      datahelper: widget.datahelper,
                       questionStack: questionStack,
                       index: index,
                     );
@@ -68,7 +65,7 @@ class _HomeState extends State<Home> {
         .then((questionStack) {
       if (questionStack != null) {
         setState(() {
-          quizes.addQuestionStack(questionStack);
+          widget.datahelper.addQuestionStack(questionStack);
         });
       }
     });

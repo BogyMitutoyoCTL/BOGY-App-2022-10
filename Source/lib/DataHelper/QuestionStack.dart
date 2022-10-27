@@ -28,6 +28,7 @@ class QuestionStack {
         _questionStringAndAnswers = questionStringAndAnswers ?? [],
         _questionStringAndFreeText = questionStringAndFreeText ?? [] {
     checkQuestionOrder();
+    _orderList.shuffle();
   }
 
   /// Returns the Question with the index `index`.

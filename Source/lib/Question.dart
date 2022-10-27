@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
 
 import 'DataHelper/CurrentlyPlaying.dart';
+import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStringAndAnswers.dart';
 import 'DataHelper/QuestionStringAndFreeText.dart';
@@ -12,7 +13,10 @@ import 'DataHelper/QuestionTypes.dart';
 class Question extends StatefulWidget {
   CurrentlyPlaying playing;
   bool isMultipleChoice = false;
-  Question({Key? key, required this.playing}) : super(key: key);
+
+  DataHelper datahelper;
+  Question({Key? key, required this.playing, required this.datahelper})
+      : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
@@ -121,6 +125,7 @@ class _QuestionState extends State<Question> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Answer(
+                  datahelper: widget.datahelper,
                   playing: widget.playing,
                 )),
         (route) => false);

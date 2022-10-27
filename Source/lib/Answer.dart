@@ -6,12 +6,16 @@ import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
 
+import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionStack.dart';
 
 class Answer extends StatefulWidget {
   CurrentlyPlaying playing;
 
-  Answer({Key? key, required this.playing}) : super(key: key);
+  DataHelper datahelper;
+
+  Answer({Key? key, required this.playing, required this.datahelper})
+      : super(key: key);
 
   @override
   State<Answer> createState() => _AnswerState();
@@ -119,6 +123,7 @@ class _AnswerState extends State<Answer> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Question(
+                  datahelper: widget.datahelper,
                   playing: widget.playing,
                 )),
         (route) => false);
@@ -128,6 +133,7 @@ class _AnswerState extends State<Answer> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Score(
+                  datahelper: widget.datahelper,
                   playing: widget.playing,
                 )),
         (route) => false);
