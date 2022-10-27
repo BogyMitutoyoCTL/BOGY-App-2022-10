@@ -139,11 +139,11 @@ class _EditQuestionState extends State<EditQuestion> {
                                       Image.memory(base64Decode(_image_base64!))
                                           .image),
                             IconButton(
-                              onPressed: importPic,
+                              onPressed: () => importPic(ImageSource.gallery),
                               icon: const Icon(Icons.image),
                             ),
                             IconButton(
-                              onPressed: importPic,
+                              onPressed: () => importPic(ImageSource.camera),
                               icon: const Icon(Icons.camera_alt),
                             ),
                           ],
@@ -196,8 +196,8 @@ class _EditQuestionState extends State<EditQuestion> {
     return widgets;
   }
 
-  Future<void> importPic() async {
-    XFile? pickedImage = await _picker.pickImage(source: ImageSource.camera);
+  Future<void> importPic(ImageSource imageSource) async {
+    XFile? pickedImage = await _picker.pickImage(source: imageSource);
     if (pickedImage != null) {
       var imagebytes = await pickedImage.readAsBytes();
       String base64string =
