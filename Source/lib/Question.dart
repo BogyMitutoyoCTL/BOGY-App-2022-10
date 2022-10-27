@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
 
 import 'DataHelper/CurrentlyPlaying.dart';
+import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStringAndAnswers.dart';
 import 'DataHelper/QuestionStringAndFreeText.dart';
@@ -12,15 +13,21 @@ import 'DataHelper/QuestionTypes.dart';
 class Question extends StatefulWidget {
   CurrentlyPlaying playing;
   bool isMultipleChoice = false;
-  Question({Key? key, required this.playing}) : super(key: key);
+
+  DataHelper datahelper;
+  Question({Key? key, required this.playing, required this.datahelper})
+      : super(key: key);
 
   @override
   State<Question> createState() => _QuestionState();
 }
 
 class _QuestionState extends State<Question> {
+  List<String> answers = ["", "", "", ""];
+  String question = "";
   final TextEditingController _inputControl = TextEditingController();
   String _input = "";
+
   @override
   void initState() {
     super.initState();
@@ -41,10 +48,10 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
-    String question = questionName();
-    List<String> answers = ["", "", "", ""];
+    question = questionName();
+
     if (widget.isMultipleChoice) {
-      answers = getanswers();
+      answers = getAnswers();
     }
     return Scaffold(
         appBar: AppBar(title: Text(widget.playing.stack.name)),
@@ -71,7 +78,10 @@ class _QuestionState extends State<Question> {
                 ),
               if (!widget.isMultipleChoice)
                 FloatingActionButton(
-                    onPressed: mcPressed, child: Icon(Icons.check)),
+                    onPressed: () {
+                      mcPressed(_input);
+                    },
+                    child: Icon(Icons.check)),
               if (widget.isMultipleChoice)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Column(
@@ -80,7 +90,10 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text(answers[0]))),
+                              onPressed: () {
+                                mcPressed(answers[0]);
+                              },
+                              child: Text(answers[0]))),
                       Padding(
                         padding: EdgeInsets.all(10),
                       ),
@@ -88,7 +101,10 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text(answers[2]))),
+                              onPressed: () {
+                                mcPressed(answers[2]);
+                              },
+                              child: Text(answers[2]))),
                     ],
                   ),
                   Padding(
@@ -100,7 +116,10 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text(answers[1]))),
+                              onPressed: () {
+                                mcPressed(answers[1]);
+                              },
+                              child: Text(answers[1]))),
                       Padding(
                         padding: EdgeInsets.all(10),
                       ),
@@ -108,7 +127,10 @@ class _QuestionState extends State<Question> {
                           width: 166.0,
                           height: 100.0,
                           child: ElevatedButton(
-                              onPressed: mcPressed, child: Text(answers[3]))),
+                              onPressed: () {
+                                mcPressed(answers[3]);
+                              },
+                              child: Text(answers[3]))),
                     ],
                   ),
                 ]),
@@ -117,11 +139,16 @@ class _QuestionState extends State<Question> {
         ));
   }
 
-  void mcPressed() {
+  void mcPressed(String input) {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Answer(
+                  datahelper: widget.datahelper,
+                  question: question,
+                  isMultipleChoice: widget.isMultipleChoice,
                   playing: widget.playing,
+                  input: input,
+                  answers: answers,
                 )),
         (route) => false);
   }
@@ -144,14 +171,13 @@ class _QuestionState extends State<Question> {
     }
   }
 
-  List<String> getanswers() {
+  List<String> getAnswers() {
     QuestionBasic questionBasic =
         widget.playing.stack.getQuestion(widget.playing.questionIndex);
     QuestionStringAndAnswers questionStringAndAnswers =
         questionBasic as QuestionStringAndAnswers;
     List<String> answer = questionStringAndAnswers.answers;
     answer.shuffle();
-    print(answer);
     return answer;
   }
 }

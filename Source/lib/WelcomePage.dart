@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors, empty_statements
 
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/Home.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  WelcomePage({Key? key}) : super(key: key) {
+    datahelper.loadDemoData();
+  }
+  DataHelper datahelper = DataHelper();
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -45,6 +49,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
   void play() {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+        MaterialPageRoute(
+            builder: (context) => Home(datahelper: widget.datahelper)),
+        (route) => false);
   }
 }

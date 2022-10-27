@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/QuestionStack.dart';
+import 'package:learnhub/EditQuestion.dart';
+import 'package:learnhub/Home.dart';
+import 'package:learnhub/ImageProcessing.dart';
+import 'package:learnhub/Question.dart';
+import 'package:learnhub/Score.dart';
 import 'WelcomePage.dart';
 
 class LearnHubApp extends StatelessWidget {
@@ -28,7 +34,7 @@ class LearnHubApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.amber,
       ),
-      home: const WelcomePage(),
+      home: WelcomePage(),
     );
   }
 }
