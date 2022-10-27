@@ -13,9 +13,6 @@ class Answer extends StatefulWidget {
   CurrentlyPlaying playing;
 
   DataHelper datahelper;
-
-  Answer({Key? key, required this.playing, required this.datahelper})
-      : super(key: key);
   bool isMultipleChoice;
   String input;
   List<String> answers = [];
@@ -23,6 +20,7 @@ class Answer extends StatefulWidget {
   Answer(
       {Key? key,
       required this.playing,
+      required this.datahelper,
       required this.answers,
       required this.input,
       required this.question,
