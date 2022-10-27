@@ -25,11 +25,13 @@ class _TopicState extends State<Topic> {
     return ElevatedButton(
         onPressed: askQuestion,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(
-              widget.questionStack.name,
-              style: TextStyle(fontSize: 30),
+            Expanded(
+              child: Text(
+                widget.questionStack.name,
+                style: TextStyle(fontSize: 17),
+              ),
             ),
             IconButton(onPressed: editDeck, icon: Icon(Icons.edit)),
             IconButton(
