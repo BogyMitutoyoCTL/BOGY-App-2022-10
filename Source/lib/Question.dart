@@ -23,6 +23,10 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
+  Future<bool> _onWillPop() async {
+    return false; //<-- SEE HERE
+  }
+
   List<String> answers = ["", "", "", ""];
   String question = "";
   final TextEditingController _inputControl = TextEditingController();
@@ -53,101 +57,104 @@ class _QuestionState extends State<Question> {
     if (widget.isMultipleChoice) {
       answers = getAnswers();
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.playing.stack.name),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "${widget.playing.questionIndex + 1}/${widget.playing.stack.getAmountOfQuestions()}",
-              style: TextStyle(fontSize: 30),
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FAB(),
-      body: ListView(
-        children: [
-          Column(children: [
-            /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
-            Padding(padding: EdgeInsets.all(10),
-             child:Text(question, style: TextStyle(fontSize: 40)),
-             ),
-            Padding(
-              padding: EdgeInsets.all(10),
-            ),
-            if (!widget.isMultipleChoice)
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.playing.stack.name),
+            actions: [
               Padding(
-                padding: const EdgeInsets.all(10),
-                child: TextField(
-                  controller: _inputControl,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Eingabe...",
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "${widget.playing.questionIndex + 1}/${widget.playing.stack.getAmountOfQuestions()}",
+                  style: TextStyle(fontSize: 30),
                 ),
-              ),
-            if (!widget.isMultipleChoice)
-              Padding(
-                padding: EdgeInsets.all(10),
-              ),
-            if (widget.isMultipleChoice)
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Column(
-                  children: [
-                    SizedBox(
-                        width: 166.0,
-                        height: 100.0,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              mcPressed(answers[0], 0);
-                            },
-                            child: Text(answers[0]))),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                    ),
-                    SizedBox(
-                        width: 166.0,
-                        height: 100.0,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              mcPressed(answers[2], 2);
-                            },
-                            child: Text(answers[2]))),
-                  ],
+              )
+            ],
+          ),
+          floatingActionButton: FAB(),
+          body: ListView(
+            children: [
+              Column(children: [
+                /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(question, style: TextStyle(fontSize: 40)),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10),
                 ),
-                Column(
-                  children: [
-                    SizedBox(
-                        width: 166.0,
-                        height: 100.0,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              mcPressed(answers[1], 1);
-                            },
-                            child: Text(answers[1]))),
+                if (!widget.isMultipleChoice)
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: _inputControl,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Eingabe...",
+                      ),
+                    ),
+                  ),
+                if (!widget.isMultipleChoice)
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                  ),
+                if (widget.isMultipleChoice)
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                            width: 166.0,
+                            height: 100.0,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  mcPressed(answers[0], 0);
+                                },
+                                child: Text(answers[0]))),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        SizedBox(
+                            width: 166.0,
+                            height: 100.0,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  mcPressed(answers[2], 2);
+                                },
+                                child: Text(answers[2]))),
+                      ],
+                    ),
                     Padding(
                       padding: EdgeInsets.all(10),
                     ),
-                    SizedBox(
-                        width: 166.0,
-                        height: 100.0,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              mcPressed(answers[3], 3);
-                            },
-                            child: Text(answers[3]))),
-                  ],
-                ),
+                    Column(
+                      children: [
+                        SizedBox(
+                            width: 166.0,
+                            height: 100.0,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  mcPressed(answers[1], 1);
+                                },
+                                child: Text(answers[1]))),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        SizedBox(
+                            width: 166.0,
+                            height: 100.0,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  mcPressed(answers[3], 3);
+                                },
+                                child: Text(answers[3]))),
+                      ],
+                    ),
+                  ]),
               ]),
-          ]),
-        ],
-      ),
-    );
+            ],
+          ),
+        ));
   }
 
   void mcPressed(String input, int ID) {

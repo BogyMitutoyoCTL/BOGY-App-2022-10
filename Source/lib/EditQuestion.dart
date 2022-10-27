@@ -220,31 +220,39 @@ class _EditQuestionState extends State<EditQuestion> {
   }
 
   void save() {
-    // TODO: Speichern
-    if (_isPictureQuestion) {
-      //TODO: Bild speichern
-    } else {
-      String fragenname = _titleController.text;
-      if (_isMultipleChoice) {
-        String antwortnamerichtig = answerControllers[0].text;
-        String antwortnamefalsch1 = answerControllers[1].text;
-        String antwortnamefalsch2 = answerControllers[2].text;
-        String antwortnamefalsch3 = answerControllers[3].text;
-        QuestionStringAndAnswers frageMultiple = QuestionStringAndAnswers(
-          question: fragenname,
-          answers: [
-            antwortnamerichtig,
-            antwortnamefalsch1,
-            antwortnamefalsch2,
-            antwortnamefalsch3
-          ],
-        );
-        Navigator.of(context).pop(frageMultiple);
+    //Keine gleichen Antworten
+    if (answerControllers[0].text.toLowerCase() !=
+            answerControllers[1].text.toLowerCase() &&
+        answerControllers[0].text.toLowerCase() !=
+            answerControllers[2].text.toLowerCase() &&
+        answerControllers[0].text.toLowerCase() !=
+            answerControllers[3].text.toLowerCase()) {
+      // TODO: Speichern
+      if (_isPictureQuestion) {
+        //TODO: Bild speichern
       } else {
-        String antwortnamerichtig = answerControllers[0].text;
-        QuestionStringAndFreeText frageEingabe = QuestionStringAndFreeText(
-            question: fragenname, answer: antwortnamerichtig);
-        Navigator.of(context).pop(frageEingabe);
+        String fragenname = _titleController.text;
+        if (_isMultipleChoice) {
+          String antwortnamerichtig = answerControllers[0].text;
+          String antwortnamefalsch1 = answerControllers[1].text;
+          String antwortnamefalsch2 = answerControllers[2].text;
+          String antwortnamefalsch3 = answerControllers[3].text;
+          QuestionStringAndAnswers frageMultiple = QuestionStringAndAnswers(
+            question: fragenname,
+            answers: [
+              antwortnamerichtig,
+              antwortnamefalsch1,
+              antwortnamefalsch2,
+              antwortnamefalsch3
+            ],
+          );
+          Navigator.of(context).pop(frageMultiple);
+        } else {
+          String antwortnamerichtig = answerControllers[0].text;
+          QuestionStringAndFreeText frageEingabe = QuestionStringAndFreeText(
+              question: fragenname, answer: antwortnamerichtig);
+          Navigator.of(context).pop(frageEingabe);
+        }
       }
     }
   }

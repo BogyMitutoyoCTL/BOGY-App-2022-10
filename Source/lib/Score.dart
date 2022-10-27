@@ -4,6 +4,10 @@ import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/Home.dart';
 
 class Score extends StatefulWidget {
+  Future<bool> _onWillPop() async {
+    return false; //<-- SEE HERE
+  }
+
   CurrentlyPlaying playing;
 
   DataHelper datahelper;
@@ -17,44 +21,50 @@ class Score extends StatefulWidget {
 
 class _ScoreState extends State<Score> {
   @override
+  Future<bool> _onWillPop() async {
+    return false; //<-- SEE HERE
+  }
+
   Widget build(BuildContext context) {
     var score = widget.playing.correctAnswers;
     var numberOfQuestions = widget.playing.stack.getAmountOfQuestions();
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.playing.stack.name),
-        ),
-        body: ListView(
-          children: [
-            Column(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text(widget.playing.stack.name),
+            ),
+            body: ListView(
               children: [
-                Center(
-                  child: Text(
-                    "Glückwunsch!",
-                    style: TextStyle(fontSize: 50),
-                  ),
-                ),
-                Image.asset("assets/images/Pokal.png"),
-                Text(
-                  "Du hast $score von $numberOfQuestions",
-                  style: TextStyle(fontSize: 50),
-                ),
-                Text(
-                  "Punkten erreicht!",
-                  style: TextStyle(fontSize: 50),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(75),
-                  child: ElevatedButton(
-                    onPressed: play,
-                    child: Text("Zurück zum Menu"),
-                  ),
+                Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        "Glückwunsch!",
+                        style: TextStyle(fontSize: 50),
+                      ),
+                    ),
+                    Image.asset("assets/images/Pokal.png"),
+                    Text(
+                      "Du hast $score von $numberOfQuestions",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    Text(
+                      "Punkten erreicht!",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(75),
+                      child: ElevatedButton(
+                        onPressed: play,
+                        child: Text("Zurück zum Menu"),
+                      ),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
-        ));
+            )));
   }
 
   void play() {
