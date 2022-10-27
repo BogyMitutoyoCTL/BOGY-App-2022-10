@@ -40,13 +40,16 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              TextField(
-                controller: anzahlRundenController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Anzahl an Fragen pro Spiel",
+              Padding(
+                padding: const EdgeInsets.all(9.0),
+                child: TextField(
+                  controller: anzahlRundenController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Anzahl an Fragen pro Spiel",
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                keyboardType: TextInputType.number,
               ),
               Expanded(
                 child: ListView.builder(
