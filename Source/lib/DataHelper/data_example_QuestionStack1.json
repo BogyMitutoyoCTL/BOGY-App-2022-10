@@ -1,0 +1,43 @@
+{
+  "name": "QuestionStack1",
+  "orderList": [
+    "b5838640-5525-11ed-94f0-63ac1d02deaa",
+    "b5838641-5525-11ed-94f0-63ac1d02deaa",
+    "b5838642-5525-11ed-94f0-63ac1d02deaa",
+    "b583ad50-5525-11ed-94f0-63ac1d02deaa"
+  ],
+  "questionStringAndAnswers": [
+    {
+      "uuid": "b5838641-5525-11ed-94f0-63ac1d02deaa",
+      "question": "Das ist die Frage der SingleChoiceFrage 0 von Stack 1. Was ist deine Antwort?",
+      "answers": [
+        "Anton",
+        "Berta",
+        "Cäsar",
+        "Dino"
+      ]
+    },
+    {
+      "uuid": "b583ad50-5525-11ed-94f0-63ac1d02deaa",
+      "question": "Das ist die Frage der SingleChoiceFrage 1 von Stack 1. Was ist deine Antwort?",
+      "answers": [
+        "Anton",
+        "Berta",
+        "Cäsar",
+        "Dino"
+      ]
+    }
+  ],
+  "questionStringAndFreeText": [
+    {
+      "uuid": "b5838640-5525-11ed-94f0-63ac1d02deaa",
+      "question": "Das ist die Frage der Freitextfrage 0 von Stack 1. Was ist deine Antwort?",
+      "answer": "Answer"
+    },
+    {
+      "uuid": "b5838642-5525-11ed-94f0-63ac1d02deaa",
+      "question": "Das ist die Frage der Freitextfrage 1 von Stack 1. Was ist deine Antwort?",
+      "answer": "Answer"
+    }
+  ]
+}

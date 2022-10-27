@@ -71,7 +71,9 @@ class _EditDeckState extends State<EditDeck> {
       widget.questionStack.name = titelStapel;
     });
 
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(
+      widget.questionStack
+    );
 
   }
 

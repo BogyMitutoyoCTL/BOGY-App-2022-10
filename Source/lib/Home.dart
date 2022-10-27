@@ -61,6 +61,13 @@ class _HomeState extends State<Home> {
 
   void addNewDeck() {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EditDeck(QuestionStack(""))));
+        builder: (context) => EditDeck(QuestionStack(""))))
+        .then((questionStack) {
+          if(questionStack != null){
+          setState(() {
+            quizes.addQuestionStack(questionStack);
+          });
+          }
+        });
   }
 }
