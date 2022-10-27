@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/TopicQuestion.dart';
+import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStack.dart';
 import 'DataHelper/QuestionStringAndAnswers.dart';
 import 'EditQuestion.dart';
@@ -73,6 +74,11 @@ class _EditDeckState extends State<EditDeck> {
                   return TopicQuestion(
                     isMultipleChoice: false,
                     questionBasic: widget.questionStack.getQuestion(index),
+                    changedCard: (QuestionBasic questionbasic) {
+                    setState(() {
+                      widget.questionStack.replaceQuestion(index, questionbasic);
+                    });
+                    },
                   );
                 }),
           ),
