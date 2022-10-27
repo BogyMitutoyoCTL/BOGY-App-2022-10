@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learnhub/EditQuestion.dart';
-import 'package:learnhub/Home.dart';
-import 'package:learnhub/ImageProcessing.dart';
-import 'package:learnhub/Question.dart';
-import 'package:learnhub/Score.dart';
 import 'WelcomePage.dart';
-import 'Question.dart';
 
 class LearnHubApp extends StatelessWidget {
   const LearnHubApp({Key? key}) : super(key: key);

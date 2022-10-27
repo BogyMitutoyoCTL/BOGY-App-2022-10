@@ -8,6 +8,10 @@
 import 'QuestionStack.dart';
 import 'QuestionStringAndAnswers.dart';
 import 'QuestionStringAndFreeText.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
 
 /// The DataHelper take care of the different question stacks.
 /// You can add, remove and get a QuestionStack.
@@ -66,6 +70,83 @@ class DataHelper {
     }
   }
 
+  /// Returns the directory where the QuestionStacks were saved.
+  /// This is a folder inside the Application Document Directory.
+  Future<Directory> _getQuestionStackDir() async {
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
+    return Directory("${appDocDir.path}/questionStacks");
+  }
+
+  /// Creates `directory` if it doesn't exist.
+  void _createFolderIfNotExists(final Directory directory) async {
+    if (!(await directory.exists())) {
+      await directory.create(recursive: true);
+    }
+  }
+
+  /// Writes all QuestionStacks to files. You can load them again with `load`.
+  /// Important: All existing files in that directory like previous storages
+  /// where deleted before!
+  Future<void> save() async {
+    await _deleteAllJsonFiles();
+
+    Directory questionStackDir = await _getQuestionStackDir();
+    _createFolderIfNotExists(questionStackDir);
+
+    for (QuestionStack questionStack in _myQuestionStacks) {
+      final file = File('${questionStackDir.path}/${questionStack.name}.json');
+      await file.writeAsString(jsonEncode(questionStack));
+      print("Saved to file: ${file.path}");
+    }
+    print('Saved all QuestionStacks');
+  }
+
+  /// Replaces all QuestionStacks with the QuestionStacks saved in the json files
+  /// by method `save`.
+  Future<void> load() async {
+    Directory questionStackDir = await _getQuestionStackDir();
+    _createFolderIfNotExists(questionStackDir);
+
+    _myQuestionStacks = [];
+
+    List<FileSystemEntity> files =
+        questionStackDir.listSync(recursive: false, followLinks: false);
+
+    for (FileSystemEntity fileSystemEntity in files) {
+      try {
+        final file = File(fileSystemEntity.path);
+        String jsonString = await file.readAsString();
+        print("Read from file ${file.path}: $jsonString");
+        Map<String, dynamic> questionStackMap = jsonDecode(jsonString);
+        QuestionStack questionStack = QuestionStack.fromJson(questionStackMap);
+        addQuestionStack(questionStack);
+      } catch (e) {
+        print("Couldn't read file");
+      }
+    }
+    print('Read all QuestionStacks');
+  }
+
+  /// Deletes all files in the directory for the QuestionStacks.
+  Future<void> _deleteAllJsonFiles() async {
+    Directory questionStackDir = await _getQuestionStackDir();
+    _createFolderIfNotExists(questionStackDir);
+
+    List<FileSystemEntity> files =
+        questionStackDir.listSync(recursive: false, followLinks: false);
+
+    for (FileSystemEntity fileSystemEntity in files) {
+      try {
+        final file = File(fileSystemEntity.path);
+        await file.delete();
+        print("Delete file: ${file.path}");
+      } catch (e) {
+        print("Couldn't delete file");
+      }
+    }
+    print('Delete all QuestionStacks');
+  }
+
   @override
   String toString() {
     String msg = "DataHelper: Contains ${_myQuestionStacks.length} Stacks.";
@@ -74,6 +155,22 @@ class DataHelper {
     }
     return msg;
   }
+}
+
+Future<void> testDataHelper() async {
+  DataHelper dataHelper = DataHelper();
+  dataHelper.loadDemoData();
+
+  print(dataHelper);
+
+  await dataHelper.save();
+
+  print("###########################");
+
+  DataHelper dataHelper2 = DataHelper();
+  dataHelper2.load();
+
+  print(dataHelper2);
 }
 
 /// This is an example of how to use this DataHelper
