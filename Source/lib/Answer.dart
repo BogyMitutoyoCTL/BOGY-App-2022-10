@@ -46,7 +46,7 @@ class _AnswerState extends State<Answer> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "${widget.playing.questionIndex}/${widget.playing.stack.getAmountOfQuestions()}",
+              "${widget.playing.questionIndex + 1}/${widget.playing.stack.getAmountOfQuestions()}",
               style: TextStyle(fontSize: 30),
             ),
           )
@@ -169,6 +169,9 @@ class _AnswerState extends State<Answer> {
   List<Color> answerVergleichMC() {
     var questionBasic =
         widget.playing.stack.getQuestion(widget.playing.questionIndex);
+    if (questionBasic.isAnswerCorrect(widget.input)) {
+      widget.playing.correctAnswers++;
+    }
     List<Color> list = [
       Colors.black,
       Colors.black,

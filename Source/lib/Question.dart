@@ -60,7 +60,7 @@ class _QuestionState extends State<Question> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "${widget.playing.questionIndex}/${widget.playing.stack.getAmountOfQuestions()}",
+              "${widget.playing.questionIndex + 1}/${widget.playing.stack.getAmountOfQuestions()}",
               style: TextStyle(fontSize: 30),
             ),
           )
