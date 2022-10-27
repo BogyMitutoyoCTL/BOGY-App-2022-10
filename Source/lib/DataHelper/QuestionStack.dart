@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:learnhub/DataHelper/QuestionTypes.dart';
 
 import 'QuestionBasic.dart';
 import 'QuestionStringAndAnswers.dart';
@@ -47,6 +48,21 @@ class QuestionStack {
     }
 
     throw Exception("Can't find the this question");
+  }
+
+  /// Adds a question independent from its type.
+  /// Returns the index of the newly added question.
+  int addQuestion(QuestionBasic question) {
+    switch (question.questionType) {
+      case QuestionTypes.stringAndAnswers:
+        return addQuestionStringAndAnswers(
+            question as QuestionStringAndAnswers);
+      case QuestionTypes.stringAndFreeText:
+        return addQuestionStringAndFreeText(
+            question as QuestionStringAndFreeText);
+      default:
+        throw Exception("This question is not of a valid question type");
+    }
   }
 
   /// Adds a Question from Type QuestionStringAndAnswers to the end of the Stack.
