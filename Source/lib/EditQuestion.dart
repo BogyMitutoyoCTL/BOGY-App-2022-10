@@ -2,9 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:learnhub/DataHelper/QuestionBasic.dart';
+import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
+import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
+import 'package:learnhub/DataHelper/QuestionTypes.dart';
 
 class EditQuestion extends StatefulWidget {
-  const EditQuestion({Key? key}) : super(key: key);
+  QuestionBasic frage;
+
+  EditQuestion(this.frage, {Key? key}) : super(key: key);
 
   @override
   State<EditQuestion> createState() => _EditQuestionState();
@@ -20,29 +26,58 @@ class _EditQuestionState extends State<EditQuestion> {
     TextEditingController(),
     TextEditingController()
   ];
-  String _title = "";
   List<String> _answer = ["", "", "", "", ""];
   final ImagePicker _picker = ImagePicker();
+
+   String getFragenTitel(){
+    if(_isPictureQuestion){
+      return "";
+    }
+    else{
+      if(_isMultipleChoice){
+        QuestionStringAndAnswers textMultipleFrage = widget.frage as QuestionStringAndAnswers;
+        return textMultipleFrage.question;
+      } else{
+        QuestionStringAndFreeText textBenutzerFrage = widget.frage as QuestionStringAndFreeText;
+        return textBenutzerFrage.question;
+      }
+    }
+  }
+
+  void setRadioButtons(){
+     if(widget.frage.questionType == QuestionTypes.stringAndFreeText){
+       _isMultipleChoice = false;
+       _isPictureQuestion = false;
+     } else if(widget.frage.questionType == QuestionTypes.stringAndAnswers){
+       _isMultipleChoice = true;
+       _isPictureQuestion = false;
+     }
+  }
 
   @override
   void initState() {
     super.initState();
+     setRadioButtons();
 
-    _titleController.text = _title;
-    for (int i = 0; i < 4; i++) {
-      answerControllers[i].text = _answer[i];
-      answerControllers[i].addListener(() {
-        setState(() {
-          _answer[i] = answerControllers[i].text;
-        });
-      });
+
+    _titleController.text =  getFragenTitel();
+    setAntwort();
+  }
+   void setAntwort(){
+    if(widget.frage.questionType == QuestionTypes.stringAndFreeText){
+      _isMultipleChoice = false;
+      _isPictureQuestion = false;
+      QuestionStringAndFreeText textBenutzerFrage = widget.frage as QuestionStringAndFreeText;
+      answerControllers[0].text = textBenutzerFrage.answer;
+    } else if(widget.frage.questionType == QuestionTypes.stringAndAnswers){
+      _isMultipleChoice = true;
+      _isPictureQuestion = false;
+      QuestionStringAndAnswers textBenutzerFrage = widget.frage as QuestionStringAndAnswers;
+      answerControllers[0].text = textBenutzerFrage.answers[0];
+      answerControllers[1].text = textBenutzerFrage.answers[1];
+      answerControllers[2].text = textBenutzerFrage.answers[2];
+      answerControllers[3].text = textBenutzerFrage.answers[3];
     }
-
-    _titleController.addListener(() {
-      setState(() {
-        _title = _titleController.text;
-      });
-    });
   }
 
   @override
@@ -172,7 +207,35 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void save() {
     // TODO: Speichern
-    Navigator.of(context).pop(); //Zur EditDeck seite
+    if (_isPictureQuestion) {
+      //TODO: Bild speichern
+    } else {
+      String fragenname = _titleController.text;
+      if (_isMultipleChoice) {
+        String antwortnamerichtig = answerControllers[0].text;
+        String antwortnamefalsch1 = answerControllers[1].text;
+        String antwortnamefalsch2 = answerControllers[2].text;
+        String antwortnamefalsch3 = answerControllers[3].text;
+        QuestionStringAndAnswers frageMultiple = QuestionStringAndAnswers(
+          question: fragenname,
+          answers: [
+            antwortnamerichtig,
+            antwortnamefalsch1,
+            antwortnamefalsch2,
+            antwortnamefalsch3
+          ],
+        );
+        Navigator.of(context).pop(
+          frageMultiple
+        );
+      } else {
+        String antwortnamerichtig = answerControllers[0].text;
+        QuestionStringAndFreeText frageEingabe = QuestionStringAndFreeText(question: fragenname, answer: antwortnamerichtig);
+        Navigator.of(context).pop(
+          frageEingabe
+        );
+      }
+    }
   }
 
   deleteStack() {}
