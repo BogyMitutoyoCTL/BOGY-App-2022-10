@@ -7,7 +7,11 @@ import 'package:learnhub/Question.dart';
 import 'package:learnhub/Score.dart';
 
 import 'DataHelper/DataHelper.dart';
+import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStack.dart';
+import 'DataHelper/QuestionStringAndAnswers.dart';
+import 'DataHelper/QuestionStringAndFreeText.dart';
+import 'DataHelper/QuestionTypes.dart';
 
 class Answer extends StatefulWidget {
   CurrentlyPlaying playing;
@@ -17,6 +21,7 @@ class Answer extends StatefulWidget {
   String input;
   List<String> answers = [];
   String question;
+  int ID;
   Answer(
       {Key? key,
       required this.playing,
@@ -24,7 +29,8 @@ class Answer extends StatefulWidget {
       required this.answers,
       required this.input,
       required this.question,
-      required this.isMultipleChoice})
+      required this.isMultipleChoice,
+      required this.ID})
       : super(key: key);
 
   @override
@@ -34,8 +40,17 @@ class Answer extends StatefulWidget {
 class _AnswerState extends State<Answer> {
   @override
   Widget build(BuildContext context) {
+    List<Color> farbe = answerVergleichMC();
     return Scaffold(
-        appBar: AppBar(title: Text(widget.playing.stack.name)),
+        appBar: AppBar(title: Text(widget.playing.stack.name), actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "${widget.playing.questionIndex}/${widget.playing.stack.getAmountOfQuestions()}",
+              style: TextStyle(fontSize: 30),
+            ),
+          )
+        ]),
         body: ListView(
           children: [
             Column(children: [
@@ -67,9 +82,9 @@ class _AnswerState extends State<Answer> {
                           child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: Colors.green,
+                                  color: farbe[0],
                                   border: Border.all(
-                                    color: Colors.green,
+                                    color: farbe[0],
                                   ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5))),
@@ -85,9 +100,9 @@ class _AnswerState extends State<Answer> {
                           child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: farbe[2],
                                   border: Border.all(
-                                    color: Colors.red,
+                                    color: farbe[2],
                                   ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5))),
@@ -107,9 +122,9 @@ class _AnswerState extends State<Answer> {
                           child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: farbe[1],
                                   border: Border.all(
-                                    color: Colors.red,
+                                    color: farbe[1],
                                   ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5))),
@@ -125,9 +140,9 @@ class _AnswerState extends State<Answer> {
                           child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: farbe[3],
                                   border: Border.all(
-                                    color: Colors.red,
+                                    color: farbe[3],
                                   ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5))),
@@ -149,6 +164,26 @@ class _AnswerState extends State<Answer> {
             ]),
           ],
         ));
+  }
+
+  List<Color> answerVergleichMC() {
+    var questionBasic =
+        widget.playing.stack.getQuestion(widget.playing.questionIndex);
+    List<Color> list = [
+      Colors.black,
+      Colors.black,
+      Colors.black,
+      Colors.black,
+      Colors.black
+    ];
+    list[widget.ID] = Colors.red;
+    for (int i = 0; i < 4; i++) {
+      if (questionBasic.isAnswerCorrect(widget.answers[i])) {
+        list[i] = Colors.green;
+      }
+    }
+
+    return list;
   }
 
   void nextQuestion() {
