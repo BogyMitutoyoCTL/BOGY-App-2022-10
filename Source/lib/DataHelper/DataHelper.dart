@@ -29,7 +29,9 @@ class DataHelper {
   /// This adds a new QuestionStack. Returns the index of the newly added Stack.
   /// It always adds the new Stack to the end.
   int addQuestionStack(QuestionStack newQuestionStack) {
-    _myQuestionStacks.add(newQuestionStack);
+    if (!_myQuestionStacks.contains(newQuestionStack)) {
+      _myQuestionStacks.add(newQuestionStack);
+    }
     return _myQuestionStacks.length - 1;
   }
 
@@ -50,7 +52,7 @@ class DataHelper {
 
   /// Adds Demo data
   void loadDemoData() {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 10; i++) {
       QuestionStack questionStack = QuestionStack("QuestionStack$i");
       for (int j = 0; j <= i; j++) {
         QuestionStringAndFreeText questionStringAndFreeText =
@@ -109,20 +111,25 @@ class DataHelper {
 
     _myQuestionStacks = [];
 
-    List<FileSystemEntity> files =
-        questionStackDir.listSync(recursive: false, followLinks: false);
+    try {
+      List<FileSystemEntity> files =
+          questionStackDir.listSync(recursive: false, followLinks: false);
 
-    for (FileSystemEntity fileSystemEntity in files) {
-      try {
-        final file = File(fileSystemEntity.path);
-        String jsonString = await file.readAsString();
-        print("Read from file ${file.path}: $jsonString");
-        Map<String, dynamic> questionStackMap = jsonDecode(jsonString);
-        QuestionStack questionStack = QuestionStack.fromJson(questionStackMap);
-        addQuestionStack(questionStack);
-      } catch (e) {
-        print("Couldn't read file");
+      for (FileSystemEntity fileSystemEntity in files) {
+        try {
+          final file = File(fileSystemEntity.path);
+          String jsonString = await file.readAsString();
+          print("Read from file ${file.path}: $jsonString");
+          Map<String, dynamic> questionStackMap = jsonDecode(jsonString);
+          QuestionStack questionStack =
+              QuestionStack.fromJson(questionStackMap);
+          addQuestionStack(questionStack);
+        } catch (e) {
+          print("Couldn't read file");
+        }
       }
+    } catch (FileSystemException) {
+      print("No file found. Starting with an empty set.");
     }
     print('Read all QuestionStacks');
   }

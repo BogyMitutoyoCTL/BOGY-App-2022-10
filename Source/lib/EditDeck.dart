@@ -104,7 +104,7 @@ class _EditDeckState extends State<EditDeck> {
     if (widget.questionStack.getAmountOfQuestions() == 0) return;
     if (widget.questionStack.name == "") return;
 
-    widget.datahelper.myQuestionStacks.add(widget.questionStack);
+    widget.datahelper.addQuestionStack(widget.questionStack);
     widget.datahelper.save();
 
     Navigator.of(context).pushAndRemoveUntil(
