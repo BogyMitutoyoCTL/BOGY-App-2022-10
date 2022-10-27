@@ -45,7 +45,7 @@ class _TopicState extends State<Topic> {
               IconButton(onPressed: editDeck, icon: Icon(Icons.edit)),
               IconButton(
                 onPressed: Loeschen,
-                icon: Icon(Icons.delete),
+                icon: Icon(Icons.delete_forever),
               )
             ],
           )),
@@ -65,7 +65,10 @@ class _TopicState extends State<Topic> {
   void editDeck() {
     Navigator.of(context)
         .push(MaterialPageRoute(
-            builder: (context) => EditDeck(widget.questionStack)))
+            builder: (context) => EditDeck(
+                  datahelper: widget.datahelper,
+                  questionStack: widget.questionStack,
+                )))
         .then(refresh);
   }
 

@@ -8,13 +8,29 @@ import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/EditQuestion.dart';
 
 import 'DataHelper/QuestionTypes.dart';
+import 'package:http/http.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
+import 'package:learnhub/DataHelper/QuestionStack.dart';
+import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
+import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
+import 'package:learnhub/EditDeck.dart';
+import 'package:learnhub/EditQuestion.dart';
+
+import 'DataHelper/QuestionTypes.dart';
 
 class TopicQuestion extends StatefulWidget {
   bool isMultipleChoice = false;
   QuestionBasic questionBasic;
-
+  DataHelper datahelper;
+  Function(QuestionBasic) changedCard;
+  QuestionStack questionstack;
   TopicQuestion(
-      {Key? key, required this.isMultipleChoice, required this.questionBasic})
+      {Key? key,
+      required this.isMultipleChoice,
+      required this.questionBasic,
+      required this.changedCard,
+      required this.datahelper,
+      required this.questionstack})
       : super(key: key);
 
   @override
@@ -25,12 +41,12 @@ class _TopicQuestionState extends State<TopicQuestion> {
   String questionName() {
     if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       QuestionStringAndAnswers questionStringAndAnswers =
-      widget.questionBasic as QuestionStringAndAnswers;
+          widget.questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (widget.questionBasic.questionType ==
         QuestionTypes.stringAndFreeText) {
       QuestionStringAndFreeText questionStringAndFreeText =
-      widget.questionBasic as QuestionStringAndFreeText;
+          widget.questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
     } else {
       return "no title";
@@ -56,15 +72,35 @@ class _TopicQuestionState extends State<TopicQuestion> {
               Icon(widget.isMultipleChoice
                   ? Icons.check_box_outline_blank
                   : Icons.abc),
+              IconButton(
+                onPressed: Loeschen,
+                icon: Icon(Icons.delete_forever),
+              )
             ],
           )),
     );
   }
 
   void editQuestion() {
-    Navigator.of(context).push(
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => EditQuestion(widget.questionBasic)))
+        .then((rueckgabeFrage) {
+      if (rueckgabeFrage != null) {
+        widget.changedCard(rueckgabeFrage);
+      }
+    });
+  }
+
+  void Loeschen() {
+    widget.questionstack.removeQuestion(widget.questionBasic);
+
+    Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-            builder: (context) => EditQuestion(widget.questionBasic))
-    );
+            builder: (context) => EditDeck(
+                  datahelper: widget.datahelper,
+                  questionStack: widget.questionstack,
+                )),
+        (route) => false);
   }
 }

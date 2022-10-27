@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/TopicQuestion.dart';
+import 'DataHelper/QuestionBasic.dart';
 import 'DataHelper/QuestionStack.dart';
 import 'DataHelper/QuestionStringAndAnswers.dart';
 import 'EditQuestion.dart';
@@ -8,7 +10,10 @@ import 'EditQuestion.dart';
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
 
-  EditDeck(this.questionStack, {Key? key}) : super(key: key);
+  DataHelper datahelper;
+
+  EditDeck({required this.datahelper, required this.questionStack, Key? key})
+      : super(key: key);
 
   @override
   State<EditDeck> createState() => _EditDeckState();
@@ -35,6 +40,7 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(40.0),
             child: FloatingActionButton(
+              heroTag: "add",
               onPressed: addQuestion,
               backgroundColor: Colors.amber,
               child: const Icon(Icons.add),
@@ -43,7 +49,9 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
-                onPressed: saveStack, child: Icon(Icons.check)),
+                heroTag: "save",
+                onPressed: saveStack,
+                child: Icon(Icons.check)),
           )
         ],
       ),
@@ -70,6 +78,14 @@ class _EditDeckState extends State<EditDeck> {
                   return TopicQuestion(
                     isMultipleChoice: false,
                     questionBasic: widget.questionStack.getQuestion(index),
+                    changedCard: (QuestionBasic questionbasic) {
+                      setState(() {
+                        widget.questionStack
+                            .replaceQuestion(index, questionbasic);
+                      });
+                    },
+                    datahelper: widget.datahelper,
+                    questionstack: widget.questionStack,
                   );
                 }),
           ),
@@ -91,9 +107,9 @@ class _EditDeckState extends State<EditDeck> {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => EditQuestion(neuefrage)))
         .then((questionbasic) {
-          setState(() {
-            widget.questionStack.addQuestion(questionbasic);
-        });
+      setState(() {
+        widget.questionStack.addQuestion(questionbasic);
+      });
     });
   }
 }
