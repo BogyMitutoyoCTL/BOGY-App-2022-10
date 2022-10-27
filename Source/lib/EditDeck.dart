@@ -79,10 +79,13 @@ class _EditDeckState extends State<EditDeck> {
                     isMultipleChoice: false,
                     questionBasic: widget.questionStack.getQuestion(index),
                     changedCard: (QuestionBasic questionbasic) {
-                    setState(() {
-                      widget.questionStack.replaceQuestion(index, questionbasic);
-                    });
+                      setState(() {
+                        widget.questionStack
+                            .replaceQuestion(index, questionbasic);
+                      });
                     },
+                    datahelper: widget.datahelper,
+                    questionstack: widget.questionStack,
                   );
                 }),
           ),
