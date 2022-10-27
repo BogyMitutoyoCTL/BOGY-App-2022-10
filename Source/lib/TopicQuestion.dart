@@ -55,32 +55,29 @@ class _TopicQuestionState extends State<TopicQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(
-            onPressed: editQuestion,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    questionName(),
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(fontSize: 17),
-                  ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: editQuestion,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  questionName(),
+                  overflow: TextOverflow.visible,
+                  style: TextStyle(fontSize: 17),
                 ),
-                Icon(widget.isMultipleChoice
-                    ? Icons.check_box_outline_blank
-                    : Icons.abc),
-                IconButton(
-                  onPressed: Loeschen,
-                  icon: Icon(Icons.delete_forever),
-                )
-              ],
-            )),
-      ),
+              ),
+              Icon(widget.isMultipleChoice
+                  ? Icons.check_box_outline_blank
+                  : Icons.abc),
+              IconButton(
+                onPressed: Loeschen,
+                icon: Icon(Icons.delete_forever),
+              )
+            ],
+          )),
     );
   }
 
