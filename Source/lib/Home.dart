@@ -61,7 +61,10 @@ class _HomeState extends State<Home> {
   void addNewDeck() {
     Navigator.of(context)
         .push(MaterialPageRoute(
-            builder: (context) => EditDeck(QuestionStack(""))))
+            builder: (context) => EditDeck(
+                  datahelper: widget.datahelper,
+                  questionStack: QuestionStack(""),
+                )))
         .then((questionStack) {
       if (questionStack != null) {
         setState(() {

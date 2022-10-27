@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/TopicQuestion.dart';
 import 'DataHelper/QuestionStack.dart';
 import 'DataHelper/QuestionStringAndAnswers.dart';
@@ -8,7 +9,10 @@ import 'EditQuestion.dart';
 class EditDeck extends StatefulWidget {
   QuestionStack questionStack;
 
-  EditDeck(this.questionStack, {Key? key}) : super(key: key);
+  DataHelper datahelper;
+
+  EditDeck({required this.datahelper, required this.questionStack, Key? key})
+      : super(key: key);
 
   @override
   State<EditDeck> createState() => _EditDeckState();
@@ -72,7 +76,9 @@ class _EditDeckState extends State<EditDeck> {
                 itemBuilder: (BuildContext context, int index) {
                   return TopicQuestion(
                     isMultipleChoice: false,
-                    questionBasic: widget.questionStack.getQuestion(index),
+                    question: widget.questionStack.getQuestion(index),
+                    datahelper: widget.datahelper,
+                    questionstack: widget.questionStack,
                   );
                 }),
           ),
