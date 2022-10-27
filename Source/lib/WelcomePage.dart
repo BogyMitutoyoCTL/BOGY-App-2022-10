@@ -6,7 +6,8 @@ import 'package:learnhub/Home.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key? key}) : super(key: key) {
-    datahelper.loadDemoData();
+    // datahelper.loadDemoData();
+    datahelper.load();
   }
   DataHelper datahelper = DataHelper();
 
