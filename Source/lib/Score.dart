@@ -41,7 +41,7 @@ class _ScoreState extends State<Score> {
                   style: TextStyle(fontSize: 50),
                 ),
                 Text(
-                  "Punkte erreicht!",
+                  "Punkten erreicht!",
                   style: TextStyle(fontSize: 50),
                 ),
                 Padding(
