@@ -30,6 +30,11 @@ QuestionStack _$QuestionStackFromJson(Map<String, dynamic> json) {
         ?.map(
             (e) => QuestionImageAndFreeText.fromJson(e as Map<String, dynamic>))
         .toList(),
+    questionImageAndSingleChoice: (json['questionImageAndSingleChoice']
+            as List<dynamic>?)
+        ?.map((e) =>
+            QuestionImageAndSingleChoice.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -43,4 +48,6 @@ Map<String, dynamic> _$QuestionStackToJson(QuestionStack instance) =>
           instance.questionStringAndFreeText.map((e) => e.toJson()).toList(),
       'questionImageAndFreeText':
           instance.questionImageAndFreeText.map((e) => e.toJson()).toList(),
+      'questionImageAndSingleChoice':
+          instance.questionImageAndSingleChoice.map((e) => e.toJson()).toList(),
     };

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:learnhub/DataHelper/QuestionImageAndSingleChoice.dart';
 import 'package:learnhub/DataHelper/QuestionTypes.dart';
 
 import 'QuestionBasic.dart';
@@ -22,16 +23,20 @@ class QuestionStack {
   List<QuestionStringAndFreeText> _questionStringAndFreeText;
   @JsonKey(defaultValue: [])
   List<QuestionImageAndFreeText> _questionImageAndFreeText;
+  @JsonKey(defaultValue: [])
+  List<QuestionImageAndSingleChoice> _questionImageAndSingleChoice;
 
   QuestionStack(this.name,
       {List<String>? orderList,
       List<QuestionStringAndAnswers>? questionStringAndAnswers,
       List<QuestionStringAndFreeText>? questionStringAndFreeText,
-      List<QuestionImageAndFreeText>? questionImageAndFreeText})
+      List<QuestionImageAndFreeText>? questionImageAndFreeText,
+      List<QuestionImageAndSingleChoice>? questionImageAndSingleChoice})
       : _orderList = orderList ?? [],
         _questionStringAndAnswers = questionStringAndAnswers ?? [],
         _questionStringAndFreeText = questionStringAndFreeText ?? [],
-        _questionImageAndFreeText = questionImageAndFreeText ?? [] {
+        _questionImageAndFreeText = questionImageAndFreeText ?? [],
+        _questionImageAndSingleChoice = questionImageAndSingleChoice ?? [] {
     checkQuestionOrder();
     _orderList.shuffle();
   }
@@ -56,6 +61,10 @@ class QuestionStack {
       return _questionImageAndFreeText
           .firstWhere((element) => element.uuid == uuid);
     }
+    if (_questionImageAndSingleChoice.any((element) => element.uuid == uuid)) {
+      return _questionImageAndSingleChoice
+          .firstWhere((element) => element.uuid == uuid);
+    }
 
     throw Exception("Can't find the this question");
   }
@@ -77,6 +86,11 @@ class QuestionStack {
       case QuestionTypes.imageAndFreeText:
         String uuid =
             _addQuestionImageAndFreeText(question as QuestionImageAndFreeText);
+        _orderList.add(uuid);
+        return _orderList.length - 1;
+      case QuestionTypes.imageAndSingleChoice:
+        String uuid = _addQuestionImageAndSingleChoice(
+            question as QuestionImageAndSingleChoice);
         _orderList.add(uuid);
         return _orderList.length - 1;
       default:
@@ -111,6 +125,15 @@ class QuestionStack {
     return newQuestionImageAndFreeText.uuid;
   }
 
+  /// Adds a Question from Type QuestionImageAndSingleChoice to the end of the Stack.
+  /// Returns the uuid of the newly added question.
+  /// Does NOT add uuid to order file!
+  String _addQuestionImageAndSingleChoice(
+      QuestionImageAndSingleChoice newQuestionImageAndSingleChoice) {
+    _questionImageAndSingleChoice.add(newQuestionImageAndSingleChoice);
+    return newQuestionImageAndSingleChoice.uuid;
+  }
+
   void removeQuestion(QuestionBasic question) {
     _orderList.remove(question.uuid);
     _removeQuestionFromQuestionList(question.uuid);
@@ -137,6 +160,11 @@ class QuestionStack {
       _questionImageAndFreeText.removeWhere((element) => element.uuid == uuid);
       return;
     }
+    if (_questionImageAndSingleChoice.any((element) => element.uuid == uuid)) {
+      _questionImageAndSingleChoice
+          .removeWhere((element) => element.uuid == uuid);
+      return;
+    }
   }
 
   /// Replaces the Question at index `indexOfOldQuestion` with `newQuestion`.
@@ -155,6 +183,10 @@ class QuestionStack {
         break;
       case QuestionTypes.imageAndFreeText:
         _addQuestionImageAndFreeText(newQuestion as QuestionImageAndFreeText);
+        break;
+      case QuestionTypes.imageAndSingleChoice:
+        _addQuestionImageAndSingleChoice(
+            newQuestion as QuestionImageAndSingleChoice);
         break;
       default:
         throw Exception("This question is not of a valid question type");
@@ -188,6 +220,12 @@ class QuestionStack {
         _orderList.add(element.uuid);
       }
     }
+    for (QuestionImageAndSingleChoice element
+        in _questionImageAndSingleChoice) {
+      if (!_orderList.contains(element.uuid)) {
+        _orderList.add(element.uuid);
+      }
+    }
   }
 
   void _deleteUnsetUuidsInOrderList() {
@@ -210,6 +248,12 @@ class QuestionStack {
           return false;
         }
       }
+      for (QuestionImageAndSingleChoice element
+          in _questionImageAndSingleChoice) {
+        if (uuid == element.uuid) {
+          return false;
+        }
+      }
       return true;
     });
   }
@@ -226,6 +270,9 @@ class QuestionStack {
   List<QuestionImageAndFreeText> get questionImageAndFreeText =>
       _questionImageAndFreeText;
 
+  List<QuestionImageAndSingleChoice> get questionImageAndSingleChoice =>
+      _questionImageAndSingleChoice;
+
   @override
   String toString() => toJson().toString();
 
@@ -241,6 +288,12 @@ void main() {
   QuestionImageAndFreeText questionImageAndFreeText =
       QuestionImageAndFreeText(imageString: "ALNDWONDOWAN", answer: "Antwort");
   questionStack.addQuestion(questionImageAndFreeText);
+
+  QuestionImageAndSingleChoice questionImageAndSingleChoice =
+      QuestionImageAndSingleChoice(
+          imageString: "HALLO_SECRET", answers: ['a', 'b', 'c', 'd']);
+  questionStack.addQuestion(questionImageAndSingleChoice);
+
   Map<String, dynamic> json = questionStack.toJson();
 
   print(json.toString());
