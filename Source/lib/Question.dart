@@ -180,7 +180,7 @@ class _QuestionState extends State<Question> {
   }
 
   Widget? FAB() {
-    if (1 == 1) {
+    if (!widget.isMultipleChoice) {
       return Padding(
           padding: const EdgeInsets.all(8.0),
           child: FloatingActionButton(

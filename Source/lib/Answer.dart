@@ -61,11 +61,33 @@ class _AnswerState extends State<Answer> {
                 padding: EdgeInsets.all(10),
               ),
               if (!widget.isMultipleChoice)
-                TextField(
-                  enabled: false,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    //labelText: widget.input,
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: farbe[4],
+                      border: Border.all(color: farbe[4]),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      widget.input,
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                ),
+              if (!widget.isMultipleChoice)
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: farbe[4],
+                      border: Border.all(color: farbe[4]),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      widget.input,
+                      style: TextStyle(fontSize: 30),
+                    ),
                   ),
                 ),
               if (!widget.isMultipleChoice)
