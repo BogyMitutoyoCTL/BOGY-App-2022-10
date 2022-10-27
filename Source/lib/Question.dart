@@ -21,6 +21,7 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   List<String> answers = ["", "", "", ""];
+  String question = "";
   final TextEditingController _inputControl = TextEditingController();
   String _input = "";
 
@@ -45,7 +46,7 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
-    String question = questionName();
+    question = questionName();
 
     if (widget.isMultipleChoice) {
       answers = getAnswers();
@@ -140,6 +141,7 @@ class _QuestionState extends State<Question> {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Answer(
+                  question: question,
                   isMultipleChoice: widget.isMultipleChoice,
                   playing: widget.playing,
                   input: input,
