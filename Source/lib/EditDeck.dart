@@ -35,6 +35,7 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(40.0),
             child: FloatingActionButton(
+              heroTag: "add",
               onPressed: addQuestion,
               backgroundColor: Colors.amber,
               child: const Icon(Icons.add),
@@ -43,7 +44,9 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
-                onPressed: saveStack, child: Icon(Icons.check)),
+                heroTag: "save",
+                onPressed: saveStack,
+                child: Icon(Icons.check)),
           )
         ],
       ),
@@ -91,9 +94,9 @@ class _EditDeckState extends State<EditDeck> {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => EditQuestion(neuefrage)))
         .then((questionbasic) {
-          setState(() {
-            widget.questionStack.addQuestion(questionbasic);
-        });
+      setState(() {
+        widget.questionStack.addQuestion(questionbasic);
+      });
     });
   }
 }
