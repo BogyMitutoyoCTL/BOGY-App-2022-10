@@ -39,25 +39,31 @@ class _TopicQuestionState extends State<TopicQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: editQuestion,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              questionName(),
-              style: TextStyle(fontSize: 30),
-            ),
-            Icon(widget.isMultipleChoice
-                ? Icons.check_box_outline_blank
-                : Icons.abc),
-          ],
-        ));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: editQuestion,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  questionName(),
+                  overflow: TextOverflow.visible,
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+              Icon(widget.isMultipleChoice
+                  ? Icons.check_box_outline_blank
+                  : Icons.abc),
+            ],
+          )),
+    );
   }
 
   void editQuestion() {
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => EditQuestion()),
-        (route) => false);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => EditQuestion()),
+    );
   }
 }

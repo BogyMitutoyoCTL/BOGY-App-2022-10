@@ -57,9 +57,9 @@ class _EditQuestionState extends State<EditQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Karte bearbeiten"),
-      ),
+      appBar: AppBar(title: Text("Karte bearbeiten"), actions: [
+        IconButton(onPressed: deleteStack, icon: Icon(Icons.check))
+      ]),
       body: ListView(
         children: [
           Padding(
@@ -174,4 +174,6 @@ class _EditQuestionState extends State<EditQuestion> {
     // TODO: Speichern
     Navigator.of(context).pop(); //Zur EditDeck seite
   }
+
+  deleteStack() {}
 }
