@@ -14,14 +14,21 @@ class Topic extends StatefulWidget {
   int index;
   Function removeStack;
 
+  Function preStartQuiz;
+
   DataHelper datahelper;
-  Topic(
-      {Key? key,
-      required this.questionStack,
-      required this.index,
-      required DataHelper this.datahelper,
-      required this.removeStack})
-      : super(key: key);
+
+  CurrentlyPlaying currentlyPlaying;
+
+  Topic({
+    Key? key,
+    required this.questionStack,
+    required this.index,
+    required DataHelper this.datahelper,
+    required this.removeStack,
+    required this.preStartQuiz,
+    required this.currentlyPlaying,
+  }) : super(key: key);
 
   @override
   State<Topic> createState() => _TopicState();
@@ -33,7 +40,10 @@ class _TopicState extends State<Topic> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
-          onPressed: askQuestion,
+          onPressed: (){
+            widget.preStartQuiz();
+            askQuestion ();
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -58,7 +68,7 @@ class _TopicState extends State<Topic> {
         MaterialPageRoute(
             builder: (context) => Question(
                   datahelper: widget.datahelper,
-                  playing: CurrentlyPlaying(widget.questionStack),
+                  playing: widget.currentlyPlaying,
                 )),
         (route) => false);
   }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/DataHelper/DataHelper.dart';
@@ -26,8 +28,7 @@ class _ScoreState extends State<Score> {
   }
 
   Widget build(BuildContext context) {
-    var score = widget.playing.correctAnswers;
-    var numberOfQuestions = widget.playing.stack.getAmountOfQuestions();
+    int score = widget.playing.correctAnswers;
 
     return WillPopScope(
         onWillPop: _onWillPop,
@@ -47,7 +48,7 @@ class _ScoreState extends State<Score> {
                     ),
                     Image.asset("assets/images/Pokal.png"),
                     Text(
-                      "Du hast $score von $numberOfQuestions",
+                      "Du hast $score von ${widget.playing.getMaxPoints()}",
                       style: TextStyle(fontSize: 50),
                     ),
                     Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/EditDeck.dart';
 import 'DataHelper/DataHelper.dart';
 import 'DataHelper/QuestionStack.dart';
@@ -15,6 +16,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   get onPressed => null;
+
+  TextEditingController anzahlRundenController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +40,22 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              TextField(
+                controller: anzahlRundenController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Anzahl an Fragen pro Spiel",
+                ),
+                keyboardType: TextInputType.number,
+              ),
               Expanded(
                 child: ListView.builder(
                     itemCount: widget.datahelper.amountOfQuestionStacks(),
                     itemBuilder: (BuildContext context, int index) {
                       QuestionStack questionStack =
                           widget.datahelper.getQuestionStack(index);
+                      CurrentlyPlaying currentlyPlaying =
+                          CurrentlyPlaying(questionStack);
                       return Topic(
                         datahelper: widget.datahelper,
                         questionStack: questionStack,
@@ -52,6 +65,13 @@ class _HomeState extends State<Home> {
                             widget.datahelper.removeQuestionStack(index);
                           });
                         },
+                        preStartQuiz: () {
+                          String anzahlRunden = anzahlRundenController.text;
+                          int anzahlRundenInt =
+                              int.tryParse(anzahlRunden) ?? 25;
+                          currentlyPlaying.rundenanzahl = anzahlRundenInt;
+                        },
+                        currentlyPlaying: currentlyPlaying,
                       );
                     }),
               ),

@@ -52,7 +52,7 @@ class _AnswerState extends State<Answer> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "${widget.playing.questionIndex + 1}/${widget.playing.stack.getAmountOfQuestions()}",
+                  "${widget.playing.questionIndex + 1}/${widget.playing.getMaxPoints()}",
                   style: TextStyle(fontSize: 30),
                 ),
               )
@@ -186,11 +186,12 @@ class _AnswerState extends State<Answer> {
                       ),
                     ]),
                   if ((widget.playing.questionIndex + 1) <
-                      widget.playing.stack.getAmountOfQuestions())
-                    ElevatedButton(
-                        onPressed: nextQuestion, child: Text("Weiter")),
+                      widget.playing.stack.getAmountOfQuestions() && (widget.playing.questionIndex +1)< widget.playing.rundenanzahl)
+                    ElevatedButton(onPressed: nextQuestion, child: Text("Weiter")),
                   if ((widget.playing.questionIndex + 1) ==
-                      widget.playing.stack.getAmountOfQuestions())
+                      widget.playing.stack.getAmountOfQuestions() ||
+                      (widget.playing.questionIndex + 1) ==
+                          widget.playing.rundenanzahl)
                     ElevatedButton(
                         onPressed: showResult, child: Text("Zum Ergebnis")),
                 ]),
