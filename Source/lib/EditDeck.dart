@@ -77,7 +77,6 @@ class _EditDeckState extends State<EditDeck> {
                 itemCount: widget.questionStack.getAmountOfQuestions(),
                 itemBuilder: (BuildContext context, int index) {
                   return TopicQuestion(
-                    isMultipleChoice: false,
                     questionBasic: widget.questionStack.getQuestion(index),
                     changedCard: (QuestionBasic questionbasic) {
                       setState(() {
