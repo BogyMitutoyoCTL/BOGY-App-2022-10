@@ -23,7 +23,7 @@ class TopicQuestion extends StatefulWidget {
 
 class _TopicQuestionState extends State<TopicQuestion> {
   String questionName() {
-    if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswer) {
+    if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       QuestionStringAndAnswers questionStringAndAnswers =
           widget.questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
