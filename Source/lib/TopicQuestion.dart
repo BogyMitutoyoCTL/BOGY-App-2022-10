@@ -23,12 +23,15 @@ class TopicQuestion extends StatefulWidget {
   QuestionBasic questionBasic;
   DataHelper datahelper;
   Function(QuestionBasic) changedCard;
+  Function removeCard;
   QuestionStack questionstack;
+
   TopicQuestion(
       {Key? key,
       required this.isMultipleChoice,
       required this.questionBasic,
       required this.changedCard,
+      required this.removeCard,
       required this.datahelper,
       required this.questionstack})
       : super(key: key);
@@ -93,14 +96,28 @@ class _TopicQuestionState extends State<TopicQuestion> {
   }
 
   void Loeschen() {
-    widget.questionstack.removeQuestion(widget.questionBasic);
-
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (context) => EditDeck(
-                  datahelper: widget.datahelper,
-                  questionStack: widget.questionstack,
-                )),
-        (route) => false);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Löschen?"),
+          content: Text("Diese Aktion löscht die Karte unwiderruflich."),
+          actions: <Widget>[
+            TextButton(
+                child: Text('Abbrechen'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            TextButton(
+              child: Text('Bestätigen'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                widget.removeCard();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

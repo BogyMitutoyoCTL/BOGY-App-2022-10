@@ -85,6 +85,11 @@ class _EditDeckState extends State<EditDeck> {
                             .replaceQuestion(index, questionbasic);
                       });
                     },
+                    removeCard: () {
+                      setState(() {
+                        widget.questionStack.removeQuestionByIndex(index);
+                      });
+                    },
                     datahelper: widget.datahelper,
                     questionstack: widget.questionStack,
                   );
