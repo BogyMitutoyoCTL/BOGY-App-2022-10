@@ -186,12 +186,11 @@ class _AnswerState extends State<Answer> {
                       ),
                     ]),
                   if ((widget.playing.questionIndex + 1) <
-                      widget.playing.stack.getAmountOfQuestions() && (widget.playing.questionIndex +1)< widget.playing.rundenanzahl)
-                    ElevatedButton(onPressed: nextQuestion, child: Text("Weiter")),
+                      widget.playing.stack.getAmountOfQuestions())
+                    ElevatedButton(
+                        onPressed: nextQuestion, child: Text("Weiter")),
                   if ((widget.playing.questionIndex + 1) ==
-                      widget.playing.stack.getAmountOfQuestions() ||
-                      (widget.playing.questionIndex + 1) ==
-                          widget.playing.rundenanzahl)
+                      widget.playing.stack.getAmountOfQuestions())
                     ElevatedButton(
                         onPressed: showResult, child: Text("Zum Ergebnis")),
                 ]),
