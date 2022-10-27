@@ -55,8 +55,9 @@ class _AnswerState extends State<Answer> {
           children: [
             Column(children: [
               /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
-              Padding(padding: EdgeInsets.all(10)),
-              Text(widget.question, style: TextStyle(fontSize: 40)),
+              Padding(padding: EdgeInsets.all(10),
+             child :  Text(widget.question, style: TextStyle(fontSize: 40)),
+              ),
               Padding(
                 padding: EdgeInsets.all(10),
               ),
