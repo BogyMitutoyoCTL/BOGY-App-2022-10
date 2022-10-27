@@ -26,8 +26,9 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
           actions: [
             IconButton(
-                icon: const Icon(Icons.add_circle_outline),
-                onPressed: addNewDeck,)
+              icon: const Icon(Icons.add_circle_outline),
+              onPressed: addNewDeck,
+            )
           ],
           title: const Text(
             "Home",
@@ -46,6 +47,7 @@ class _HomeState extends State<Home> {
                         quizes.getQuestionStack(index);
                     return Topic(
                       questionStack: questionStack,
+                      index: index,
                     );
                   }),
             ),
@@ -60,14 +62,15 @@ class _HomeState extends State<Home> {
   }
 
   void addNewDeck() {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EditDeck(QuestionStack(""))))
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => EditDeck(QuestionStack(""))))
         .then((questionStack) {
-          if(questionStack != null){
-          setState(() {
-            quizes.addQuestionStack(questionStack);
-          });
-          }
+      if (questionStack != null) {
+        setState(() {
+          quizes.addQuestionStack(questionStack);
         });
+      }
+    });
   }
 }

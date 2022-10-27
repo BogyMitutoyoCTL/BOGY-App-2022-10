@@ -31,7 +31,7 @@ class _ScoreState extends State<Score> {
                     style: TextStyle(fontSize: 50),
                   ),
                 ),
-                Image.asset("assets/images/Pokal.png"),
+                Image.asset("assets/images/PokalbeiScore.png"),
                 Text(
                   "Du hast $score von $numberOfQuestions",
                   style: TextStyle(fontSize: 50),

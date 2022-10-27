@@ -26,13 +26,25 @@ class _EditDeckState extends State<EditDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(onPressed: saveStack, icon: Icon(Icons.check))],
         title: Text("Bearbeiten/Erstellen"),
       ),
-      floatingActionButton:  FloatingActionButton(
-        onPressed: addQuestion,
-        backgroundColor: Colors.amber,
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: FloatingActionButton(
+              onPressed: addQuestion,
+              backgroundColor: Colors.amber,
+              child: const Icon(Icons.add),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton(
+                onPressed: saveStack, child: Icon(Icons.check)),
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -71,13 +83,11 @@ class _EditDeckState extends State<EditDeck> {
       widget.questionStack.name = titelStapel;
     });
 
-    Navigator.of(context).pop(
-      widget.questionStack
-    );
-
+    Navigator.of(context).pop(widget.questionStack);
   }
 
   void addQuestion() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EditQuestion()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => EditQuestion()));
   }
 }
