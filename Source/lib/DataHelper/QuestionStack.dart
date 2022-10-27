@@ -55,39 +55,47 @@ class QuestionStack {
   int addQuestion(QuestionBasic question) {
     switch (question.questionType) {
       case QuestionTypes.stringAndAnswers:
-        return addQuestionStringAndAnswers(
-            question as QuestionStringAndAnswers);
+        String uuid =
+            _addQuestionStringAndAnswers(question as QuestionStringAndAnswers);
+        _orderList.add(uuid);
+        return _orderList.length - 1;
       case QuestionTypes.stringAndFreeText:
-        return addQuestionStringAndFreeText(
+        String uuid = _addQuestionStringAndFreeText(
             question as QuestionStringAndFreeText);
+        _orderList.add(uuid);
+        return _orderList.length - 1;
       default:
         throw Exception("This question is not of a valid question type");
     }
   }
 
   /// Adds a Question from Type QuestionStringAndAnswers to the end of the Stack.
-  /// Returns the index of the newly added question.
-  int addQuestionStringAndAnswers(
+  /// Returns the uuid of the newly added question.
+  /// Does NOT add uuid to order file!
+  String _addQuestionStringAndAnswers(
       QuestionStringAndAnswers newQuestionStringAndAnswers) {
     _questionStringAndAnswers.add(newQuestionStringAndAnswers);
-    _orderList.add(newQuestionStringAndAnswers.uuid);
-    return _orderList.length - 1;
+    return newQuestionStringAndAnswers.uuid;
   }
 
   /// Adds a Question from Type QuestionStringAndFreeText to the end of the Stack.
-  /// Returns the index of the newly added question.
-  int addQuestionStringAndFreeText(
+  /// Returns the uuid of the newly added question.
+  /// Does NOT add uuid to order file!
+  String _addQuestionStringAndFreeText(
       QuestionStringAndFreeText newQuestionStringAndFreeText) {
     _questionStringAndFreeText.add(newQuestionStringAndFreeText);
-    _orderList.add(newQuestionStringAndFreeText.uuid);
-    return _orderList.length - 1;
+    return newQuestionStringAndFreeText.uuid;
   }
 
   /// Removes a Question by its id. Throws an error if the index is not valid.
   void removeQuestion(int index) {
     String uuid = _orderList[index];
     _orderList.removeAt(index);
+    _removeQuestionFromQuestionList(uuid);
+  }
 
+  /// Removes the question but does NOT delete the uuid from order file.
+  void _removeQuestionFromQuestionList(String uuid) {
     if (_questionStringAndAnswers.any((element) => element.uuid == uuid)) {
       _questionStringAndAnswers.removeWhere((element) => element.uuid == uuid);
       return;
@@ -95,6 +103,25 @@ class QuestionStack {
     if (_questionStringAndFreeText.any((element) => element.uuid == uuid)) {
       _questionStringAndFreeText.removeWhere((element) => element.uuid == uuid);
       return;
+    }
+  }
+
+  /// Replaces the Question at index `indexOfOldQuestion` with `newQuestion`.
+  void replaceQuestion(int indexOfOldQuestion, QuestionBasic newQuestion) {
+    String uuid = getQuestion(indexOfOldQuestion).uuid;
+    _removeQuestionFromQuestionList(uuid);
+
+    newQuestion.uuid = uuid;
+
+    switch (newQuestion.questionType) {
+      case QuestionTypes.stringAndAnswers:
+        _addQuestionStringAndAnswers(newQuestion as QuestionStringAndAnswers);
+        break;
+      case QuestionTypes.stringAndFreeText:
+        _addQuestionStringAndFreeText(newQuestion as QuestionStringAndFreeText);
+        break;
+      default:
+        throw Exception("This question is not of a valid question type");
     }
   }
 

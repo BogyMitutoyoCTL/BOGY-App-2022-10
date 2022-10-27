@@ -58,13 +58,13 @@ class DataHelper {
                 question:
                     "Das ist die Frage der Freitextfrage $j von Stack $i. Was ist deine Antwort?",
                 answer: "Answer");
-        questionStack.addQuestionStringAndFreeText(questionStringAndFreeText);
+        questionStack.addQuestion(questionStringAndFreeText);
         QuestionStringAndAnswers questionStringAndAnswers =
             QuestionStringAndAnswers(
                 question:
                     "Das ist die Frage der SingleChoiceFrage $j von Stack $i. Was ist deine Antwort?",
                 answers: ["Anton", "Berta", "Cäsar", "Dino"]);
-        questionStack.addQuestionStringAndAnswers(questionStringAndAnswers);
+        questionStack.addQuestion(questionStringAndAnswers);
       }
       addQuestionStack(questionStack);
     }
@@ -161,16 +161,16 @@ Future<void> testDataHelper() async {
   DataHelper dataHelper = DataHelper();
   dataHelper.loadDemoData();
 
-  print(dataHelper);
+  QuestionStack questionStack = dataHelper.getQuestionStack(0);
 
-  await dataHelper.save();
+  print(questionStack);
 
-  print("###########################");
+  QuestionStringAndFreeText questionStringAndFreeText =
+      QuestionStringAndFreeText(question: "neue Frage", answer: "neue antwort");
 
-  DataHelper dataHelper2 = DataHelper();
-  dataHelper2.load();
+  questionStack.replaceQuestion(0, questionStringAndFreeText);
 
-  print(dataHelper2);
+  print(questionStack);
 }
 
 /// This is an example of how to use this DataHelper
@@ -187,9 +187,9 @@ void main() {
   dataHelper.addQuestionStack(questionStack2);
   print(dataHelper);
 
-  dataHelper.getQuestionStack(0).addQuestionStringAndFreeText(
+  dataHelper.getQuestionStack(0).addQuestion(
       QuestionStringAndFreeText(question: "Frage?", answer: "Antwort"));
-  dataHelper.getQuestionStack(0).addQuestionStringAndAnswers(
+  dataHelper.getQuestionStack(0).addQuestion(
       QuestionStringAndAnswers(question: "Frage2?", answers: ["8", "3", "4"]));
   print(dataHelper);
 
