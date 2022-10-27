@@ -48,7 +48,7 @@ class _ScoreState extends State<Score> {
                   padding: const EdgeInsets.all(75),
                   child: ElevatedButton(
                     onPressed: play,
-                    child: Text("Neues Spiel"),
+                    child: Text("Zurück zum Menu"),
                   ),
                 ),
               ],
