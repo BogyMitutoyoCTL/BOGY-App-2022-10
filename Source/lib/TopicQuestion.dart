@@ -60,7 +60,6 @@ class _TopicQuestionState extends State<TopicQuestion> {
       child: ElevatedButton(
           onPressed: editQuestion,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 child: Text(
