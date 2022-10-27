@@ -2,6 +2,6 @@
 
 /// This are the existing QuestionTypes
 enum QuestionTypes {
-  stringAndAnswer,
+  stringAndAnswers,
   stringAndFreeText,
 }

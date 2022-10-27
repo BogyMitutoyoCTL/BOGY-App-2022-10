@@ -6,6 +6,7 @@ import 'package:learnhub/DataHelper/QuestionBasic.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/EditQuestion.dart';
+
 import 'DataHelper/QuestionTypes.dart';
 
 class TopicQuestion extends StatefulWidget {
@@ -22,7 +23,7 @@ class TopicQuestion extends StatefulWidget {
 
 class _TopicQuestionState extends State<TopicQuestion> {
   String questionName() {
-    if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswer) {
+    if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       QuestionStringAndAnswers questionStringAndAnswers =
           widget.questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;

@@ -17,7 +17,7 @@ class QuestionStringAndAnswers extends QuestionBasic {
   /// Always the first answer is the right one.
   QuestionStringAndAnswers(
       {required this.question, required this.answers, String? uuid})
-      : super(uuid: uuid, questionType: QuestionTypes.stringAndAnswer);
+      : super(uuid: uuid, questionType: QuestionTypes.stringAndAnswers);
 
   @override
   bool isAnswerCorrect(var answerToCheck) {
