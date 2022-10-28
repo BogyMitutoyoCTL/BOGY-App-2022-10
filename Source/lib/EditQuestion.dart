@@ -191,7 +191,7 @@ class _EditQuestionState extends State<EditQuestion> {
                         title: const Text("Multiple Choice"),
                       ),
                       TextField(
-                        maxLength: 15,
+                        maxLength: 40,
                         controller: answerControllers[0],
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -220,7 +220,7 @@ class _EditQuestionState extends State<EditQuestion> {
     for (int i = 1; i < 4; i++) {
       widgets.add(const Padding(padding: EdgeInsets.all(8.0)));
       widgets.add(TextField(
-        maxLength: 15,
+        maxLength: 40,
         controller: answerControllers[i],
         decoration: InputDecoration(
           border: OutlineInputBorder(),
@@ -258,34 +258,35 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void save() {
     setState(() {
-      _titleController.text.isEmpty
+      _titleController.text.replaceAll(" ", "").isEmpty
           ? _validateTitle = true
           : _validateTitle = false;
-      answerControllers[0].text.isEmpty
+      answerControllers[0].text.replaceAll(" ", "").isEmpty
           ? _validateAnswer[0] = true
           : _validateAnswer[0] = false;
       if (_isMultipleChoice) {
         for (int i = 1; i < 4; i++) {
-          answerControllers[i].text.isEmpty
+          answerControllers[i].text.replaceAll(" ", "").isEmpty
               ? _validateAnswer[i] = true
               : _validateAnswer[i] = false;
         }
       }
     });
-    if (_titleController.text.isEmpty && !_isPictureQuestion) return;
-    if (answerControllers[0].text.isEmpty) return;
+    if (_titleController.text.replaceAll(" ", "").isEmpty &&
+        !_isPictureQuestion) return;
+    if (answerControllers[0].text.replaceAll(" ", "").isEmpty) return;
     if (_isMultipleChoice) {
       for (int i = 1; i < 4; i++) {
-        if (answerControllers[i].text.isEmpty) return;
+        if (answerControllers[i].text.replaceAll(" ", "").isEmpty) return;
       }
     }
     //Keine gleichen Antworten
-    if (answerControllers[0].text.toLowerCase() !=
-            answerControllers[1].text.toLowerCase() &&
-        answerControllers[0].text.toLowerCase() !=
-            answerControllers[2].text.toLowerCase() &&
-        answerControllers[0].text.toLowerCase() !=
-            answerControllers[3].text.toLowerCase()) {
+    if (answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
+            answerControllers[1].text.replaceAll(" ", "").toLowerCase() &&
+        answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
+            answerControllers[2].text.replaceAll(" ", "").toLowerCase() &&
+        answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
+            answerControllers[3].text.replaceAll(" ", "").toLowerCase()) {
       // TODO: Speichern
       if (_isPictureQuestion) {
         if (_isMultipleChoice) {
