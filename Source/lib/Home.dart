@@ -67,10 +67,11 @@ class _HomeState extends State<Home> {
                         datahelper: widget.datahelper,
                         questionStack: questionStack,
                         index: index,
-                        removeStack: () {
+                        removeStack: () async {
                           setState(() {
                             widget.datahelper.removeQuestionStack(index);
                           });
+                          await widget.datahelper.save();
                         },
                         preStartQuiz: () {
                           String anzahlRunden = anzahlRundenController.text;
