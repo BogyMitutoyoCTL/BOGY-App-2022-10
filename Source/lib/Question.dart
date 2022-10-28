@@ -106,10 +106,10 @@ class _QuestionState extends State<Question> {
                     child: Image(
                         width: 250,
                         image: Image.memory(base64Decode((widget.playing.stack
-                            .getQuestion(
-                            widget.playing.questionIndex)
-                        as QuestionImageAndFreeText)
-                            .imageString))
+                                        .getQuestion(
+                                            widget.playing.questionIndex)
+                                    as QuestionImageAndSingleChoice)
+                                .imageString))
                             .image),
                   ),
                 Padding(
@@ -247,9 +247,16 @@ class _QuestionState extends State<Question> {
   List<String> getAnswers() {
     QuestionBasic questionBasic =
         widget.playing.stack.getQuestion(widget.playing.questionIndex);
-    QuestionStringAndAnswers questionStringAndAnswers =
-        questionBasic as QuestionStringAndAnswers;
-    List<String> answer = [...questionStringAndAnswers.answers];
+    List<String> answer;
+    if (questionBasic.isPictureQuestion) {
+      QuestionImageAndSingleChoice questionImageAndSingleChoice =
+          questionBasic as QuestionImageAndSingleChoice;
+      answer = [...questionImageAndSingleChoice.answers];
+    } else {
+      QuestionStringAndAnswers questionStringAndAnswers =
+          questionBasic as QuestionStringAndAnswers;
+      answer = [...questionStringAndAnswers.answers];
+    }
     answer.shuffle();
     return answer;
   }

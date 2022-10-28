@@ -22,7 +22,7 @@ Beim Löschen eines Stapels wird eine Abfrage angezeigt:
 
 Wir haben begonnen, unsere eigenen Widgets zu programmieren, wie wir sie am Vortag diskutiert haben.
 
-## Tolle Widgets, die wir eingesetzt haben
+### Tolle Widgets, die wir eingesetzt haben
 
 Neben den in der  [Flutter (PPTX⇓)](Flutter.pptx)  Präsentation erwähnten Widgets haben wir folgende tollen Widgets verwendet:
 
@@ -34,6 +34,10 @@ Neben den in der  [Flutter (PPTX⇓)](Flutter.pptx)  Präsentation erwähnten Wi
 * `AlertDialog`: kann eine Meldung auf dem Bildschirm anzeigen, die bestätigt werden muss
 * `Image.asset`: für Bilder, die Teil der App sind
 * `CircularProgressIndicator`: ein Wartekringel, während Daten geladen werden
+
+### Ordner mit unseren Daten
+
+Je nach Smartphone liegen unsere Daten unter `/data/data/de.mitutoyo.learnhub` oder `/data/user/0/de.mitutoyo.learnhub`. Die JSON Dateien mit den Fragen und Antworten liegen dann unter `app_flutter/questionStacks`.
 
 ### Daten zum Testen auf das Smartphone übertragen
 

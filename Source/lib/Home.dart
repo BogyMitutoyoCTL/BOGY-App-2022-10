@@ -17,7 +17,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   get onPressed => null;
 
-  TextEditingController anzahlRundenController = TextEditingController();
+  TextEditingController anzahlRundenController =
+      TextEditingController(text: "10");
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +71,9 @@ class _HomeState extends State<Home> {
                         },
                         preStartQuiz: () {
                           String anzahlRunden = anzahlRundenController.text;
-                          int anzahlRundenInt =
-                              int.tryParse(anzahlRunden) ?? 25;
-                          currentlyPlaying.rundenanzahl = anzahlRundenInt;
+                          int maxQuestions = int.tryParse(anzahlRunden) ?? 25;
+                          if (maxQuestions < 0) maxQuestions = 25;
+                          currentlyPlaying.maxQuestions = maxQuestions;
                         },
                         currentlyPlaying: currentlyPlaying,
                       );
