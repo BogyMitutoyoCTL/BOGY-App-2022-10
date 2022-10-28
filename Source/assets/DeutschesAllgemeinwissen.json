@@ -1,0 +1,109 @@
+{
+  "name": "Deutsches Allgemeinwissen ",
+  "orderList": [
+    "2cfb23a0-5697-11ed-8080-6f4841c87fe8",
+    "03464260-5697-11ed-8080-6f4841c87fe8",
+    "0a2b2d60-568e-11ed-9eca-0d8414c807f9",
+    "2ccdf2c0-568f-11ed-9eca-0d8414c807f9",
+    "89dc86c0-568a-11ed-9eca-0d8414c807f9",
+    "c07c3790-5697-11ed-8080-6f4841c87fe8",
+    "745b3580-568f-11ed-9eca-0d8414c807f9",
+    "e4b70da0-568e-11ed-9eca-0d8414c807f9",
+    "c532b030-5696-11ed-8080-6f4841c87fe8"
+  ],
+  "questionStringAndAnswers": [
+    {
+      "uuid": "0a2b2d60-568e-11ed-9eca-0d8414c807f9",
+      "question": "Was ist die 3. groesste deutsche Stadt ?",
+      "answers": [
+        "Muenchen ",
+        "Frankfurt",
+        "Koeln",
+        "Bremen "
+      ]
+    },
+    {
+      "uuid": "03464260-5697-11ed-8080-6f4841c87fe8",
+      "question": "Zu welchem Nachbarland hat DE die laengste Grenze?",
+      "answers": [
+        "Oesterreich ",
+        "Frankreich ",
+        "Spanien",
+        "Kanda"
+      ]
+    },
+    {
+      "uuid": "c07c3790-5697-11ed-8080-6f4841c87fe8",
+      "question": "Was ist das schoenste Dorf deutschlands ?",
+      "answers": [
+        "Aistaig",
+        "Bochingen🤣",
+        "Boll",
+        "Wald"
+      ]
+    },
+    {
+      "uuid": "e4b70da0-568e-11ed-9eca-0d8414c807f9",
+      "question": "Wie heiss der aktuelle Bundeskanzler/innen ?",
+      "answers": [
+        "Olaf Scholz ",
+        "Angela Merkel",
+        "Markus Soeder",
+        "T-Low"
+      ]
+    },
+    {
+      "uuid": "c532b030-5696-11ed-8080-6f4841c87fe8",
+      "question": "Wie heisst der laengste Fluss deutschlands ?",
+      "answers": [
+        "Rhein ",
+        "Main ",
+        "Neckar",
+        "Donau "
+      ]
+    },
+    {
+      "uuid": "89dc86c0-568a-11ed-9eca-0d8414c807f9",
+      "question": "Wie viel Bundeslaender hat Deutschland ?",
+      "answers": [
+        "16",
+        "21",
+        "14",
+        "20"
+      ]
+    },
+    {
+      "uuid": "2cfb23a0-5697-11ed-8080-6f4841c87fe8",
+      "question": "Welches ist da Groesste Nachbarland deutschlands? ",
+      "answers": [
+        "Daenemark",
+        "Frankreich",
+        "Polen",
+        "Schweiz"
+      ]
+    },
+    {
+      "uuid": "2ccdf2c0-568f-11ed-9eca-0d8414c807f9",
+      "question": "In welcher deutschen Stadt steht der hoechste Kirchturm der Welt ?",
+      "answers": [
+        "Ulm",
+        "Koeln",
+        "Dresden ",
+        "ja"
+      ]
+    },
+    {
+      "uuid": "745b3580-568f-11ed-9eca-0d8414c807f9",
+      "question": "Welches ist das groesste Fussballstadion Deutschlands ?",
+      "answers": [
+        "Signal Iduna Park - Dortmund",
+        "Olympiastadion - Berlin ",
+        "Mercedes Benz Arena - Stuttgart ",
+        "Alianz Arena - Muenchen "
+      ]
+    }
+  ],
+  "questionStringAndFreeText": [],
+  "questionImageAndFreeText": [],
+  "questionImageAndSingleChoice": []
+}

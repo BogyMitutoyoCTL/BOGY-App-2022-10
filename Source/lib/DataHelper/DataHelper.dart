@@ -5,6 +5,8 @@
 // https://docs.flutter.dev/development/data-and-backend/json#one-time-code-generation
 // for help.
 
+import 'package:flutter/services.dart';
+
 import 'QuestionStack.dart';
 import 'QuestionStringAndAnswers.dart';
 import 'QuestionStringAndFreeText.dart';
@@ -139,6 +141,20 @@ class DataHelper {
       print("Something went wrong - no worries...");
     }
     return true;
+  }
+
+  Future<String> _loadAsset(String filename) async {
+    return await rootBundle.loadString("assets/$filename.json");
+  }
+
+  Future<void> addDefaultQuestionStacks() async {
+    for (String filename in ["Bundeslaender", "DeutschesAllgemeinwissen"]) {
+      String jsonString = await _loadAsset(filename);
+      print("Read from asset $filename: $jsonString");
+      Map<String, dynamic> questionStackMap = jsonDecode(jsonString);
+      QuestionStack questionStack = QuestionStack.fromJson(questionStackMap);
+      addQuestionStack(questionStack);
+    }
   }
 
   /// Deletes all files in the directory for the QuestionStacks.

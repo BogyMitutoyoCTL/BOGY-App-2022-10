@@ -84,6 +84,8 @@ flutter:
      - assets/images/Logo.png
      - assets/images/Feuerwerk.png
      - assets/images/Pokal.png
+     - assets/Bundeslaender.json
+     - assets/DeutschesAllgemeinwissen.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
