@@ -105,7 +105,8 @@ class DataHelper {
 
   /// Replaces all QuestionStacks with the QuestionStacks saved in the json files
   /// by method `save`.
-  Future<void> load() async {
+  /// Returns true on finished. This is needed by a FutureBuilder.
+  Future<bool> load() async {
     Directory questionStackDir = await _getQuestionStackDir();
     _createFolderIfNotExists(questionStackDir);
 
@@ -132,6 +133,7 @@ class DataHelper {
       print("No file found. Starting with an empty set.");
     }
     print('Read all QuestionStacks');
+    return true;
   }
 
   /// Deletes all files in the directory for the QuestionStacks.
