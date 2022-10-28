@@ -288,6 +288,7 @@ class _EditQuestionState extends State<EditQuestion> {
         answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
             answerControllers[3].text.replaceAll(" ", "").toLowerCase()) {
       // TODO: Speichern
+
       if (_isPictureQuestion) {
         if (_isMultipleChoice) {
           GenerateQuestionImageAndSingleChoice();
@@ -306,7 +307,7 @@ class _EditQuestionState extends State<EditQuestion> {
 
   void GenerateQuestionStringAndFreeText() {
     var questionStringAndFreeText = QuestionStringAndFreeText(
-        question: answerControllers[0].text, answer: answerControllers[0].text);
+        question: _titleController.text, answer: answerControllers[0].text);
     Navigator.of(context).pop(questionStringAndFreeText);
   }
 
