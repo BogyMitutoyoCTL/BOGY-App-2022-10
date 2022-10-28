@@ -207,7 +207,6 @@ class _QuestionState extends State<Question> {
                   ID: ID,
                   datahelper: widget.datahelper,
                   question: question,
-                  isMultipleChoice: widget.isMultipleChoice,
                   playing: widget.playing,
                   input: input,
                   answers: answers,
