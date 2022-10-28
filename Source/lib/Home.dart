@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                           String anzahlRunden = anzahlRundenController.text;
                           int anzahlRundenInt =
                               int.tryParse(anzahlRunden) ?? 25;
-                          currentlyPlaying.rundenanzahl = anzahlRundenInt;
+                          currentlyPlaying.maxQuestions = anzahlRundenInt;
                         },
                         currentlyPlaying: currentlyPlaying,
                       );
