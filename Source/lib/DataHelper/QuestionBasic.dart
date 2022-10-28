@@ -11,9 +11,9 @@ abstract class QuestionBasic {
   @JsonKey(required: true)
   late String uuid;
   @JsonKey(required: true)
-  late final bool isPictureQuestion;
+  late bool isPictureQuestion;
   @JsonKey(required: true)
-  late final bool isMultipleChoiceQuestion;
+  late bool isMultipleChoiceQuestion;
   @JsonKey(ignore: true)
   final QuestionTypes _questionType;
 
