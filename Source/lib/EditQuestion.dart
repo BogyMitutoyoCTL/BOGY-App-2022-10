@@ -185,6 +185,7 @@ class _EditQuestionState extends State<EditQuestion> {
                         title: const Text("Multiple Choice"),
                       ),
                       TextField(
+                        maxLength: 15,
                         controller: answerControllers[0],
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -210,6 +211,7 @@ class _EditQuestionState extends State<EditQuestion> {
     for (int i = 1; i < 4; i++) {
       widgets.add(const Padding(padding: EdgeInsets.all(8.0)));
       widgets.add(TextField(
+        maxLength: 15,
         controller: answerControllers[i],
         decoration: const InputDecoration(
           border: OutlineInputBorder(),

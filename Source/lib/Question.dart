@@ -4,6 +4,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:learnhub/Answer.dart';
+import 'package:learnhub/DataHelper/QuestionImageAndFreeText.dart';
+import 'package:learnhub/DataHelper/QuestionImageAndSingleChoice.dart';
 
 import 'DataHelper/CurrentlyPlaying.dart';
 import 'DataHelper/DataHelper.dart';
@@ -15,8 +17,10 @@ import 'DataHelper/QuestionTypes.dart';
 class Question extends StatefulWidget {
   CurrentlyPlaying playing;
   bool isMultipleChoice = false;
+  bool isPictureQuestion = false;
 
   DataHelper datahelper;
+
   Question({Key? key, required this.playing, required this.datahelper})
       : super(key: key);
 
@@ -79,10 +83,35 @@ class _QuestionState extends State<Question> {
             children: [
               Column(children: [
                 /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text(question, style: TextStyle(fontSize: 40)),
-                ),
+                if (!widget.isPictureQuestion)
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Text(question, style: TextStyle(fontSize: 40)),
+                  ),
+                if (widget.isPictureQuestion && !widget.isMultipleChoice)
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Image(
+                        width: 250,
+                        image: Image.memory(base64Decode((widget.playing.stack
+                                        .getQuestion(
+                                            widget.playing.questionIndex)
+                                    as QuestionImageAndFreeText)
+                                .imageString))
+                            .image),
+                  ),
+                if (widget.isPictureQuestion && widget.isMultipleChoice)
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Image(
+                        width: 250,
+                        image: Image.memory(base64Decode((widget.playing.stack
+                            .getQuestion(
+                            widget.playing.questionIndex)
+                        as QuestionImageAndFreeText)
+                            .imageString))
+                            .image),
+                  ),
                 Padding(
                   padding: EdgeInsets.all(10),
                 ),
@@ -179,15 +208,23 @@ class _QuestionState extends State<Question> {
         widget.playing.stack.getQuestion(widget.playing.questionIndex);
     if (questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       widget.isMultipleChoice = true;
+      widget.isPictureQuestion = false;
       QuestionStringAndAnswers questionStringAndAnswers =
           questionBasic as QuestionStringAndAnswers;
       return questionStringAndAnswers.question;
     } else if (questionBasic.questionType == QuestionTypes.stringAndFreeText) {
       widget.isMultipleChoice = false;
+      widget.isPictureQuestion = false;
       QuestionStringAndFreeText questionStringAndFreeText =
           questionBasic as QuestionStringAndFreeText;
       return questionStringAndFreeText.question;
+    } else if (questionBasic.questionType == QuestionTypes.imageAndFreeText) {
+      widget.isMultipleChoice = false;
+      widget.isPictureQuestion = true;
+      return "Ordne zu";
     } else {
+      widget.isMultipleChoice = true;
+      widget.isPictureQuestion = true;
       return "Ordne zu";
     }
   }
