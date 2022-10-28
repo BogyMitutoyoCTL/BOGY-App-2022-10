@@ -134,6 +134,7 @@ class _HomeState extends State<Home> {
 
   Future<void> addDefault() async {
     await widget.datahelper.addDefaultQuestionStacks();
+    await widget.datahelper.save();
     setState(() {});
   }
 }
