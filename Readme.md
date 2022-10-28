@@ -10,6 +10,19 @@ Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartpho
 
 Wir haben begonnen, unsere eigenen Widgets zu programmieren, wie wir sie am Vortag diskutiert haben.
 
+## Tolle Widgets, die wir eingesetzt haben
+
+Neben den in der  [Flutter (PPTX⇓)](Flutter.pptx)  Präsentation erwähnten Widgets haben wir folgende tollen Widgets verwendet:
+
+* `FloatingActionButton`: die runden Buttons am unteren Rand des Bildschirms
+* `WillPopScope`: kann verhindern, dass man zurück gehen kann
+* `BoxDecoration`: kann abgerundete Ecken erzeugen
+* `InputDecoration` zusammen mit `OutlineInputBorder`: kann einen Rahmen um ein Text-Eingabefeld erzeugen, damit man weiß, was man eintragen muss
+* `Expanded`: kann ein Element von seiner Breite her ausdehnen, damit andere Elemente in einer `Row` nach hinten verschoben werden.
+* `AlertDialog`: kann eine Meldung auf dem Bildschirm anzeigen, die bestätigt werden muss
+* `Image.asset`: für Bilder, die Teil der App sind
+* `CircularProgressIndicator`: ein Wartekringel, während Daten geladen werden
+
 ### Daten zum Testen auf das Smartphone übertragen
 
 Je nach Smartphone, das emuliert wird, kann man Bilder nach `/sdcard/DCIM/Camera` übertragen
