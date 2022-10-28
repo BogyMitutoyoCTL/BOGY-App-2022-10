@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
             actions: [
               IconButton(
-                  onPressed: defaulladen,
+                  onPressed: addDefault,
                   icon: const Icon(Icons.download_for_offline)),
               IconButton(
                 icon: const Icon(Icons.add_circle_outline),
@@ -132,5 +132,9 @@ class _HomeState extends State<Home> {
         false;
   }
 
-  void defaulladen() {}
+  Future<void> addDefault() async {
+    await widget.datahelper.addDefaultQuestionStacks();
+    await widget.datahelper.save();
+    setState(() {});
+  }
 }
