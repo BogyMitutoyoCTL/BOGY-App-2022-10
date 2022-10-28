@@ -12,9 +12,9 @@ import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/DataHelper/QuestionTypes.dart';
 
 class EditQuestion extends StatefulWidget {
-  QuestionBasic frage;
+  QuestionBasic question;
 
-  EditQuestion(this.frage, {Key? key}) : super(key: key);
+  EditQuestion(this.question, {Key? key}) : super(key: key);
 
   @override
   State<EditQuestion> createState() => _EditQuestionState();
@@ -42,27 +42,27 @@ class _EditQuestionState extends State<EditQuestion> {
     } else {
       if (_isMultipleChoice) {
         QuestionStringAndAnswers textMultipleFrage =
-            widget.frage as QuestionStringAndAnswers;
+            widget.question as QuestionStringAndAnswers;
         return textMultipleFrage.question;
       } else {
         QuestionStringAndFreeText textBenutzerFrage =
-            widget.frage as QuestionStringAndFreeText;
+            widget.question as QuestionStringAndFreeText;
         return textBenutzerFrage.question;
       }
     }
   }
 
   void setRadioButtons() {
-    if (widget.frage.questionType == QuestionTypes.stringAndFreeText) {
+    if (widget.question.questionType == QuestionTypes.stringAndFreeText) {
       _isMultipleChoice = false;
       _isPictureQuestion = false;
-    } else if (widget.frage.questionType == QuestionTypes.stringAndAnswers) {
+    } else if (widget.question.questionType == QuestionTypes.stringAndAnswers) {
       _isMultipleChoice = true;
       _isPictureQuestion = false;
-    } else if (widget.frage.questionType == QuestionTypes.imageAndFreeText) {
+    } else if (widget.question.questionType == QuestionTypes.imageAndFreeText) {
       _isMultipleChoice = false;
       _isPictureQuestion = true;
-    } else if (widget.frage.questionType ==
+    } else if (widget.question.questionType ==
         QuestionTypes.imageAndSingleChoice) {
       _isMultipleChoice = true;
       _isPictureQuestion = true;
@@ -78,35 +78,35 @@ class _EditQuestionState extends State<EditQuestion> {
   }
 
   void setAntwort() {
-    if (widget.frage.questionType == QuestionTypes.stringAndFreeText) {
+    if (widget.question.questionType == QuestionTypes.stringAndFreeText) {
       _isMultipleChoice = false;
       _isPictureQuestion = false;
-      var questionStringAndFreeText = widget.frage as QuestionStringAndFreeText;
+      var questionStringAndFreeText = widget.question as QuestionStringAndFreeText;
       answerControllers[0].text = questionStringAndFreeText.answer;
-    } else if (widget.frage.questionType == QuestionTypes.stringAndAnswers) {
+    } else if (widget.question.questionType == QuestionTypes.stringAndAnswers) {
       _isMultipleChoice = true;
       _isPictureQuestion = false;
-      var questionStringAndAnswers = widget.frage as QuestionStringAndAnswers;
+      var questionStringAndAnswers = widget.question as QuestionStringAndAnswers;
       answerControllers[0].text = questionStringAndAnswers.answers[0];
       answerControllers[1].text = questionStringAndAnswers.answers[1];
       answerControllers[2].text = questionStringAndAnswers.answers[2];
       answerControllers[3].text = questionStringAndAnswers.answers[3];
-    } else if (widget.frage.questionType ==
+    } else if (widget.question.questionType ==
         QuestionTypes.imageAndSingleChoice) {
       _isMultipleChoice = true;
       _isPictureQuestion = true;
       var questionImageAndSingleChoice =
-          widget.frage as QuestionImageAndSingleChoice;
+          widget.question as QuestionImageAndSingleChoice;
       answerControllers[0].text = questionImageAndSingleChoice.answers[0];
       answerControllers[1].text = questionImageAndSingleChoice.answers[1];
       answerControllers[2].text = questionImageAndSingleChoice.answers[2];
       answerControllers[3].text = questionImageAndSingleChoice.answers[3];
       _image_base64 = questionImageAndSingleChoice.imageString;
       ;
-    } else if (widget.frage.questionType == QuestionTypes.imageAndFreeText) {
+    } else if (widget.question.questionType == QuestionTypes.imageAndFreeText) {
       _isMultipleChoice = false;
       _isPictureQuestion = true;
-      var questionImageAndFreeText = widget.frage as QuestionImageAndFreeText;
+      var questionImageAndFreeText = widget.question as QuestionImageAndFreeText;
       answerControllers[0].text = questionImageAndFreeText.answer;
       _image_base64 = questionImageAndFreeText.imageString;
     }

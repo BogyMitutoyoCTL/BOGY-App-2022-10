@@ -1,5 +1,5 @@
 {
-  "name": "Deutsches Allgemeinwissen ",
+  "name": "Deutsches Allgemeinwissen",
   "orderList": [
     "2cfb23a0-5697-11ed-8080-6f4841c87fe8",
     "03464260-5697-11ed-8080-6f4841c87fe8",
@@ -9,32 +9,33 @@
     "c07c3790-5697-11ed-8080-6f4841c87fe8",
     "745b3580-568f-11ed-9eca-0d8414c807f9",
     "e4b70da0-568e-11ed-9eca-0d8414c807f9",
-    "c532b030-5696-11ed-8080-6f4841c87fe8"
+    "c532b030-5696-11ed-8080-6f4841c87fe8",
+    "745b7580-568f-11ed-2eca-0d8414c807f9"
   ],
   "questionStringAndAnswers": [
     {
       "uuid": "0a2b2d60-568e-11ed-9eca-0d8414c807f9",
-      "question": "Was ist die 3. groesste deutsche Stadt ?",
+      "question": "Was ist die 3. grösste deutsche Stadt?",
       "answers": [
-        "Muenchen ",
+        "München",
         "Frankfurt",
-        "Koeln",
-        "Bremen "
+        "Köln",
+        "Bremen"
       ]
     },
     {
       "uuid": "03464260-5697-11ed-8080-6f4841c87fe8",
-      "question": "Zu welchem Nachbarland hat DE die laengste Grenze?",
+      "question": "Zu welchem Nachbarland hat DE die längste Grenze?",
       "answers": [
-        "Oesterreich ",
-        "Frankreich ",
+        "Österreich",
+        "Frankreich",
         "Spanien",
-        "Kanda"
+        "Kanada"
       ]
     },
     {
       "uuid": "c07c3790-5697-11ed-8080-6f4841c87fe8",
-      "question": "Was ist das schoenste Dorf deutschlands ?",
+      "question": "Was ist das schönste Dorf Deutschlands?",
       "answers": [
         "Aistaig",
         "Bochingen🤣",
@@ -44,27 +45,27 @@
     },
     {
       "uuid": "e4b70da0-568e-11ed-9eca-0d8414c807f9",
-      "question": "Wie heiss der aktuelle Bundeskanzler/innen ?",
+      "question": "Wie heißt der aktuelle Bundeskanzler/innen ?",
       "answers": [
-        "Olaf Scholz ",
+        "Olaf Scholz",
         "Angela Merkel",
-        "Markus Soeder",
+        "Markus Söder",
         "T-Low"
       ]
     },
     {
       "uuid": "c532b030-5696-11ed-8080-6f4841c87fe8",
-      "question": "Wie heisst der laengste Fluss deutschlands ?",
+      "question": "Wie heißt der längste Fluss Deutschlands?",
       "answers": [
-        "Rhein ",
-        "Main ",
+        "Rhein",
+        "Main",
         "Neckar",
-        "Donau "
+        "Donau"
       ]
     },
     {
       "uuid": "89dc86c0-568a-11ed-9eca-0d8414c807f9",
-      "question": "Wie viel Bundeslaender hat Deutschland ?",
+      "question": "Wieviele Bundesländer hat Deutschland?",
       "answers": [
         "16",
         "21",
@@ -74,9 +75,9 @@
     },
     {
       "uuid": "2cfb23a0-5697-11ed-8080-6f4841c87fe8",
-      "question": "Welches ist da Groesste Nachbarland deutschlands? ",
+      "question": "Welches ist das grösste Nachbarland Deutschlands?",
       "answers": [
-        "Daenemark",
+        "Dänemark",
         "Frankreich",
         "Polen",
         "Schweiz"
@@ -84,22 +85,32 @@
     },
     {
       "uuid": "2ccdf2c0-568f-11ed-9eca-0d8414c807f9",
-      "question": "In welcher deutschen Stadt steht der hoechste Kirchturm der Welt ?",
+      "question": "In welcher deutschen Stadt steht der höchste Kirchturm der Welt?",
       "answers": [
         "Ulm",
-        "Koeln",
-        "Dresden ",
-        "ja"
+        "Köln",
+        "Dresden",
+        "Oberndorf"
       ]
     },
     {
       "uuid": "745b3580-568f-11ed-9eca-0d8414c807f9",
-      "question": "Welches ist das groesste Fussballstadion Deutschlands ?",
+      "question": "Welches ist das grösste Fussballstadion Deutschlands?",
       "answers": [
         "Signal Iduna Park - Dortmund",
-        "Olympiastadion - Berlin ",
-        "Mercedes Benz Arena - Stuttgart ",
-        "Alianz Arena - Muenchen "
+        "Olympiastadion - Berlin",
+        "Mercedes Benz Arena - Stuttgart",
+        "Alianz Arena - Muenchen"
+      ]
+    },
+    {
+      "uuid": "745b7580-568f-11ed-2eca-0d8414c807f9",
+      "question": "Wo kann men ein cooles BOGY machen?",
+      "answers": [
+        "Mitutoyo CTL Germany, Oberndorf",
+        "Hmmmm, was ist ein BOGY",
+        "Ich mache gar kein BOGY",
+        "BOGY ist doch für Mädchen..."
       ]
     }
   ],

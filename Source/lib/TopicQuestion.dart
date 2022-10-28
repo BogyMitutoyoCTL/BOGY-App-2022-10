@@ -1,12 +1,16 @@
 // ignore_for_file: unnecessary_import, prefer_const_constructors, must_be_immutable
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/QuestionBasic.dart';
+import 'package:learnhub/DataHelper/QuestionImageAndSingleChoice.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndAnswers.dart';
 import 'package:learnhub/DataHelper/QuestionStringAndFreeText.dart';
 import 'package:learnhub/EditQuestion.dart';
 
+import 'DataHelper/QuestionImageAndFreeText.dart';
 import 'DataHelper/QuestionTypes.dart';
 import 'package:learnhub/DataHelper/DataHelper.dart';
 import 'package:learnhub/DataHelper/QuestionStack.dart';
@@ -33,21 +37,43 @@ class TopicQuestion extends StatefulWidget {
 }
 
 class _TopicQuestionState extends State<TopicQuestion> {
-  String questionName() {
+  Widget questionName() {
     if (widget.questionBasic.questionType == QuestionTypes.stringAndAnswers) {
       widget.isMultipleChoice = true;
       QuestionStringAndAnswers questionStringAndAnswers =
           widget.questionBasic as QuestionStringAndAnswers;
-      return questionStringAndAnswers.question;
+      return Text(questionStringAndAnswers.question,
+          overflow: TextOverflow.visible, style: TextStyle(fontSize: 17));
     } else if (widget.questionBasic.questionType ==
         QuestionTypes.stringAndFreeText) {
       widget.isMultipleChoice = false;
       QuestionStringAndFreeText questionStringAndFreeText =
           widget.questionBasic as QuestionStringAndFreeText;
-      return questionStringAndFreeText.question;
+      return Text(questionStringAndFreeText.question,
+          overflow: TextOverflow.visible, style: TextStyle(fontSize: 17));
+    } else if (widget.questionBasic.questionType ==
+        QuestionTypes.imageAndFreeText) {
+      return Image(
+          height: 100,
+          image: Image.memory(base64Decode(
+                  (widget.questionBasic as QuestionImageAndFreeText)
+                      .imageString))
+              .image);
+    } else if (widget.questionBasic.questionType ==
+        QuestionTypes.imageAndSingleChoice) {
+      return Image(
+          height: 100,
+          image: Image.memory(base64Decode(
+                  (widget.questionBasic as QuestionImageAndSingleChoice)
+                      .imageString))
+              .image);
     } else {
-      return "no title";
+      return Text("Dies sollten Sie nicht lesen");
     }
+  }
+
+  Image? imageload() {
+    return null;
   }
 
   @override
@@ -59,15 +85,11 @@ class _TopicQuestionState extends State<TopicQuestion> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: Text(
-                  questionName(),
-                  overflow: TextOverflow.visible,
-                  style: TextStyle(fontSize: 17),
-                ),
-              ),
-              if (widget.isMultipleChoice) Icon(Icons.check_box_outlined),
-              if (!widget.isMultipleChoice) Icon(Icons.abc),
+              Expanded(child: questionName()),
+              if (widget.questionBasic.isMultipleChoiceQuestion)
+                Icon(Icons.check_box_outlined),
+              if (!widget.questionBasic.isMultipleChoiceQuestion)
+                Icon(Icons.abc),
               IconButton(
                 onPressed: Loeschen,
                 icon: Icon(Icons.delete_forever),

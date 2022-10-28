@@ -40,9 +40,9 @@ class _TopicState extends State<Topic> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
-          onPressed: (){
+          onPressed: () {
             widget.preStartQuiz();
-            askQuestion ();
+            askQuestion();
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -103,9 +103,9 @@ class _TopicState extends State<Topic> {
                 }),
             TextButton(
               child: Text('Bestätigen'),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
-                widget.removeStack();
+                await widget.removeStack();
               },
             ),
           ],
