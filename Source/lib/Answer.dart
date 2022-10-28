@@ -189,14 +189,20 @@ class _AnswerState extends State<Answer> {
                           widget.playing.stack.getAmountOfQuestions() &&
                       (widget.playing.questionIndex + 1) <
                           widget.playing.rundenanzahl)
-                    ElevatedButton(
-                        onPressed: nextQuestion, child: Text("Weiter")),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                          onPressed: nextQuestion, child: Text("Weiter")),
+                    ),
                   if ((widget.playing.questionIndex + 1) ==
                           widget.playing.stack.getAmountOfQuestions() ||
                       (widget.playing.questionIndex + 1) ==
                           widget.playing.rundenanzahl)
-                    ElevatedButton(
-                        onPressed: showResult, child: Text("Zum Ergebnis")),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                          onPressed: showResult, child: Text("Zum Ergebnis")),
+                    ),
                 ]),
               ],
             )));
