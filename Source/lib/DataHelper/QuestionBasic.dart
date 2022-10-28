@@ -10,12 +10,26 @@ abstract class QuestionBasic {
   /// When you create the Question, the UUID is created automatically if not explicitly specified.
   @JsonKey(required: true)
   late String uuid;
+  @JsonKey(required: true)
+  late bool isPictureQuestion;
+  @JsonKey(required: true)
+  late bool isMultipleChoiceQuestion;
   @JsonKey(ignore: true)
   final QuestionTypes _questionType;
 
   QuestionBasic({required String? uuid, required QuestionTypes questionType})
       : _questionType = questionType {
     this.uuid = uuid ?? const Uuid().v1();
+    isPictureQuestion = false;
+    isMultipleChoiceQuestion = false;
+    if (questionType == QuestionTypes.imageAndSingleChoice ||
+        questionType == QuestionTypes.imageAndFreeText) {
+      isPictureQuestion = true;
+    }
+    if (questionType == QuestionTypes.imageAndSingleChoice ||
+        questionType == QuestionTypes.stringAndAnswers) {
+      isMultipleChoiceQuestion = true;
+    }
   }
 
   /// Returns true if `answerToCheck` is the right answer. Otherwise returns false.
