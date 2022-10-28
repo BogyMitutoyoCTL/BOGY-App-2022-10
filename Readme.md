@@ -2,9 +2,23 @@
 
 Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartphones 📱.
 
-## Dienstag 25.10.2022
+## Ergebnis
+
+
+
+## Dienstag 25.10.2022 bis Freitag 28.10.2022
 
 Wir haben begonnen, unsere eigenen Widgets zu programmieren, wie wir sie am Vortag diskutiert haben.
+
+### Daten zum Testen auf das Smartphone übertragen
+
+Je nach Smartphone, das emuliert wird, kann man Bilder nach `/sdcard/DCIM/Camera` übertragen
+
+![](fileexplorer_sdcard.png)
+
+oder nach `/storage/emulated/0/DCIM`:
+
+![](fileexplorer_emulated.png)
 
 ### Warnungen loswerden
 
@@ -12,7 +26,7 @@ In unserem Projekt gab es Warnungen mit dem Text
 
 > Warning: Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01
 
-Um diese Warnungen loszuwerden, muss man:
+Um diese Warnungen loszuwerden, haben wir die Gradle Version und das SDK aktualisiert
 
 1. den Unterordner `android` unseres Projekts in Android Studio öffnen
 2. Im Menü "Tools/AGP Upgrade Assistent" auswählen
