@@ -108,7 +108,7 @@ class _QuestionState extends State<Question> {
                         image: Image.memory(base64Decode((widget.playing.stack
                                         .getQuestion(
                                             widget.playing.questionIndex)
-                                    as QuestionImageAndFreeText)
+                                    as QuestionImageAndSingleChoice)
                                 .imageString))
                             .image),
                   ),
@@ -141,21 +141,24 @@ class _QuestionState extends State<Question> {
                                 onPressed: () {
                                   mcPressed(answers[0], 0);
                                 },
-                                child: Text(answers[0],
-                                    style: TextStyle(fontSize: 15)))),
+                                child: Text(
+                                  answers[0],
+                                  style: TextStyle(fontSize: 15),
+                                ))),
                         Padding(
                           padding: EdgeInsets.all(10),
                         ),
                         SizedBox(
-                          width: 166.0,
-                          height: 100.0,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                mcPressed(answers[2], 2);
-                              },
-                              child: Text(answers[2],
-                                  style: TextStyle(fontSize: 15))),
-                        )
+                            width: 166.0,
+                            height: 100.0,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  mcPressed(answers[2], 2);
+                                },
+                                child: Text(
+                                  answers[2],
+                                  style: TextStyle(fontSize: 15),
+                                ))),
                       ],
                     ),
                     Padding(
@@ -170,8 +173,10 @@ class _QuestionState extends State<Question> {
                                 onPressed: () {
                                   mcPressed(answers[1], 1);
                                 },
-                                child: Text(answers[1],
-                                    style: TextStyle(fontSize: 15)))),
+                                child: Text(
+                                  answers[1],
+                                  style: TextStyle(fontSize: 15),
+                                ))),
                         Padding(
                           padding: EdgeInsets.all(10),
                         ),
@@ -182,8 +187,10 @@ class _QuestionState extends State<Question> {
                                 onPressed: () {
                                   mcPressed(answers[3], 3);
                                 },
-                                child: Text(answers[3],
-                                    style: TextStyle(fontSize: 15)))),
+                                child: Text(
+                                  answers[3],
+                                  style: TextStyle(fontSize: 15),
+                                ))),
                       ],
                     ),
                   ]),
