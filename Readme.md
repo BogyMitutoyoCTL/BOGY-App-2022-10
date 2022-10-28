@@ -24,6 +24,10 @@ Anlegen einer neuen Karte im Spiel:
 
 ![](images/karteanlegen_25.png)
 
+So sehen Karten beim Spielen aus:
+
+![](images/spielen_25.png)
+
 
 
 ## Dienstag 25.10.2022 bis Freitag 28.10.2022
