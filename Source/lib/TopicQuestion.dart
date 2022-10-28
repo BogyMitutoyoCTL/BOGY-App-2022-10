@@ -86,8 +86,10 @@ class _TopicQuestionState extends State<TopicQuestion> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Expanded(child: questionName()),
-              if (widget.isMultipleChoice) Icon(Icons.check_box_outlined),
-              if (!widget.isMultipleChoice) Icon(Icons.abc),
+              if (widget.questionBasic.isMultipleChoiceQuestion)
+                Icon(Icons.check_box_outlined),
+              if (!widget.questionBasic.isMultipleChoiceQuestion)
+                Icon(Icons.abc),
               IconButton(
                 onPressed: Loeschen,
                 icon: Icon(Icons.delete_forever),
