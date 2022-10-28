@@ -15,9 +15,7 @@ import 'DataHelper/QuestionTypes.dart';
 
 class Answer extends StatefulWidget {
   CurrentlyPlaying playing;
-
   DataHelper datahelper;
-  bool isMultipleChoice;
   String input;
   List<String> answers = [];
   String question;
@@ -29,7 +27,6 @@ class Answer extends StatefulWidget {
       required this.answers,
       required this.input,
       required this.question,
-      required this.isMultipleChoice,
       required this.ID})
       : super(key: key);
 
@@ -69,7 +66,7 @@ class _AnswerState extends State<Answer> {
                   Padding(
                     padding: EdgeInsets.all(10),
                   ),
-                  if (!widget.isMultipleChoice)
+                  if (!widget.playing.getActQuestion().isMultipleChoiceQuestion)
                     Container(
                       height: 50,
                       decoration: BoxDecoration(
@@ -84,7 +81,7 @@ class _AnswerState extends State<Answer> {
                         ),
                       ),
                     ),
-                  if (!widget.isMultipleChoice)
+                  if (!widget.playing.getActQuestion().isMultipleChoiceQuestion)
                     Container(
                       height: 50,
                       decoration: BoxDecoration(
@@ -99,11 +96,11 @@ class _AnswerState extends State<Answer> {
                         ),
                       ),
                     ),
-                  if (!widget.isMultipleChoice)
+                  if (!widget.playing.getActQuestion().isMultipleChoiceQuestion)
                     Padding(
                       padding: EdgeInsets.all(10),
                     ),
-                  if (widget.isMultipleChoice)
+                  if (widget.playing.getActQuestion().isMultipleChoiceQuestion)
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Column(
                         children: [
