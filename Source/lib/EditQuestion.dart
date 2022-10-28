@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_final_fields, prefer_const_constructors, unused_local_variable, avoid_print, unused_field, unused_import, must_be_immutable, file_names, non_constant_identifier_names
 
 import 'dart:io';
 import 'dart:convert';
@@ -186,7 +186,7 @@ class _EditQuestionState extends State<EditQuestion> {
                         title: const Text("Multiple Choice"),
                       ),
                       TextField(
-                        maxLength: 15,
+                        maxLength: 40,
                         controller: answerControllers[0],
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -212,7 +212,7 @@ class _EditQuestionState extends State<EditQuestion> {
     for (int i = 1; i < 4; i++) {
       widgets.add(const Padding(padding: EdgeInsets.all(8.0)));
       widgets.add(TextField(
-        maxLength: 15,
+        maxLength: 40,
         controller: answerControllers[i],
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
