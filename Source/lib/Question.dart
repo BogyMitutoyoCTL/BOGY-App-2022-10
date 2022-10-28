@@ -80,7 +80,7 @@ class _QuestionState extends State<Question> {
               Column(children: [
                 /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
                 Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(20),
                   child: Text(question, style: TextStyle(fontSize: 40)),
                 ),
                 Padding(

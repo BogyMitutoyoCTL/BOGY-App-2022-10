@@ -62,7 +62,7 @@ class _AnswerState extends State<Answer> {
                 Column(children: [
                   /*if (_questionType) Image.asset("assets/images/Logo.png"),*/
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(20),
                     child:
                         Text(widget.question, style: TextStyle(fontSize: 40)),
                   ),
@@ -186,10 +186,13 @@ class _AnswerState extends State<Answer> {
                       ),
                     ]),
                   if ((widget.playing.questionIndex + 1) <
-                      widget.playing.stack.getAmountOfQuestions() && (widget.playing.questionIndex +1)< widget.playing.rundenanzahl)
-                    ElevatedButton(onPressed: nextQuestion, child: Text("Weiter")),
+                          widget.playing.stack.getAmountOfQuestions() &&
+                      (widget.playing.questionIndex + 1) <
+                          widget.playing.rundenanzahl)
+                    ElevatedButton(
+                        onPressed: nextQuestion, child: Text("Weiter")),
                   if ((widget.playing.questionIndex + 1) ==
-                      widget.playing.stack.getAmountOfQuestions() ||
+                          widget.playing.stack.getAmountOfQuestions() ||
                       (widget.playing.questionIndex + 1) ==
                           widget.playing.rundenanzahl)
                     ElevatedButton(
