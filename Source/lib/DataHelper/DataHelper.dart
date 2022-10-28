@@ -107,32 +107,36 @@ class DataHelper {
   /// by method `save`.
   /// Returns true on finished. This is needed by a FutureBuilder.
   Future<bool> load() async {
-    Directory questionStackDir = await _getQuestionStackDir();
-    _createFolderIfNotExists(questionStackDir);
-
-    _myQuestionStacks = [];
-
     try {
-      List<FileSystemEntity> files =
-          questionStackDir.listSync(recursive: false, followLinks: false);
+      Directory questionStackDir = await _getQuestionStackDir();
+      _createFolderIfNotExists(questionStackDir);
 
-      for (FileSystemEntity fileSystemEntity in files) {
-        try {
-          final file = File(fileSystemEntity.path);
-          String jsonString = await file.readAsString();
-          print("Read from file ${file.path}: $jsonString");
-          Map<String, dynamic> questionStackMap = jsonDecode(jsonString);
-          QuestionStack questionStack =
-              QuestionStack.fromJson(questionStackMap);
-          addQuestionStack(questionStack);
-        } catch (e) {
-          print("Couldn't read file");
+      _myQuestionStacks = [];
+
+      try {
+        List<FileSystemEntity> files =
+            questionStackDir.listSync(recursive: false, followLinks: false);
+
+        for (FileSystemEntity fileSystemEntity in files) {
+          try {
+            final file = File(fileSystemEntity.path);
+            String jsonString = await file.readAsString();
+            print("Read from file ${file.path}: $jsonString");
+            Map<String, dynamic> questionStackMap = jsonDecode(jsonString);
+            QuestionStack questionStack =
+                QuestionStack.fromJson(questionStackMap);
+            addQuestionStack(questionStack);
+          } catch (e) {
+            print("Couldn't read file");
+          }
         }
+      } catch (FileSystemException) {
+        print("No file found. Starting with an empty set.");
       }
+      print('Read all QuestionStacks');
     } catch (FileSystemException) {
-      print("No file found. Starting with an empty set.");
+      print("Something went wrong - no worries...");
     }
-    print('Read all QuestionStacks');
     return true;
   }
 
