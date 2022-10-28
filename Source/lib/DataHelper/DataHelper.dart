@@ -96,7 +96,8 @@ class DataHelper {
     _createFolderIfNotExists(questionStackDir);
 
     for (QuestionStack questionStack in _myQuestionStacks) {
-      final file = File('${questionStackDir.path}/${questionStack.name}.json');
+      final String fileName = questionStack.getValidFileName();
+      final file = File('${questionStackDir.path}/$fileName.json');
       await file.writeAsString(jsonEncode(questionStack));
       print("Saved to file: ${file.path}");
     }

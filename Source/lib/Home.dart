@@ -71,9 +71,9 @@ class _HomeState extends State<Home> {
                         },
                         preStartQuiz: () {
                           String anzahlRunden = anzahlRundenController.text;
-                          int anzahlRundenInt =
-                              int.tryParse(anzahlRunden) ?? 25;
-                          currentlyPlaying.maxQuestions = anzahlRundenInt;
+                          int maxQuestions = int.tryParse(anzahlRunden) ?? 25;
+                          if (maxQuestions < 0) maxQuestions = 25;
+                          currentlyPlaying.maxQuestions = maxQuestions;
                         },
                         currentlyPlaying: currentlyPlaying,
                       );

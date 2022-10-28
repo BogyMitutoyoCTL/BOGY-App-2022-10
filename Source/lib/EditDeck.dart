@@ -105,11 +105,13 @@ class _EditDeckState extends State<EditDeck> {
 
   void saveStack() {
     setState(() {
-      _titleController.text.isEmpty ? _validate = true : _validate = false;
+      _titleController.text.replaceAll(" ", "").isEmpty
+          ? _validate = true
+          : _validate = false;
     });
     widget.questionStack.name = _titleController.text;
     if (widget.questionStack.getAmountOfQuestions() == 0) return;
-    if (widget.questionStack.name == "") return;
+    if (widget.questionStack.name.replaceAll(" ", "").isEmpty) return;
 
     widget.datahelper.addQuestionStack(widget.questionStack);
     widget.datahelper.save();
