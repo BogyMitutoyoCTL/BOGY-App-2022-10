@@ -208,7 +208,7 @@ class _AnswerState extends State<Answer> {
     if (questionBasic.isAnswerCorrect(widget.input)) {
       widget.playing.correctAnswers++;
     } else {
-      Vibration.vibrate(duration: 500, amplitude: 4000);
+      Vibration.vibrate(duration: 500, amplitude: 881);
     }
     List<Color> list = [
       Colors.black,
