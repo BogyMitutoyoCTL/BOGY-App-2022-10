@@ -31,76 +31,102 @@ class _EditDeckState extends State<EditDeck> {
     _titleController.text = widget.questionStack.name;
   }
 
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: new Text('Achtung!'),
+            content: new Text(
+                'Willst du deine bisherigen Änderungen wirklich verwerfen?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(false), //<-- SEE HERE
+                child: new Text('Nein'),
+              ),
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(true), // <-- SEE HERE
+                child: new Text('Ja'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Bearbeiten/Erstellen", style: TextStyle(fontSize: 30)),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: FloatingActionButton(
-              heroTag: "add",
-              onPressed: addQuestion,
-              backgroundColor: Colors.amber,
-              child: const Icon(Icons.add),
-            ),
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Bearbeiten/Erstellen", style: TextStyle(fontSize: 30)),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
-                heroTag: "save",
-                onPressed: saveStack,
-                child: Icon(Icons.save_outlined)),
-          )
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              maxLength: 35,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Titel",
-                errorText: _validate ? "Titel muss gesetzt werden" : null,
+          floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: FloatingActionButton(
+                  heroTag: "add",
+                  onPressed: addQuestion,
+                  backgroundColor: Colors.amber,
+                  child: const Icon(Icons.add),
+                ),
               ),
-              controller: _titleController,
-            ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FloatingActionButton(
+                    heroTag: "save",
+                    onPressed: saveStack,
+                    child: Icon(Icons.save_outlined)),
+              )
+            ],
           ),
-          const Text(
-            "Karten:",
-            style: TextStyle(fontSize: 30),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
+                  maxLength: 35,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Titel",
+                    errorText: _validate ? "Titel muss gesetzt werden" : null,
+                  ),
+                  controller: _titleController,
+                ),
+              ),
+              const Text(
+                "Karten:",
+                style: TextStyle(fontSize: 30),
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: widget.questionStack.getAmountOfQuestions(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return TopicQuestion(
+                        questionBasic: widget.questionStack.getQuestion(index),
+                        changedCard: (QuestionBasic questionbasic) {
+                          setState(() {
+                            widget.questionStack
+                                .replaceQuestion(index, questionbasic);
+                          });
+                        },
+                        removeCard: () {
+                          setState(() {
+                            widget.questionStack.removeQuestionByIndex(index);
+                          });
+                        },
+                        datahelper: widget.datahelper,
+                        questionstack: widget.questionStack,
+                      );
+                    }),
+              ),
+            ],
           ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: widget.questionStack.getAmountOfQuestions(),
-                itemBuilder: (BuildContext context, int index) {
-                  return TopicQuestion(
-                    questionBasic: widget.questionStack.getQuestion(index),
-                    changedCard: (QuestionBasic questionbasic) {
-                      setState(() {
-                        widget.questionStack
-                            .replaceQuestion(index, questionbasic);
-                      });
-                    },
-                    removeCard: () {
-                      setState(() {
-                        widget.questionStack.removeQuestionByIndex(index);
-                      });
-                    },
-                    datahelper: widget.datahelper,
-                    questionstack: widget.questionStack,
-                  );
-                }),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   void saveStack() {
