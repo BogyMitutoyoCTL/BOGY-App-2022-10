@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:learnhub/DataHelper/QuestionImageAndSingleChoice.dart';
 import 'package:learnhub/DataHelper/QuestionTypes.dart';
+import 'package:uuid/uuid.dart';
 
 import 'QuestionBasic.dart';
 import 'QuestionImageAndFreeText.dart';
@@ -14,7 +15,7 @@ part 'QuestionStack.g.dart';
 @JsonSerializable(explicitToJson: true, includeIfNull: true)
 class QuestionStack {
   @JsonKey(required: true)
-  String _name;
+  String name;
   @JsonKey(defaultValue: [])
   List<String> _orderList;
   @JsonKey(defaultValue: [])
@@ -26,14 +27,13 @@ class QuestionStack {
   @JsonKey(defaultValue: [])
   List<QuestionImageAndSingleChoice> _questionImageAndSingleChoice;
 
-  QuestionStack(String name,
+  QuestionStack(this.name,
       {List<String>? orderList,
       List<QuestionStringAndAnswers>? questionStringAndAnswers,
       List<QuestionStringAndFreeText>? questionStringAndFreeText,
       List<QuestionImageAndFreeText>? questionImageAndFreeText,
       List<QuestionImageAndSingleChoice>? questionImageAndSingleChoice})
-      : _name = _makeNameValid(name),
-        _orderList = orderList ?? [],
+      : _orderList = orderList ?? [],
         _questionStringAndAnswers = questionStringAndAnswers ?? [],
         _questionStringAndFreeText = questionStringAndFreeText ?? [],
         _questionImageAndFreeText = questionImageAndFreeText ?? [],
@@ -42,9 +42,9 @@ class QuestionStack {
     _orderList.shuffle();
   }
 
-  static String _makeNameValid(String name) {
-    String notAllowedCharsInTitle = '[?<:>+*|/["\'\\]\\\\]';
-    return name.replaceAll(RegExp(notAllowedCharsInTitle), "_");
+  String getValidFileName() {
+    const String notAllowedCharsInTitle = '[?<:>+*|/["\'\\]\\\\]';
+    return "${name.replaceAll(RegExp(notAllowedCharsInTitle), "_")}-${const Uuid().v1()}";
   }
 
   /// Returns the Question with the index `index`.
@@ -262,12 +262,6 @@ class QuestionStack {
       }
       return true;
     });
-  }
-
-  String get name => _name;
-
-  set name(String name) {
-    _name = _makeNameValid(name);
   }
 
   /// Returns a list containing the uuids from the Questions.

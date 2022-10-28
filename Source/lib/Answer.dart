@@ -118,7 +118,7 @@ class _AnswerState extends State<Answer> {
                                           BorderRadius.all(Radius.circular(5))),
                                   child: Text(widget.answers[0],
                                       style: TextStyle(
-                                          fontSize: 30, color: Colors.white)))),
+                                          fontSize: 15, color: Colors.white)))),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
@@ -136,7 +136,7 @@ class _AnswerState extends State<Answer> {
                                           BorderRadius.all(Radius.circular(5))),
                                   child: Text(widget.answers[2],
                                       style: TextStyle(
-                                          fontSize: 30, color: Colors.white)))),
+                                          fontSize: 15, color: Colors.white)))),
                         ],
                       ),
                       Padding(
@@ -158,7 +158,7 @@ class _AnswerState extends State<Answer> {
                                           BorderRadius.all(Radius.circular(5))),
                                   child: Text(widget.answers[1],
                                       style: TextStyle(
-                                          fontSize: 30, color: Colors.white)))),
+                                          fontSize: 15, color: Colors.white)))),
                           Padding(
                             padding: EdgeInsets.all(10),
                           ),
@@ -176,24 +176,33 @@ class _AnswerState extends State<Answer> {
                                           BorderRadius.all(Radius.circular(5))),
                                   child: Text(widget.answers[3],
                                       style: TextStyle(
-                                        fontSize: 30,
+                                        fontSize: 15,
                                         color: Colors.white,
                                       )))),
                         ],
                       ),
                     ]),
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                  ),
                   if ((widget.playing.questionIndex + 1) <
                           widget.playing.stack.getAmountOfQuestions() &&
                       (widget.playing.questionIndex + 1) <
                           widget.playing.maxQuestions)
-                    ElevatedButton(
-                        onPressed: nextQuestion, child: Text("Weiter")),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                          onPressed: nextQuestion, child: Text("Weiter")),
+                    ),
                   if ((widget.playing.questionIndex + 1) ==
                           widget.playing.stack.getAmountOfQuestions() ||
                       (widget.playing.questionIndex + 1) ==
                           widget.playing.maxQuestions)
-                    ElevatedButton(
-                        onPressed: showResult, child: Text("Zum Ergebnis")),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                          onPressed: showResult, child: Text("Zum Ergebnis")),
+                    ),
                 ]),
               ],
             )));
@@ -205,7 +214,7 @@ class _AnswerState extends State<Answer> {
     if (questionBasic.isAnswerCorrect(widget.input)) {
       widget.playing.correctAnswers++;
     } else {
-      Vibration.vibrate(duration: 500, amplitude: 4000);
+      Vibration.vibrate(duration: 500, amplitude: 881);
     }
     List<Color> list = [
       Colors.black,

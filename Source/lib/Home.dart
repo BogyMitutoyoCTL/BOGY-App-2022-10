@@ -17,7 +17,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   get onPressed => null;
 
-  TextEditingController anzahlRundenController = TextEditingController();
+  TextEditingController anzahlRundenController =
+      TextEditingController(text: "10");
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,12 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
             actions: [
               IconButton(
+                  onPressed: defaulladen,
+                  icon: const Icon(Icons.download_for_offline)),
+              IconButton(
                 icon: const Icon(Icons.add_circle_outline),
                 onPressed: addNewDeck,
-              )
+              ),
             ],
             title: const Text(
               "Home",
@@ -70,9 +74,9 @@ class _HomeState extends State<Home> {
                         },
                         preStartQuiz: () {
                           String anzahlRunden = anzahlRundenController.text;
-                          int anzahlRundenInt =
-                              int.tryParse(anzahlRunden) ?? 25;
-                          currentlyPlaying.maxQuestions = anzahlRundenInt;
+                          int maxQuestions = int.tryParse(anzahlRunden) ?? 25;
+                          if (maxQuestions < 0) maxQuestions = 25;
+                          currentlyPlaying.maxQuestions = maxQuestions;
                         },
                         currentlyPlaying: currentlyPlaying,
                       );
@@ -127,4 +131,6 @@ class _HomeState extends State<Home> {
         )) ??
         false;
   }
+
+  void defaulladen() {}
 }
