@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_final_fields, prefer_const_constructors, unused_local_variable, avoid_print, unused_field, unused_import, must_be_immutable, file_names, non_constant_identifier_names
 
 import 'dart:io';
 import 'dart:convert';
