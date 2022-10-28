@@ -50,13 +50,17 @@ class _ScoreState extends State<Score> {
                     ),
                     Image.asset("assets/images/Pokal.png",
                         height: 300, width: 200, fit: BoxFit.fitWidth),
-                    Text(
-                      "Du hast $score von ${widget.playing.getMaxPoints()}",
-                      style: TextStyle(fontSize: 50),
+                    Center(
+                      child: Text(
+                        "Du hast $score von ${widget.playing.getMaxPoints()}",
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
-                    Text(
-                      "Punkten erreicht!",
-                      style: TextStyle(fontSize: 50),
+                    Center(
+                      child: Text(
+                        "Punkten erreicht!",
+                        style: TextStyle(fontSize: 40),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(69),
