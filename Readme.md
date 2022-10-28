@@ -16,6 +16,14 @@ Beim Löschen eines Stapels wird eine Abfrage angezeigt:
 
 ![](images/askondeletestack_25.png)
 
+Anlegen eines neuen Spiels:
+
+![](images/newquiz_25.png)
+
+Anlegen einer neuen Karte im Spiel:
+
+![](images/karteanlegen_25.png)
+
 
 
 ## Dienstag 25.10.2022 bis Freitag 28.10.2022
