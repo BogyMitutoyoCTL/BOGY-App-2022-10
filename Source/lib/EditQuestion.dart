@@ -145,6 +145,7 @@ class _EditQuestionState extends State<EditQuestion> {
                       ),
                       if (!_isPictureQuestion)
                         TextField(
+                          maxLength: 50,
                           controller: _titleController,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),

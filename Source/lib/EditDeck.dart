@@ -61,6 +61,7 @@ class _EditDeckState extends State<EditDeck> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
+              maxLength: 35,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Titel",
