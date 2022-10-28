@@ -21,6 +21,8 @@ class EditQuestion extends StatefulWidget {
 }
 
 class _EditQuestionState extends State<EditQuestion> {
+  bool _validateTitle = false;
+  List<bool> _validateAnswer = [false, false, false, false];
   bool _isPictureQuestion = false;
   bool _isMultipleChoice = false;
   String? _image_base64;
@@ -147,9 +149,12 @@ class _EditQuestionState extends State<EditQuestion> {
                         TextField(
                           maxLength: 50,
                           controller: _titleController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: "Frage",
+                            errorText: _validateTitle
+                                ? "Frage muss gesetzt werden"
+                                : null,
                           ),
                         ),
                       if (_isPictureQuestion) const Text("Bild:"),
@@ -188,9 +193,12 @@ class _EditQuestionState extends State<EditQuestion> {
                       TextField(
                         maxLength: 40,
                         controller: answerControllers[0],
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: "Richtige Antwort",
+                          errorText: _validateAnswer[0]
+                              ? "Richtige Antwort muss gesetzt werden"
+                              : null,
                         ),
                       )
                     ] +
@@ -214,9 +222,11 @@ class _EditQuestionState extends State<EditQuestion> {
       widgets.add(TextField(
         maxLength: 40,
         controller: answerControllers[i],
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: "Falsche Antwort",
+          errorText:
+              _validateAnswer[i] ? "Falsche Antwort muss gesetzt werden" : null,
         ),
       ));
     }
@@ -247,13 +257,36 @@ class _EditQuestionState extends State<EditQuestion> {
   }
 
   void save() {
+    setState(() {
+      _titleController.text.replaceAll(" ", "").isEmpty
+          ? _validateTitle = true
+          : _validateTitle = false;
+      answerControllers[0].text.replaceAll(" ", "").isEmpty
+          ? _validateAnswer[0] = true
+          : _validateAnswer[0] = false;
+      if (_isMultipleChoice) {
+        for (int i = 1; i < 4; i++) {
+          answerControllers[i].text.replaceAll(" ", "").isEmpty
+              ? _validateAnswer[i] = true
+              : _validateAnswer[i] = false;
+        }
+      }
+    });
+    if (_titleController.text.replaceAll(" ", "").isEmpty &&
+        !_isPictureQuestion) return;
+    if (answerControllers[0].text.replaceAll(" ", "").isEmpty) return;
+    if (_isMultipleChoice) {
+      for (int i = 1; i < 4; i++) {
+        if (answerControllers[i].text.replaceAll(" ", "").isEmpty) return;
+      }
+    }
     //Keine gleichen Antworten
-    if (answerControllers[0].text.toLowerCase() !=
-            answerControllers[1].text.toLowerCase() &&
-        answerControllers[0].text.toLowerCase() !=
-            answerControllers[2].text.toLowerCase() &&
-        answerControllers[0].text.toLowerCase() !=
-            answerControllers[3].text.toLowerCase()) {
+    if (answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
+            answerControllers[1].text.replaceAll(" ", "").toLowerCase() &&
+        answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
+            answerControllers[2].text.replaceAll(" ", "").toLowerCase() &&
+        answerControllers[0].text.replaceAll(" ", "").toLowerCase() !=
+            answerControllers[3].text.replaceAll(" ", "").toLowerCase()) {
       // TODO: Speichern
       if (_isPictureQuestion) {
         if (_isMultipleChoice) {

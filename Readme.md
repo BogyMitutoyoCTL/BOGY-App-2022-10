@@ -4,21 +4,50 @@ Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartpho
 
 ## Ergebnis
 
+Der Startscreen der App:
+
+![](images/startscreen_25.png)
+
+Der Home-Screen:
+
+![](images/homescreen_25.png)
+
+Beim Löschen eines Stapels wird eine Abfrage angezeigt:
+
+![](images/askondeletestack_25.png)
+
 
 
 ## Dienstag 25.10.2022 bis Freitag 28.10.2022
 
 Wir haben begonnen, unsere eigenen Widgets zu programmieren, wie wir sie am Vortag diskutiert haben.
 
+### Tolle Widgets, die wir eingesetzt haben
+
+Neben den in der  [Flutter (PPTX⇓)](Flutter.pptx)  Präsentation erwähnten Widgets haben wir folgende tollen Widgets verwendet:
+
+* `FloatingActionButton`: die runden Buttons am unteren Rand des Bildschirms
+* `WillPopScope`: kann verhindern, dass man zurück gehen kann
+* `BoxDecoration`: kann abgerundete Ecken erzeugen
+* `InputDecoration` zusammen mit `OutlineInputBorder`: kann einen Rahmen um ein Text-Eingabefeld erzeugen, damit man weiß, was man eintragen muss
+* `Expanded`: kann ein Element von seiner Breite her ausdehnen, damit andere Elemente in einer `Row` nach hinten verschoben werden.
+* `AlertDialog`: kann eine Meldung auf dem Bildschirm anzeigen, die bestätigt werden muss
+* `Image.asset`: für Bilder, die Teil der App sind
+* `CircularProgressIndicator`: ein Wartekringel, während Daten geladen werden
+
+### Ordner mit unseren Daten
+
+Je nach Smartphone liegen unsere Daten unter `/data/data/de.mitutoyo.learnhub` oder `/data/user/0/de.mitutoyo.learnhub`. Die JSON Dateien mit den Fragen und Antworten liegen dann unter `app_flutter/questionStacks`.
+
 ### Daten zum Testen auf das Smartphone übertragen
 
 Je nach Smartphone, das emuliert wird, kann man Bilder nach `/sdcard/DCIM/Camera` übertragen
 
-![](fileexplorer_sdcard.png)
+![](images/fileexplorer_sdcard.png)
 
 oder nach `/storage/emulated/0/DCIM`:
 
-![](fileexplorer_emulated.png)
+![](images/fileexplorer_emulated.png)
 
 ### Warnungen loswerden
 
@@ -43,7 +72,7 @@ Wir haben am Vormittag die Übungen für [Flutter (PPTX⇓)](Flutter.pptx) beend
 
 Danach haben wir mit Hilfe von [Figma](https://www.figma.com) eine grobe Skizze erstellt, wie unsere App aussehen soll und wie der Ablauf sein könnte:
 
-![App Übersicht](figma.png)
+![App Übersicht](images/figma.png)
 
 Für unsere App wurden mehrere Namensvorschläge gemacht:
 
@@ -123,7 +152,7 @@ Hausaufgaben:
 
 Wir haben zunächst mündlich erklärt, was wir uns für eine App wünschen. Basierend darauf, habt ihr folgende Punkte identifiziert, was die App alles können müsste:
 
-![Brainstorming](brainstorming.jpg)
+![Brainstorming](images/brainstorming.jpg)
 
 * Quiz: Flaggen (2 Nennungen)
   * Aufteilen nach Kontintenten

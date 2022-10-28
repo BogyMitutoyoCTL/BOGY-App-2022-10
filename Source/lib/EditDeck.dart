@@ -9,6 +9,7 @@ import 'DataHelper/QuestionStringAndAnswers.dart';
 import 'EditQuestion.dart';
 
 class EditDeck extends StatefulWidget {
+  bool _validate = false;
   QuestionStack questionStack;
 
   DataHelper datahelper;
@@ -21,6 +22,7 @@ class EditDeck extends StatefulWidget {
 }
 
 class _EditDeckState extends State<EditDeck> {
+  bool _validate = false;
   final TextEditingController _titleController = TextEditingController();
 
   @override
@@ -62,9 +64,10 @@ class _EditDeckState extends State<EditDeck> {
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               maxLength: 35,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Titel",
+                errorText: _validate ? "Titel muss gesetzt werden" : null,
               ),
               controller: _titleController,
             ),
@@ -101,9 +104,14 @@ class _EditDeckState extends State<EditDeck> {
   }
 
   void saveStack() {
+    setState(() {
+      _titleController.text.replaceAll(" ", "").isEmpty
+          ? _validate = true
+          : _validate = false;
+    });
     widget.questionStack.name = _titleController.text;
     if (widget.questionStack.getAmountOfQuestions() == 0) return;
-    if (widget.questionStack.name == "") return;
+    if (widget.questionStack.name.replaceAll(" ", "").isEmpty) return;
 
     widget.datahelper.addQuestionStack(widget.questionStack);
     widget.datahelper.save();

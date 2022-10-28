@@ -1,5 +1,7 @@
 import 'dart:math';
 
+// ignore_for_file: type_init_formals, must_be_immutable, unused_element, file_names, prefer_const_constructors, annotate_overrides, override_on_non_overriding_member
+
 import 'package:flutter/material.dart';
 import 'package:learnhub/DataHelper/CurrentlyPlaying.dart';
 import 'package:learnhub/DataHelper/DataHelper.dart';
@@ -57,7 +59,7 @@ class _ScoreState extends State<Score> {
                       style: TextStyle(fontSize: 50),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(75),
+                      padding: const EdgeInsets.all(69),
                       child: ElevatedButton(
                         onPressed: play,
                         child: Text("Zurück zum Menu"),

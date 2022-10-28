@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:learnhub/DataHelper/QuestionImageAndSingleChoice.dart';
 import 'package:learnhub/DataHelper/QuestionTypes.dart';
+import 'package:uuid/uuid.dart';
 
 import 'QuestionBasic.dart';
 import 'QuestionImageAndFreeText.dart';
@@ -39,6 +40,11 @@ class QuestionStack {
         _questionImageAndSingleChoice = questionImageAndSingleChoice ?? [] {
     checkQuestionOrder();
     _orderList.shuffle();
+  }
+
+  String getValidFileName() {
+    const String notAllowedCharsInTitle = '[?<:>+*|/["\'\\]\\\\]';
+    return "${name.replaceAll(RegExp(notAllowedCharsInTitle), "_")}-${const Uuid().v1()}";
   }
 
   /// Returns the Question with the index `index`.

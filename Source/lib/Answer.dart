@@ -185,18 +185,27 @@ class _AnswerState extends State<Answer> {
                         ],
                       ),
                     ]),
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                  ),
                   if ((widget.playing.questionIndex + 1) <
                           widget.playing.stack.getAmountOfQuestions() &&
                       (widget.playing.questionIndex + 1) <
-                          widget.playing.rundenanzahl)
-                    ElevatedButton(
-                        onPressed: nextQuestion, child: Text("Weiter")),
+                          widget.playing.maxQuestions)
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                          onPressed: nextQuestion, child: Text("Weiter")),
+                    ),
                   if ((widget.playing.questionIndex + 1) ==
                           widget.playing.stack.getAmountOfQuestions() ||
                       (widget.playing.questionIndex + 1) ==
-                          widget.playing.rundenanzahl)
-                    ElevatedButton(
-                        onPressed: showResult, child: Text("Zum Ergebnis")),
+                          widget.playing.maxQuestions)
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ElevatedButton(
+                          onPressed: showResult, child: Text("Zum Ergebnis")),
+                    ),
                 ]),
               ],
             )));
@@ -208,7 +217,7 @@ class _AnswerState extends State<Answer> {
     if (questionBasic.isAnswerCorrect(widget.input)) {
       widget.playing.correctAnswers++;
     } else {
-      Vibration.vibrate(duration: 500, amplitude: 4000);
+      Vibration.vibrate(duration: 500, amplitude: 881);
     }
     List<Color> list = [
       Colors.black,
