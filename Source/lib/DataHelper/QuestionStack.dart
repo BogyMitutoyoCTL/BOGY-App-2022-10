@@ -14,7 +14,7 @@ part 'QuestionStack.g.dart';
 @JsonSerializable(explicitToJson: true, includeIfNull: true)
 class QuestionStack {
   @JsonKey(required: true)
-  String name;
+  String _name;
   @JsonKey(defaultValue: [])
   List<String> _orderList;
   @JsonKey(defaultValue: [])
@@ -26,19 +26,25 @@ class QuestionStack {
   @JsonKey(defaultValue: [])
   List<QuestionImageAndSingleChoice> _questionImageAndSingleChoice;
 
-  QuestionStack(this.name,
+  QuestionStack(String name,
       {List<String>? orderList,
       List<QuestionStringAndAnswers>? questionStringAndAnswers,
       List<QuestionStringAndFreeText>? questionStringAndFreeText,
       List<QuestionImageAndFreeText>? questionImageAndFreeText,
       List<QuestionImageAndSingleChoice>? questionImageAndSingleChoice})
-      : _orderList = orderList ?? [],
+      : _name = _makeNameValid(name),
+        _orderList = orderList ?? [],
         _questionStringAndAnswers = questionStringAndAnswers ?? [],
         _questionStringAndFreeText = questionStringAndFreeText ?? [],
         _questionImageAndFreeText = questionImageAndFreeText ?? [],
         _questionImageAndSingleChoice = questionImageAndSingleChoice ?? [] {
     checkQuestionOrder();
     _orderList.shuffle();
+  }
+
+  static String _makeNameValid(String name) {
+    String notAllowedCharsInTitle = '[?<:>+*|/["\'\\]\\\\]';
+    return name.replaceAll(RegExp(notAllowedCharsInTitle), "_");
   }
 
   /// Returns the Question with the index `index`.
@@ -256,6 +262,12 @@ class QuestionStack {
       }
       return true;
     });
+  }
+
+  String get name => _name;
+
+  set name(String name) {
+    _name = _makeNameValid(name);
   }
 
   /// Returns a list containing the uuids from the Questions.
