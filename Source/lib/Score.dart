@@ -46,7 +46,8 @@ class _ScoreState extends State<Score> {
                         style: TextStyle(fontSize: 50),
                       ),
                     ),
-                    Image.asset("assets/images/Pokal.png"),
+                    Image.asset("assets/images/Pokal.png",
+                        height: 300, width: 200, fit: BoxFit.fitWidth),
                     Text(
                       "Du hast $score von ${widget.playing.getMaxPoints()}",
                       style: TextStyle(fontSize: 50),
