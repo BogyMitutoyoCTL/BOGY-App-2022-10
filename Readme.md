@@ -2,9 +2,48 @@
 
 Elektronik-Symbole oder Messtechnik-Symbole erlernen mit einer App für Smartphones 📱.
 
-## Dienstag 25.10.2022
+## Ergebnis
+
+Der Startscreen der App:
+
+![](images/startscreen_25.png)
+
+Der Home-Screen:
+
+![](images/homescreen_25.png)
+
+Beim Löschen eines Stapels wird eine Abfrage angezeigt:
+
+![](images/askondeletestack_25.png)
+
+
+
+## Dienstag 25.10.2022 bis Freitag 28.10.2022
 
 Wir haben begonnen, unsere eigenen Widgets zu programmieren, wie wir sie am Vortag diskutiert haben.
+
+## Tolle Widgets, die wir eingesetzt haben
+
+Neben den in der  [Flutter (PPTX⇓)](Flutter.pptx)  Präsentation erwähnten Widgets haben wir folgende tollen Widgets verwendet:
+
+* `FloatingActionButton`: die runden Buttons am unteren Rand des Bildschirms
+* `WillPopScope`: kann verhindern, dass man zurück gehen kann
+* `BoxDecoration`: kann abgerundete Ecken erzeugen
+* `InputDecoration` zusammen mit `OutlineInputBorder`: kann einen Rahmen um ein Text-Eingabefeld erzeugen, damit man weiß, was man eintragen muss
+* `Expanded`: kann ein Element von seiner Breite her ausdehnen, damit andere Elemente in einer `Row` nach hinten verschoben werden.
+* `AlertDialog`: kann eine Meldung auf dem Bildschirm anzeigen, die bestätigt werden muss
+* `Image.asset`: für Bilder, die Teil der App sind
+* `CircularProgressIndicator`: ein Wartekringel, während Daten geladen werden
+
+### Daten zum Testen auf das Smartphone übertragen
+
+Je nach Smartphone, das emuliert wird, kann man Bilder nach `/sdcard/DCIM/Camera` übertragen
+
+![](images/fileexplorer_sdcard.png)
+
+oder nach `/storage/emulated/0/DCIM`:
+
+![](images/fileexplorer_emulated.png)
 
 ### Warnungen loswerden
 
@@ -12,7 +51,7 @@ In unserem Projekt gab es Warnungen mit dem Text
 
 > Warning: Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01
 
-Um diese Warnungen loszuwerden, muss man:
+Um diese Warnungen loszuwerden, haben wir die Gradle Version und das SDK aktualisiert
 
 1. den Unterordner `android` unseres Projekts in Android Studio öffnen
 2. Im Menü "Tools/AGP Upgrade Assistent" auswählen
@@ -29,7 +68,7 @@ Wir haben am Vormittag die Übungen für [Flutter (PPTX⇓)](Flutter.pptx) beend
 
 Danach haben wir mit Hilfe von [Figma](https://www.figma.com) eine grobe Skizze erstellt, wie unsere App aussehen soll und wie der Ablauf sein könnte:
 
-![App Übersicht](figma.png)
+![App Übersicht](images/figma.png)
 
 Für unsere App wurden mehrere Namensvorschläge gemacht:
 
@@ -109,7 +148,7 @@ Hausaufgaben:
 
 Wir haben zunächst mündlich erklärt, was wir uns für eine App wünschen. Basierend darauf, habt ihr folgende Punkte identifiziert, was die App alles können müsste:
 
-![Brainstorming](brainstorming.jpg)
+![Brainstorming](images/brainstorming.jpg)
 
 * Quiz: Flaggen (2 Nennungen)
   * Aufteilen nach Kontintenten
