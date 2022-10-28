@@ -17,7 +17,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   get onPressed => null;
 
-  TextEditingController anzahlRundenController = TextEditingController();
+  TextEditingController anzahlRundenController =
+      TextEditingController(text: "10");
 
   @override
   Widget build(BuildContext context) {
