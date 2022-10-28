@@ -93,17 +93,20 @@ class DataHelper {
   /// where deleted before!
   Future<void> save() async {
     await _deleteAllJsonFiles();
+    try {
+      Directory questionStackDir = await _getQuestionStackDir();
+      _createFolderIfNotExists(questionStackDir);
 
-    Directory questionStackDir = await _getQuestionStackDir();
-    _createFolderIfNotExists(questionStackDir);
-
-    for (QuestionStack questionStack in _myQuestionStacks) {
-      final String fileName = questionStack.getValidFileName();
-      final file = File('${questionStackDir.path}/$fileName.json');
-      await file.writeAsString(jsonEncode(questionStack));
-      print("Saved to file: ${file.path}");
+      for (QuestionStack questionStack in _myQuestionStacks) {
+        final String fileName = questionStack.getValidFileName();
+        final file = File('${questionStackDir.path}/$fileName.json');
+        await file.writeAsString(jsonEncode(questionStack));
+        print("Saved to file: ${file.path}");
+      }
+      print('Saved all QuestionStacks');
+    } catch (e) {
+      print('Something went wrong, but anyway...');
     }
-    print('Saved all QuestionStacks');
   }
 
   /// Replaces all QuestionStacks with the QuestionStacks saved in the json files
@@ -159,22 +162,26 @@ class DataHelper {
 
   /// Deletes all files in the directory for the QuestionStacks.
   Future<void> _deleteAllJsonFiles() async {
-    Directory questionStackDir = await _getQuestionStackDir();
-    _createFolderIfNotExists(questionStackDir);
+    try {
+      Directory questionStackDir = await _getQuestionStackDir();
+      _createFolderIfNotExists(questionStackDir);
 
-    List<FileSystemEntity> files =
-        questionStackDir.listSync(recursive: false, followLinks: false);
+      List<FileSystemEntity> files =
+          questionStackDir.listSync(recursive: false, followLinks: false);
 
-    for (FileSystemEntity fileSystemEntity in files) {
-      try {
-        final file = File(fileSystemEntity.path);
-        await file.delete();
-        print("Delete file: ${file.path}");
-      } catch (e) {
-        print("Couldn't delete file");
+      for (FileSystemEntity fileSystemEntity in files) {
+        try {
+          final file = File(fileSystemEntity.path);
+          await file.delete();
+          print("Delete file: ${file.path}");
+        } catch (e) {
+          print("Couldn't delete file");
+        }
       }
+      print('Delete all QuestionStacks');
+    } catch (e) {
+      print('Something went wrong, but anyway...');
     }
-    print('Delete all QuestionStacks');
   }
 
   @override
