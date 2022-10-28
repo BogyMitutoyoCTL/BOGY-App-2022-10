@@ -201,6 +201,36 @@ class _QuestionState extends State<Question> {
   }
 
   void mcPressed(String input, int ID) {
+    print(input);
+    if (input == "") {
+      print("Befehl erhalten");
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Achtung"),
+              content: Text("Möchten Sie wirklich eine leere Antwort abgeben?"),
+              actions: <Widget>[
+                TextButton(
+                    child: Text('Abbrechen'),
+                    onPressed: () {
+                      return;
+                    }),
+                TextButton(
+                  child: Text('Bestätigen'),
+                  onPressed: () {
+                    answerCall(input, ID);
+                  },
+                ),
+              ],
+            );
+          });
+    } else {
+      answerCall(input, ID);
+    }
+  }
+
+  void answerCall(String input, int ID) {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) => Answer(
